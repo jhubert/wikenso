@@ -6,14 +6,14 @@ class WikisController < ApplicationController
   def create
     wiki = Wiki.new(wiki_params)
     if wiki.save
-      redirect_to wiki_path(wiki)
+      redirect_to root_url(subdomain: wiki.name)
     else
       render :new
     end
   end
 
   def show
-    @wiki = Wiki.find_by_name!(request.subdomain)
+    @wiki = Wiki.where("lower(name) = ?", request.subdomain).first!
   end
 
   private

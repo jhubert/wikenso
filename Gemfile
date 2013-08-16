@@ -8,10 +8,16 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'zurb-foundation'
 gem 'turbolinks'
-gem 'rspec-rails'
 gem 'simple_form'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
+end
+
+group :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'forgery'
+  gem 'database_cleaner'
 end
