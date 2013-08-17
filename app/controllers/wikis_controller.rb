@@ -13,7 +13,7 @@ class WikisController < ApplicationController
   end
 
   def show
-    @wiki = Wiki.where("lower(name) = ?", request.subdomain).first!
+    @wiki = Wiki.case_insensitive_find_by_name(request.subdomain).first!
   end
 
   private
