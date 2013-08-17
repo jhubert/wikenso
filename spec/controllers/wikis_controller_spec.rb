@@ -2,8 +2,6 @@ require 'spec_helper'
 require 'concerns/controller_authentication_spec'
 
 describe WikisController do
-  include_examples ControllerAuthentication
-
   context "GET 'new'" do
     it "returns http success" do
       get 'new'
@@ -81,6 +79,8 @@ describe WikisController do
   end
 
   context "GET 'show'" do
+    before(:each) { sign_in(FactoryGirl.create(:user)) }
+
     context "for a valid subdomain" do
       it "returns HTTP success" do
         FactoryGirl.create(:wiki, name: "nilenso")
@@ -101,6 +101,17 @@ describe WikisController do
         @request.host = "uppercase.wikenso.com"
         get "show"
         assigns(:wiki).should == wiki
+      end
+
+      context "when the user is not authenticated" do
+        before(:each) { sign_out }
+
+        it "redirects to the login page for the subdomain" do
+          wiki = FactoryGirl.create(:wiki, name: "foo")
+          @request.host = "foo.wikenso.com"
+          get "show"
+          response.should redirect_to "http://foo.wikenso.com/sessions/new"
+        end
       end
     end
 

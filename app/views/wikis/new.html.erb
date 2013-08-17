@@ -2,6 +2,7 @@
   <%= f.input :name %>
   <%= f.simple_fields_for :users do |users_form| %>
     <%= users_form.input :name %>
+    <%= users_form.input :email %>
     <%= users_form.input :password %>
     <%= users_form.input :password_confirmation %>
   <% end %>

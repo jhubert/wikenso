@@ -1,12 +1,26 @@
 require 'spec_helper'
 
 describe ControllerAuthentication, type: :controller do
-  controller { include ControllerAuthentication }
+  controller do
+    include ControllerAuthentication
+
+    before_filter :authenticate_user!
+
+    def index
+      render nothing: true
+    end
+  end
 
   it "signs a user in by saving the ID in the session" do
     user = FactoryGirl.create(:user)
     @controller.sign_in(user)
     session[:user_id].should == user.id
+  end
+
+  it "signs a user out by clearing the ID from the session" do
+    @controller.sign_in(FactoryGirl.create(:user))
+    @controller.sign_out
+    session[:user_id].should be_nil
   end
 
   context "when finding the current user" do
@@ -30,6 +44,20 @@ describe ControllerAuthentication, type: :controller do
 
     it "returns false if a user is logged in" do
       @controller.user_signed_in?.should be_false
+    end
+  end
+
+  context "when authenticating a user" do
+    it 'returns http success when the user is logged in' do
+      @controller.sign_in(FactoryGirl.create(:user))
+      get :index
+      response.should be_success
+    end
+
+    it "redirects to the sessions#new page for that wiki" do
+      @request.host = "foo.wikenso.dev"
+      get :index
+      response.should redirect_to "http://foo.wikenso.dev/sessions/new"
     end
   end
 end

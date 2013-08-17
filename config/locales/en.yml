@@ -21,3 +21,6 @@
 
 en:
   hello: "Hello world"
+  sessions:
+    create:
+      sign_in_unsuccessful: "Login failed. Please check your username and/or password and try again."

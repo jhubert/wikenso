@@ -16,3 +16,11 @@ RSpec.configure do |config|
   config.before(:each) { DatabaseCleaner.start }
   config.after(:each) { DatabaseCleaner.clean }
 end
+
+def sign_in(user)
+  session[:user_id] = user.id
+end
+
+def sign_out
+  session.clear
+end

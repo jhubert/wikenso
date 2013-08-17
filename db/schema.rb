@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130817050917) do
+ActiveRecord::Schema.define(version: 20130817103047) do
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -21,7 +21,10 @@ ActiveRecord::Schema.define(version: 20130817050917) do
     t.datetime "updated_at"
     t.integer  "wiki_id"
     t.string   "password_digest"
+    t.string   "email"
   end
+
+  add_index "users", ["email", "wiki_id"], name: "index_users_on_email_and_wiki_id", unique: true, using: :btree
 
   create_table "wikis", force: true do |t|
     t.string   "name"

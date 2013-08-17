@@ -1,6 +1,8 @@
 class WikisController < ApplicationController
   include ControllerAuthentication
 
+  before_filter :authenticate_user!, :only => :show
+
   def new
     @wiki = Wiki.new
     @wiki.users.new
@@ -23,6 +25,6 @@ class WikisController < ApplicationController
   private
 
   def wiki_params
-    params.require(:wiki).permit(:name, :users_attributes => [:name, :password, :password_confirmation])
+    params.require(:wiki).permit(:name, :users_attributes => [:name, :password, :password_confirmation, :email])
   end
 end
