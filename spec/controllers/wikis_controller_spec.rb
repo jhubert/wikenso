@@ -116,10 +116,10 @@ describe WikisController do
     end
 
     context "for an invalid subdomain" do
-      it "throws an error" do
+      it "throws a RoutingError (404)" do
         wiki = FactoryGirl.create(:wiki, name: "nilenso")
         @request.host = "c42.wikenso.com"
-        expect { get "show" }.to raise_error(ActiveRecord::RecordNotFound)
+        expect { get "show" }.to raise_error(ActionController::RoutingError)
       end
     end
   end
