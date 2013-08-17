@@ -1,4 +1,6 @@
 class WikisController < ApplicationController
+  include ControllerAuthentication
+
   def new
     @wiki = Wiki.new
     @wiki.users.new
@@ -7,6 +9,7 @@ class WikisController < ApplicationController
   def create
     @wiki = Wiki.new(wiki_params)
     if @wiki.save
+      sign_in(@wiki.users.first)
       redirect_to root_url(subdomain: @wiki.name)
     else
       render :new

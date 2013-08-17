@@ -1,7 +1,10 @@
 require 'spec_helper'
+require 'concerns/controller_authentication_spec'
 
 describe WikisController do
-  describe "GET 'new'" do
+  include_examples ControllerAuthentication
+
+  context "GET 'new'" do
     it "returns http success" do
       get 'new'
       response.should be_success
@@ -19,19 +22,35 @@ describe WikisController do
     end
   end
 
-  describe "GET 'create'" do
+  context "GET 'create'" do
     context "when save is successful" do
+      let(:users_attributes) { {"0" => FactoryGirl.attributes_for(:user)} }
+
       it "creates a new wiki" do
-        expect { get 'create', :wiki => FactoryGirl.attributes_for(:wiki) }.to change { Wiki.count }.by(1)
+        expect do
+          get 'create', wiki: FactoryGirl.attributes_for(:wiki, :users_attributes)
+        end.to change { Wiki.count }.by(1)
+      end
+
+      it "creates a new user" do
+        expect do
+          get 'create', wiki: FactoryGirl.attributes_for(:wiki, :users_attributes)
+        end.to change { User.count }.by(1)
+      end
+
+      it "signs the new user in" do
+        get 'create', wiki: FactoryGirl.attributes_for(:wiki, :users_attributes)
+        user = User.last
+        controller.current_user.should == user
       end
 
       it "creates a wiki with the supplied name" do
-        get 'create', :wiki => FactoryGirl.attributes_for(:wiki, name: "FooWiki")
+        get 'create', :wiki => FactoryGirl.attributes_for(:wiki, :users_attributes, name: "FooWiki")
         Wiki.last.name.should == "FooWiki"
       end
 
       it "redirects to the subdomain for the wiki" do
-        get 'create', :wiki => FactoryGirl.attributes_for(:wiki, name: "foowiki")
+        get 'create', :wiki => FactoryGirl.attributes_for(:wiki, :users_attributes, name: "foowiki")
         response.should redirect_to "http://foowiki.test.host/"
       end
     end
@@ -40,12 +59,17 @@ describe WikisController do
       before(:each) { FactoryGirl.create(:wiki, name: "Foo") }
 
       it "doesn't create a new wiki" do
-        expect { get 'create', :wiki => FactoryGirl.attributes_for(:wiki, name: "Foo") }.not_to change { Wiki.count }
+        expect { get 'create', :wiki => FactoryGirl.attributes_for(:wiki, :users_attributes, name: "Foo") }.not_to change { Wiki.count }
       end
 
       it "renders the 'new' template" do
-        get 'create', :wiki => FactoryGirl.attributes_for(:wiki, name: "Foo")
+        get 'create', :wiki => FactoryGirl.attributes_for(:wiki, :users_attributes, name: "Foo")
         response.should render_template(:new)
+      end
+
+      it "doesn't sign the user in" do
+        get 'create', wiki: FactoryGirl.attributes_for(:wiki, :users_attributes, name: "Foo")
+        controller.current_user.should be_nil
       end
     end
 
@@ -56,8 +80,7 @@ describe WikisController do
     end
   end
 
-  describe "GET 'show'" do
-    before(:each) { DatabaseCleaner.clean }
+  context "GET 'show'" do
     context "for a valid subdomain" do
       it "returns HTTP success" do
         FactoryGirl.create(:wiki, name: "nilenso")
