@@ -9,6 +9,7 @@ gem 'jquery-rails'
 gem 'zurb-foundation'
 gem 'turbolinks'
 gem 'simple_form'
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

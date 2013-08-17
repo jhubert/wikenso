@@ -11,6 +11,12 @@ describe WikisController do
       get 'new'
       assigns(:wiki).should be_a Wiki
     end
+
+    it "assigns a user belonging to the wiki" do
+      get 'new'
+      wiki = assigns(:wiki)
+      wiki.users.should_not be_empty
+    end
   end
 
   describe "GET 'create'" do

@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130816060017) do
+ActiveRecord::Schema.define(version: 20130817050917) do
+
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "password"
+    t.string   "password_confirmation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "wiki_id"
+    t.string   "password_digest"
+  end
 
   create_table "wikis", force: true do |t|
     t.string   "name"
