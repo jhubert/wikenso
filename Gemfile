@@ -21,3 +21,8 @@ group :test do
   gem 'forgery'
   gem 'database_cleaner'
 end
+
+group :development do
+  gem 'pry-rails'
+  gem 'zeus'
+end
