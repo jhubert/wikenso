@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks
+//= require vendor/underscore
+//= require vendor/backbone
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
