@@ -5,7 +5,7 @@ FactoryGirl.define do
     name { Forgery(:name).company_name.downcase }
 
     trait :users_attributes do
-      users_attributes { { "0" => FactoryGirl.attributes_for(:user) } }
+      users_attributes { { "0" => attributes_for(:user) } }
     end
 
   end

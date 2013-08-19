@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe Subdomain, :type => :controller do
-  controller do
+  controller(ActionController::Base) do
     include Subdomain
-    require_inclusion_of_subdomain(:in => lambda { ["foo", "bar", "baz"] })
+    require_inclusion_of_subdomain(:in => -> { ["foo", "bar", "baz"] })
 
     def index
       render :text => "HELLO!"

@@ -17,8 +17,8 @@ describe SessionsController do
   describe "GET 'create'" do
     before(:each) do
       @request.host = "foo.wikenso.dev"
-      wiki = FactoryGirl.create(:wiki, name: "Foo")
-      @user = FactoryGirl.create(:user, wiki: wiki, email: "a@example.com", password: "foo", password_confirmation: "foo")
+      wiki = create(:wiki, name: "Foo")
+      @user = create(:user, wiki: wiki, email: "a@example.com", password: "foo", password_confirmation: "foo")
     end
 
     context "when the credentials are correct" do
@@ -69,7 +69,8 @@ describe SessionsController do
 
   describe "GET 'destroy'" do
     it "redirects to the root path for that subdomain" do
-      user = FactoryGirl.create(:user)
+      create(:wiki, name: "Foo")
+      user = create(:user)
       @controller.sign_in(user)
       @request.host = "foo.wikenso.com"
       delete 'destroy', :id => user.id
@@ -77,7 +78,7 @@ describe SessionsController do
     end
 
     it "clears user ID from the session" do
-      user = FactoryGirl.create(:user)
+      user = create(:user)
       @controller.sign_in(user)
       expect { delete 'destroy', :id => user.id }.to change { session[:user_id] }.from(user.id).to(nil)
     end

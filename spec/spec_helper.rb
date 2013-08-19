@@ -15,6 +15,8 @@ RSpec.configure do |config|
   config.before(:suite) { DatabaseCleaner.strategy = :truncation }
   config.before(:each) { DatabaseCleaner.start }
   config.after(:each) { DatabaseCleaner.clean }
+
+  config.include FactoryGirl::Syntax::Methods
 end
 
 def sign_in(user)
