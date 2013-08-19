@@ -1,1 +1,29 @@
-Welcome to the <%= @wiki.subdomain %> Wiki.
+<% if @wiki.pages.present? %>
+  <div class="row wiki-pages-view">
+
+    <div class="large-3 columns wiki-pages-view-index">
+      <ul class="wiki-pages-view-index-list">
+        <% @wiki.pages.order("created_at").each do |page| %>
+          <li class="wiki-pages-view-index-list-item">
+            <%= page.title %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="large-9 columns wiki-pages-view-single">
+      <div class="wiki-pages-view-single-title">
+        <%= @wiki.pages.order("created_at").first.title %>
+      </div>
+
+      <div class="wiki-pages-view-single-text">
+        <%= sanitize @wiki.pages.order("created_at").first.text, tags: %w(p em strong) %>
+      </div>
+    </div>
+
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $(".wiki-pages-view-index-list-item").first().addClass("active");
+</script>

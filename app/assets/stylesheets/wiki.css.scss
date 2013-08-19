@@ -1,64 +1,46 @@
-body {
-  margin: 0;
+$page-title-font: "ff-dagny-web-pro";
+$page-title-margin-top: 35px;
+
+.wiki-pages-view-index {
+  border-right: 2px solid rgba(127, 198, 51, 0.7);
+  margin-top: $page-title-margin-top;
 }
 
-.wiki-header-logo {
-  background-color: $topbar-bg;
-  line-height: $topbar-height;
-  padding: 0 20px;
-  img {
-    max-height: 60px;
-  }
-
+.wiki-pages-view-index-list {
+  height: 100%;
+  margin-right: 20px;
+  list-style-type: none;
+  letter-spacing: -1px;
+  text-align: right;
 }
 
-.wiki-header-search {
-  width: 280px;
-  height: $topbar-height;
-  background-color: $topbar-bg;
-  padding: 0 20px;
-}
-
-.wiki-header-search-icon {
-  line-height: $topbar-height;
-  font-size: 22px;
-  color: #6D9136;
-}
-
-
-input.wiki-header-search-input {
+.wiki-pages-view-index-list-item {
   margin-top: 15px;
-  display: inline;
-  font-family: "ff-dagny-web-pro";
-  font-size: 17px;
-  font-weight: 200;
-  color: white;
-  border: none;
-  background: #699526;
-  border-radius: 5px;
-  &:focus {
-    background: #699526;
-  }
-  @include placeholder {
-    color: #CFE199;
-  }
-}
-
-.wiki-header-signed-in {
-  font-family: "jaf-bernino-sans-condensed";
-  height: $topbar-height;
-  line-height: $topbar-height;
-  background-color: $topbar-bg;
-  padding: 0 20px 0 20px;
-  font-size: 17px;
-}
-
-.wiki-header-signed-in-signed-in-as {
+  font-family: $page-title-font;
+  font-size: 25px;
   font-weight: 300;
-  color: #D5E9A5;
+  color: #888;
+  &.active {
+    font-size: 29px;
+    font-weight: 400;
+    color: #333;
+  }
 }
 
-.wiki-header-signed-in-first-name {
-  color: white;
-  font-weight: 400;
+.wiki-pages-view-single {
+  margin-top: $page-title-margin-top;
+  padding-left: 50px;
+}
+
+.wiki-pages-view-single-title {
+  font-family: $page-title-font;
+  font-weight: 700;
+  font-size: 60px;
+}
+
+.wiki-pages-view-single-text {
+  font-family: "ff-tisa-web-pro";
+  margin-top: 15px;
+  line-height: 30px;
+  font-size: 17px;
 }
