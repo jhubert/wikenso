@@ -27,3 +27,8 @@ en:
   layouts:
     header:
       search_bar_placeholder_text: "Search…"
+
+  activerecord:
+    errors:
+      messages:
+        subdomain_format: "cannot contain spaces or special characters."
