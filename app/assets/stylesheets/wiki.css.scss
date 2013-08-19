@@ -21,20 +21,26 @@ body {
 
 .wiki-header-search-icon {
   line-height: $topbar-height;
-  font-size: 19px;
+  font-size: 22px;
   color: #6D9136;
 }
 
 
 input.wiki-header-search-input {
-  margin-top: 17px;
+  margin-top: 15px;
   display: inline;
+  font-family: "ff-dagny-web-pro";
+  font-size: 17px;
+  font-weight: 200;
   color: white;
   border: none;
   background: #699526;
   border-radius: 5px;
   &:focus {
     background: #699526;
+  }
+  @include placeholder {
+    color: #CFE199;
   }
 }
 
@@ -44,6 +50,7 @@ input.wiki-header-search-input {
   line-height: $topbar-height;
   background-color: $topbar-bg;
   padding: 0 20px 0 20px;
+  font-size: 17px;
 }
 
 .wiki-header-signed-in-signed-in-as {

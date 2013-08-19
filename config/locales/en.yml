@@ -24,3 +24,6 @@ en:
   sessions:
     create:
       sign_in_unsuccessful: "Login failed. Please check your username and/or password and try again."
+  layouts:
+    header:
+      search_bar_placeholder_text: "Search…"
