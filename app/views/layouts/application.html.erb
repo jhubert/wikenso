@@ -10,7 +10,9 @@
 </head>
 <body>
 
-<%= render "layouts/header" %>
+<% if subdomain? %>
+  <%= render "layouts/header" %>
+<% end %>
 
 <%= yield %>
 

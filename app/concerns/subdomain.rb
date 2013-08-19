@@ -1,6 +1,11 @@
 module Subdomain
   extend ActiveSupport::Concern
 
+  included do
+    def subdomain?
+      request.subdomain =~ /.+/
+    end
+  end
 
   module ClassMethods
     def require_inclusion_of_subdomain(options={})

@@ -13,35 +13,34 @@
       </li>
       <li class="divider"></li>
     </ul>
-    <ul class="right">
+    <% if user_signed_in? %>
 
-      <li class="wiki-header-search search has-form">
-        <form>
-        <div class="row collapse">
-          <div class="small-2 columns">
-            <i class="foundicon-search wiki-header-search-icon"></i>
-          </div>
+      <ul class="right">
+        <li class="wiki-header-search search has-form">
+          <form>
+            <div class="row collapse">
+              <div class="small-2 columns">
+                <i class="foundicon-search wiki-header-search-icon"></i>
+              </div>
 
-          <div class="small-10 columns">
-            <input type="text" class="wiki-header-search-input" placeholder="<%= t(".search_bar_placeholder_text") %>"/>
-          </div>
-        </div>
-        </form>
-      </li>
+              <div class="small-10 columns">
+                <input type="text" class="wiki-header-search-input" placeholder="<%= t(".search_bar_placeholder_text") %>"/>
+              </div>
+            </div>
+          </form>
+        </li>
 
-      <li class="divider"></li>
+        <li class="divider"></li>
 
-      <li class="wiki-header-signed-in">
+        <li class="wiki-header-signed-in">
         <span class="wiki-header-signed-in-signed-in-as">
-          Signed in as
+          <%= t(".signed_in_as_text") %>
         </span>
         <span class="wiki-header-signed-in-first-name">
-          timothyandrew
+          <%= current_user.name %>
         </span>
-      </li>
-
-    </ul>
-
+        </li>
+      </ul>
+    <% end %>
   </section>
-
 </nav>

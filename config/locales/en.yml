@@ -28,6 +28,7 @@ en:
     header:
       search_bar_placeholder_text: "Search…"
 
+      signed_in_as_text: "Signed in as"
   activerecord:
     errors:
       messages:

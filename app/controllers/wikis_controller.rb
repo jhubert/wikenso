@@ -1,6 +1,4 @@
 class WikisController < ApplicationController
-  include ControllerAuthentication
-
   before_filter :authenticate_user!, :only => :show
 
   def new
