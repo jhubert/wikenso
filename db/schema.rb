@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130817103047) do
+ActiveRecord::Schema.define(version: 20130819110105) do
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20130817103047) do
   add_index "users", ["email", "wiki_id"], name: "index_users_on_email_and_wiki_id", unique: true, using: :btree
 
   create_table "wikis", force: true do |t|
-    t.string   "name"
+    t.string   "subdomain"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -5,5 +5,5 @@ class ApplicationController < ActionController::Base
 
   include Subdomain
 
-  require_inclusion_of_subdomain in: lambda { Wiki.pluck(:name).map(&:downcase) }
+  require_inclusion_of_subdomain in: lambda { Wiki.pluck(:subdomain).map(&:downcase) }
 end

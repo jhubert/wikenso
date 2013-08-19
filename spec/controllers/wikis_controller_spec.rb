@@ -42,31 +42,31 @@ describe WikisController do
         controller.current_user.should == user
       end
 
-      it "creates a wiki with the supplied name" do
-        get 'create', :wiki => attributes_for(:wiki, :users_attributes, name: "FooWiki")
-        Wiki.last.name.should == "FooWiki"
+      it "creates a wiki with the supplied subdomain" do
+        get 'create', :wiki => attributes_for(:wiki, :users_attributes, subdomain: "FooWiki")
+        Wiki.last.subdomain.should == "FooWiki"
       end
 
       it "redirects to the subdomain for the wiki" do
-        get 'create', :wiki => attributes_for(:wiki, :users_attributes, name: "foowiki")
+        get 'create', :wiki => attributes_for(:wiki, :users_attributes, subdomain: "foowiki")
         response.should redirect_to "http://foowiki.test.host/"
       end
     end
 
     context "when save is unsuccessful due to a duplicate wiki name" do
-      before(:each) { create(:wiki, name: "Foo") }
+      before(:each) { create(:wiki, subdomain: "Foo") }
 
       it "doesn't create a new wiki" do
-        expect { get 'create', :wiki => attributes_for(:wiki, :users_attributes, name: "Foo") }.not_to change { Wiki.count }
+        expect { get 'create', :wiki => attributes_for(:wiki, :users_attributes, subdomain: "Foo") }.not_to change { Wiki.count }
       end
 
       it "renders the 'new' template" do
-        get 'create', :wiki => attributes_for(:wiki, :users_attributes, name: "Foo")
+        get 'create', :wiki => attributes_for(:wiki, :users_attributes, subdomain: "Foo")
         response.should render_template(:new)
       end
 
       it "doesn't sign the user in" do
-        get 'create', wiki: attributes_for(:wiki, :users_attributes, name: "Foo")
+        get 'create', wiki: attributes_for(:wiki, :users_attributes, subdomain: "Foo")
         controller.current_user.should be_nil
       end
     end
@@ -83,21 +83,21 @@ describe WikisController do
 
     context "for a valid subdomain" do
       it "returns HTTP success" do
-        create(:wiki, name: "nilenso")
+        create(:wiki, subdomain: "nilenso")
         @request.host = "nilenso.wikenso.com"
         get "show"
         response.should be_success
       end
 
-      it "assigns the wiki whose name is the same as the subdomain" do
-        wiki = create(:wiki, name: "nilenso")
+      it "assigns the wiki whose subdomain is the same as the request subdomain" do
+        wiki = create(:wiki, subdomain: "nilenso")
         @request.host = "nilenso.wikenso.com"
         get "show"
         assigns(:wiki).should == wiki
       end
 
       it "matches a subdomain even when it's case is different" do
-        wiki = create(:wiki, name: "UPPERCASE")
+        wiki = create(:wiki, subdomain: "UPPERCASE")
         @request.host = "uppercase.wikenso.com"
         get "show"
         assigns(:wiki).should == wiki
@@ -107,7 +107,7 @@ describe WikisController do
         before(:each) { sign_out }
 
         it "redirects to the login page for the subdomain" do
-          wiki = create(:wiki, name: "foo")
+          wiki = create(:wiki, subdomain: "foo")
           @request.host = "foo.wikenso.com"
           get "show"
           response.should redirect_to "http://foo.wikenso.com/sessions/new"
@@ -117,7 +117,7 @@ describe WikisController do
 
     context "for an invalid subdomain" do
       it "throws a RoutingError (404)" do
-        wiki = create(:wiki, name: "nilenso")
+        wiki = create(:wiki, subdomain: "nilenso")
         @request.host = "c42.wikenso.com"
         expect { get "show" }.to raise_error(ActionController::RoutingError)
       end

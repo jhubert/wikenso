@@ -17,7 +17,7 @@ describe SessionsController do
   describe "GET 'create'" do
     before(:each) do
       @request.host = "foo.wikenso.dev"
-      wiki = create(:wiki, name: "Foo")
+      wiki = create(:wiki, subdomain: "Foo")
       @user = create(:user, wiki: wiki, email: "a@example.com", password: "foo", password_confirmation: "foo")
     end
 
@@ -69,7 +69,7 @@ describe SessionsController do
 
   describe "GET 'destroy'" do
     it "redirects to the root path for that subdomain" do
-      create(:wiki, name: "Foo")
+      create(:wiki, subdomain: "Foo")
       user = create(:user)
       @controller.sign_in(user)
       @request.host = "foo.wikenso.com"

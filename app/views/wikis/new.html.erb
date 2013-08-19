@@ -1,5 +1,5 @@
 <%= simple_form_for @wiki do |f| %>
-  <%= f.input :name %>
+  <%= f.input :subdomain %>
   <%= f.simple_fields_for :users do |users_form| %>
     <%= users_form.input :name %>
     <%= users_form.input :email %>

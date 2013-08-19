@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :wiki do
-    name { Forgery(:name).company_name.downcase }
+    subdomain { Forgery(:name).company_name.downcase }
 
     trait :users_attributes do
       users_attributes { { "0" => attributes_for(:user) } }
