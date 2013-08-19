@@ -1,20 +1,37 @@
-<header class="wiki-header row">
-  <div class="large-4 columns wiki-header-logo">
-    <%= image_tag "placeholder_logo.png" %>
-  </div>
+<nav class="wiki-header top-bar">
+  <ul class="title-area">
+    <li class="name">
+      <div class="wiki-header-logo">
+        <%= image_tag "placeholder_logo.png" %>
+      </div>
+    </li>
+  </ul>
 
-  <div class="large-4 columns wiki-header-search">
-    <input type="text"/>
-  </div>
 
+  <section class="top-bar-section">
+    <ul class="right">
+      <li class="divider"></li>
 
-  <div class="large-2 columns wiki-header-signed-in tk-jaf-bernino-sans-condensed">
-    <span class="wiki-header-signed-in-signed-in-as">
-      Signed in as
-    </span>
-    <span class="wiki-header-signed-in-first-name">
-      timothyandrew
-    </span>
-  </div>
+      <li class="wiki-header-search">
+        <div class="wiki-header-search-icon">
+          <i class="foundicon-search"></i>
+        </div>
+        <input type="text" class="wiki-header-search-input"/>
+      </li>
 
-</header>
+      <li class="divider"></li>
+
+      <li class="wiki-header-signed-in">
+        <span class="wiki-header-signed-in-signed-in-as">
+          Signed in as
+        </span>
+        <span class="wiki-header-signed-in-first-name">
+          timothyandrew
+        </span>
+      </li>
+
+    </ul>
+
+  </section>
+
+</nav>
