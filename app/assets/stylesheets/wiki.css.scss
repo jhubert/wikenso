@@ -13,23 +13,19 @@ body {
 .wiki-header-search {
   width: 280px;
   height: $topbar-height;
-  line-height: $topbar-height;
   background-color: $topbar-bg;
   padding: 0 20px;
 }
 
 .wiki-header-search-icon {
-  display: inline;
+  line-height: $topbar-height;
   font-size: 19px;
   color: #6D9136;
 }
 
 
 input.wiki-header-search-input {
-  display: none;
-  line-height: $topbar-height;
-  width: 200px;
-  margin: 0 0 4px 5px;
+  margin-top: 17px;
   display: inline;
   color: white;
   border: none;
