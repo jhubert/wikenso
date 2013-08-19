@@ -1,0 +1,4 @@
+window.WikiApp = {
+  Models: {}
+  Views: {}
+}
