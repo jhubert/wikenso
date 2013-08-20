@@ -29,6 +29,7 @@ class WikiApp.Views.EditableWikiPageView extends Backbone.View
   setContentEditable: =>
     @title.attr('contenteditable', true)
     @text.attr('contenteditable', true)
+    @text.focus()
 
   unsetContentEditable: =>
     @title.attr('contenteditable', false)
