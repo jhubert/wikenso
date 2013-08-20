@@ -7,6 +7,7 @@ class WikiApp.Views.WikiView extends Backbone.View
 
   initialize: =>
     @wiki_page_view = new WikiApp.Views.WikiPageView
+    @editable_wiki_page_view = new WikiApp.Views.EditableWikiPageView
     @editButton = this.$el.find(".edit-wiki-page-button")
     @backButton = this.$el.find(".finish-edit-wiki-page-button")
     @backButton.hide()
@@ -18,9 +19,8 @@ class WikiApp.Views.WikiView extends Backbone.View
         @editButton.hide()
         @backButton.show()
 
-
   makeNonEditable: =>
-    @wiki_page_view.makeNonEditable =>
+    @editable_wiki_page_view.makeNonEditable =>
       $(".wiki-pages-view-index").fadeIn("fast")
       @editButton.show()
       @backButton.hide()

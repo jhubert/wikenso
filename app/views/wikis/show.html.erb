@@ -18,7 +18,7 @@
         <%= @wiki.pages.order("created_at").first.title %>
       </div>
 
-      <div class="wiki-pages-view-single-text">
+      <div class="wiki-pages-view-single-text display">
         <%= sanitize @wiki.pages.order("created_at").first.text, tags: %w(p em strong) %>
       </div>
     </div>
