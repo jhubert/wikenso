@@ -6,7 +6,7 @@ class WikiApp.Models.PageModel extends Backbone.Model
 
   setAutoSaveTimeout: =>
     clearTimeout(@autoSaveTimeout)
-    @autoSaveTimeout = setTimeout(@autoSave, 1000)
+    @autoSaveTimeout = setTimeout(@autoSave, 800)
 
   setAutoSaveCallbacks: (options) =>
     @successCallback = options.success || (->)
@@ -14,5 +14,6 @@ class WikiApp.Models.PageModel extends Backbone.Model
     @requestCallback = options.request || (->)
 
   autoSave: =>
+    console.log @changed
     @requestCallback()
     @save().done(@successCallback).fail(@errorCallback)
