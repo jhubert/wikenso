@@ -8,9 +8,6 @@ before_script:
   - bundle exec rake db:migrate
   - bundle exec rake db:test:prepare
 
-script:
-  - bundle exec rake default konacha:run
-
 notifications:
   email:
     - wikenso@nilenso.com
