@@ -9,13 +9,16 @@ class WikiApp.Views.EditableWikiPageView extends Backbone.View
     @title = this.$el.find(".wiki-pages-view-single-title")
     @text = this.$el.find(".wiki-pages-view-single-text")
     @setContentEditable()
-    @model = new WikiApp.Models.PageModel(text: @getText(), title: @getTitle())
+    @model = new WikiApp.Models.PageModel(text: @getText(), title: @getTitle(), id: @getId())
 
   updateTitle: =>
     @model.set('title', @getTitle())
 
   updateText: =>
     @model.set('text', @getText())
+
+  getId: =>
+    this.$el.data('id')
 
   getTitle: =>
     @title.html().trim()
