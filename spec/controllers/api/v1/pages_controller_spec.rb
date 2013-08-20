@@ -17,11 +17,10 @@ module Api
             page.reload.title.should == "Foo"
           end
 
-          it "returns the page's title and text in JSON" do
+          it "returns an empty hash so that backbone doesn't update its local model" do
             page = create(:page, title: "Bar", text: "Baz")
             put :update, id: page.id, page: {title: "Foo"}
-            response_hash = JSON.parse(response.body).symbolize_keys
-            response_hash.should == {text: "Baz", title: "Foo"}
+            JSON.parse(response.body).should == {}
           end
         end
 

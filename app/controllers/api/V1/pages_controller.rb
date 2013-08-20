@@ -4,7 +4,7 @@ module Api
       def update
         page = Page.find(params[:id])
         if page.update(page_params)
-          render json: page, only: [:title, :text]
+          render json: {}
         else
           render json: page.errors, status: :bad_request
         end
