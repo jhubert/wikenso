@@ -19,7 +19,7 @@
       </div>
 
       <div class="wiki-pages-view-single-text">
-        <%= sanitize @page.text, tags: %w(p em strong) %>
+        <p><%= sanitize @page.text, tags: %w(p em strong br) %></p>
       </div>
     </div>
 
