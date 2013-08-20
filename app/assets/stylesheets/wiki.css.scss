@@ -19,11 +19,11 @@ $page-title-margin-top: 35px;
   font-family: $page-title-font;
   font-size: 25px;
   font-weight: 300;
-  color: #888;
+  a { color: #888; }
   &.active {
     font-size: 29px;
     font-weight: 400;
-    color: #333;
+    a { color: #333; }
   }
 }
 

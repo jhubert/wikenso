@@ -5,7 +5,7 @@
       <ul class="wiki-pages-view-index-list">
         <% @wiki.pages.each do |page| %>
           <li class="wiki-pages-view-index-list-item <%= page == @page ? "active" : "" %>">
-            <%= page.title %>
+            <%= link_to page.title, page_path(page) %>
           </li>
         <% end %>
       </ul>
