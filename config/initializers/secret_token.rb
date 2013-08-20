@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Wikenso::Application.config.secret_key_base = 'e53de8573f164e8a120dbb3a3828ce0fbd373942d505807867b0ac58f019abfd6f352831ec6dcbbadd9a71d58e605545993b4a4e5bcd6af0aea45cf95ff058e8'
+Wikenso::Application.config.secret_key_base = ENV['secret_token']

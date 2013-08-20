@@ -1,1 +1,2 @@
 host_name: "wikenso.dev"
+secret_token: "somelongstringhere"
