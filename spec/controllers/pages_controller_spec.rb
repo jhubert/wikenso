@@ -27,6 +27,30 @@ describe PagesController do
         assigns(:wiki).should == wiki
       end
 
+      context "when assigning the page" do
+        let(:wiki) { create(:wiki, subdomain: "foo") }
+        before(:each) { @request.host = "foo.wikenso.com" }
+
+        it "assigns the page corresponding to the passed ID" do
+          page = create(:page, wiki: wiki)
+          get :show, id: page.id
+          assigns(:page).should == page
+        end
+
+        it "assigns the first page if no ID is passed" do
+          first_page = create(:page, wiki: wiki)
+          second_page = create(:page, wiki: wiki)
+          get :show
+          assigns(:page).should == first_page
+        end
+
+        it "raises an error if an invalid ID is passed" do
+          first_page = create(:page, wiki: wiki)
+          second_page = create(:page, wiki: wiki)
+          expect { get :show, id: 12345 }.to raise_error(ActiveRecord::RecordNotFound)
+        end
+      end
+
       context "when the user is not authenticated" do
         before(:each) { sign_out }
 
