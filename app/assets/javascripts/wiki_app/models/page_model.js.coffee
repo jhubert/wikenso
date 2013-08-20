@@ -2,8 +2,17 @@ class WikiApp.Models.PageModel extends Backbone.Model
   urlRoot: "/api/v1/pages"
 
   initialize: =>
-    @on('change', @autoSave)
+    @on('change', @setAutoSaveTimeout)
+
+  setAutoSaveTimeout: =>
+    clearTimeout(@autoSaveTimeout)
+    @autoSaveTimeout = setTimeout(@autoSave, 1000)
+
+  setAutoSaveCallbacks: (options) =>
+    @successCallback = options.success || (->)
+    @errorCallback = options.error || (->)
+    @requestCallback = options.request || (->)
 
   autoSave: =>
-    clearTimeout(@autoSaveTimeout)
-    @autoSaveTimeout = setTimeout(@save, 1000)
+    @requestCallback()
+    @save().done(@successCallback).fail(@errorCallback)

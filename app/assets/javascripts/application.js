@@ -16,6 +16,7 @@
 //= require turbolinks
 //= require vendor/underscore
 //= require vendor/backbone
+//= require vendor/moment
 //= require wiki_app/wiki_app
 //= require_tree ./wiki_app
 //= require_tree .

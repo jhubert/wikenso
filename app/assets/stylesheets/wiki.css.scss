@@ -56,3 +56,10 @@ $page-title-margin-top: 35px;
 .finish-edit-wiki-page-button {
   float: right;
 }
+
+.saving-indicator {
+  display: none;
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+}

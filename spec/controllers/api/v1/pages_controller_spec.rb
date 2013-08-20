@@ -17,11 +17,11 @@ module Api
             page.reload.title.should == "Foo"
           end
 
-          it "returns the page in JSON" do
+          it "returns the page's title and text in JSON" do
             page = create(:page, title: "Bar", text: "Baz")
             put :update, id: page.id, page: {title: "Foo"}
             response_hash = JSON.parse(response.body).symbolize_keys
-            response_hash.slice(:text, :title).should == {text: "Baz", title: "Foo"}
+            response_hash.should == {text: "Baz", title: "Foo"}
           end
         end
 
