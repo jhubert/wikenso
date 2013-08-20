@@ -23,7 +23,7 @@ class WikiApp.Views.EditableWikiPageView extends Backbone.View
     this.$el.data('id')
 
   getTitle: =>
-    @title.html().trim()
+    @title.text().trim()
 
   getText: =>
     @text.html().trim()
