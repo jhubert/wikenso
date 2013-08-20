@@ -1,0 +1,25 @@
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: wiki_dev
+  pool: 5
+  username:
+  password:
+  host: localhost
+
+test:
+  adapter: postgresql
+  encoding: utf8
+  database: wiki_test
+  pool: 5
+  username:
+  password:
+  host: localhost
+
+production:
+  adapter: postgresql
+  encoding: utf8
+  database: wiki_prod
+  pool: 5
+  username:
+  password:
