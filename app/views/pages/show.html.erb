@@ -15,11 +15,11 @@
       <a href="javascript:void(0);" class="edit-wiki-page-button button">Edit</a>
       <a href="javascript:void(0);" class="finish-edit-wiki-page-button button">Back</a>
       <div class="wiki-pages-view-single-title">
-        <%= @wiki.pages.order("created_at").first.title %>
+        <%= @page.title %>
       </div>
 
       <div class="wiki-pages-view-single-text">
-        <%= sanitize @wiki.pages.order("created_at").first.text, tags: %w(p em strong) %>
+        <%= sanitize @page.text, tags: %w(p em strong) %>
       </div>
     </div>
 
@@ -28,5 +28,5 @@
 
 <script type="text/javascript">
   $(".wiki-pages-view-index-list-item").first().addClass("active");
-  new WikiApp.Views.WikiView();
+  new WikiApp.Views.WikiView({first_page_attributes: gon.first_page_attributes});
 </script>
