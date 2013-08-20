@@ -36,6 +36,8 @@ $page-title-margin-top: 35px;
   font-family: $page-title-font;
   font-weight: 700;
   font-size: 60px;
+  outline: 0 solid transparent;
+  &:focus { outline: 0 solid transparent; }
 }
 
 .wiki-pages-view-single-text {
@@ -43,6 +45,8 @@ $page-title-margin-top: 35px;
   margin-top: 15px;
   line-height: 30px;
   font-size: 17px;
+  outline: 0 solid transparent;
+  &:focus { outline: 0 solid transparent; }
 }
 
 .edit-wiki-page-button {

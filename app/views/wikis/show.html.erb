@@ -11,14 +11,14 @@
       </ul>
     </div>
 
-    <div class="large-9 columns wiki-pages-view-single">
+    <div class="large-9 columns wiki-pages-view-single display">
       <a href="javascript:void(0);" class="edit-wiki-page-button button">Edit</a>
       <a href="javascript:void(0);" class="finish-edit-wiki-page-button button">Back</a>
       <div class="wiki-pages-view-single-title">
         <%= @wiki.pages.order("created_at").first.title %>
       </div>
 
-      <div class="wiki-pages-view-single-text display">
+      <div class="wiki-pages-view-single-text">
         <%= sanitize @wiki.pages.order("created_at").first.text, tags: %w(p em strong) %>
       </div>
     </div>
