@@ -20,6 +20,7 @@ class WikiApp.Views.WikiPageView extends Backbone.View
       error: => @errorView.show("An error has occured while saving the page. Please try again.")
     )
     @model.once("change", @helpText.hide)
+    @text.focus()
 
   getId: =>
     this.$el.data('id')
