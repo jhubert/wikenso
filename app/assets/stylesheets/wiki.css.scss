@@ -38,6 +38,7 @@ $page-title-margin-top: 35px;
   font-size: 60px;
   outline: 0 solid transparent;
   &:focus { outline: 0 solid transparent; }
+  &.placeholder { color: #BBB; }
 }
 
 .wiki-pages-view-single-text {

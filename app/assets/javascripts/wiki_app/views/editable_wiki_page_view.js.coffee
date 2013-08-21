@@ -2,24 +2,21 @@ class WikiApp.Views.EditableWikiPageView extends Backbone.View
   el: ".wiki-pages-view-single.edit"
 
   events:
-    "keyup .wiki-pages-view-single-title": "updateTitle"
     "keyup .wiki-pages-view-single-text": "updateText"
 
   initialize: =>
-    @title = this.$el.find(".wiki-pages-view-single-title")
+    @model = new WikiApp.Models.PageModel
+    @title = new WikiApp.Views.PageTitleView(@model)
     @text = this.$el.find(".wiki-pages-view-single-text")
     @setContentEditable()
 
     @savingIndicator = new WikiApp.Views.SavingIndicatorView
     @helpText = new WikiApp.Views.HelpTextView
-    @model = new WikiApp.Models.PageModel(text: @getText(), title: @getTitle(), id: @getId())
 
+    @model.set(text: @getText(), id: @getId())
     @model.setAutoSaveCallbacks(success: @savingIndicator.saved, request: @savingIndicator.saving)
     @model.once("change", @helpText.hide)
     @helpText.show()
-
-  updateTitle: =>
-    @model.set('title', @getTitle())
 
   updateText: =>
     @model.set('text', @getText())
@@ -27,19 +24,16 @@ class WikiApp.Views.EditableWikiPageView extends Backbone.View
   getId: =>
     this.$el.data('id')
 
-  getTitle: =>
-    @title.text().trim()
-
   getText: =>
     @text.html().trim()
 
   setContentEditable: =>
-    @title.attr('contenteditable', true)
+    @title.setContentEditable()
     @text.attr('contenteditable', true)
     @text.focus()
 
   unsetContentEditable: =>
-    @title.attr('contenteditable', false)
+    @title.unsetContentEditable()
     @text.attr('contenteditable', false)
 
   tearDown: (callback) =>

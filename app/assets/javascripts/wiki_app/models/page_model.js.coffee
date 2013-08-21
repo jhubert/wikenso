@@ -10,9 +10,9 @@ class WikiApp.Models.PageModel extends Backbone.Model
 
   setAutoSaveCallbacks: (options) =>
     @successCallback = options.success || (->)
-    @errorCallback = options.error || (->)
+    @errorCallback = options.error || (-> console.log "Error while saving the page.")
     @requestCallback = options.request || (->)
 
   autoSave: =>
     @requestCallback()
-    @save().done(@successCallback).fail(@errorCallback)
+    @save({}, { success: @successCallback, error: @errorCallback })

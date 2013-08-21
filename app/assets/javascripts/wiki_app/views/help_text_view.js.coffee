@@ -5,4 +5,4 @@ class WikiApp.Views.HelpTextView extends Backbone.View
     this.$el.show('slow')
 
   hide: =>
-    this.$el.hide('slow')
+    this.$el.hide('fast')
