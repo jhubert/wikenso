@@ -8,7 +8,7 @@ Wikenso::Application.routes.draw do
   root :to => 'wikis#new'
 
   namespace :api do
-    namespace :V1 do
+    namespace :v1 do
       resources :pages, only: :update
     end
   end
