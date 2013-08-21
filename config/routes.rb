@@ -9,7 +9,7 @@ Wikenso::Application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :pages, only: :update
+      resources :pages, only: :update, controller: "api/v1/pages"
     end
   end
 end
