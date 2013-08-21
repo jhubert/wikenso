@@ -1,6 +1,11 @@
 class PagesController < ApplicationController
   before_filter :authenticate_user!
 
+  def edit
+    wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first!
+    @page = wiki.pages.find_by_id!(params[:id])
+  end
+
   def show
     @wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first!
     if params.has_key?(:id)

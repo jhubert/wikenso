@@ -1,4 +1,4 @@
-$progress-color: #4DA8DD;
+$progress-color: #FF0000;
 
 /* Make clicks pass-through */
 #nprogress {
@@ -16,7 +16,7 @@ $progress-color: #4DA8DD;
 
     position: fixed;
     z-index: 0;
-    top: 80px;
+    top: 0;
     left: 0;
 
     width: 100%;

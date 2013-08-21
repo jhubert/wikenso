@@ -2,6 +2,28 @@ require 'spec_helper'
 
 describe PagesController do
 
+  context "GET 'edit'" do
+    before(:each) { sign_in(create(:user)) }
+
+    let(:wiki) { create(:wiki, subdomain: "foo") }
+    before(:each) { @request.host = "foo.example.com" }
+
+    it "assigns the page corresponding to the passed ID" do
+      page = create(:page, wiki: wiki)
+      get :edit, id: page.id
+      assigns(:page).should == page
+    end
+
+    it "raises an error if the ID is invalid" do
+      expect { get :edit, id: 1234 }.to raise_error
+    end
+
+    it "raises an error if the ID points to a page belonging to another wiki" do
+      page = create(:page, wiki: create(:wiki))
+      expect { get :edit, id: page.id }.to raise_error
+    end
+  end
+
   context "GET 'show'" do
     before(:each) { sign_in(create(:user)) }
 

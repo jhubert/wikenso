@@ -4,19 +4,13 @@ class WikiApp.Views.PageTextView extends Backbone.View
   events:
     "keyup": "updateText"
 
-  initialize: (@model) => @updateText()
+  initialize: (@model) => @updateText(silent: true)
 
-  updateText: =>
-    @model.set('text', @getText())
+  updateText: (options) =>
+    @model.set('text', @getText(), options)
 
   getText: =>
     this.$el.html().trim()
-
-  setContentEditable: =>
-    this.$el.attr('contenteditable', true)
-
-  unsetContentEditable: =>
-    this.$el.attr('contenteditable', false)
 
   focus: =>
     this.$el.focus()

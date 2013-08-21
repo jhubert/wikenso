@@ -4,16 +4,10 @@ class WikiApp.Views.PageTitleView extends Backbone.View
   events:
     "keyup": "updateTitle"
 
-  initialize: (@model) => @updateTitle()
+  initialize: (@model) => @updateTitle(silent: true)
 
-  setContentEditable: =>
-    this.$el.attr('contenteditable', true)
-
-  unsetContentEditable: =>
-    this.$el.attr('contenteditable', false)
-
-  updateTitle: =>
-    @model.set('title', @getTitle())
+  updateTitle: (options) =>
+    @model.set('title', @getTitle(), options)
 
   getTitle: =>
     this.$el.text().trim()

@@ -1,0 +1,37 @@
+<div class="help-text row">
+  <p class="large-12-columns">
+    <%= t(".editor_help_text") %>
+  </p>
+</div>
+
+<div class="error-text row">
+  <p class="large-12-columns">
+  </p>
+</div>
+
+<div class="row wiki-pages-view">
+  <div class="large-12 columns wiki-pages-view-single" data-id=<%= @page.id %>>
+    <%= link_to "Back", page_path(@page), { class: "finish-edit-wiki-page-button" } %>
+    <div class="wiki-pages-view-single-title" contenteditable=true>
+      <%= @page.title %>
+    </div>
+
+    <div class="wiki-pages-view-single-text" contenteditable=true>
+      <p><%= sanitize @page.text, tags: %w(p em strong br) %></p>
+    </div>
+  </div>
+
+</div>
+
+<div class="saving-indicator">
+</div>
+
+<script type="text/javascript">
+  $(document).on('page:fetch', function () {
+    NProgress.start();
+  });
+  $(document).on('page:load', function () {
+    NProgress.done();
+  });
+  new WikiApp.Views.WikiPageView();
+</script>
