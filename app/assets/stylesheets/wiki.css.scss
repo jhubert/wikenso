@@ -79,3 +79,15 @@ $page-title-margin-top: 35px;
   font-family: "ff-dagny-web-pro";
   p { margin: 0; }
 }
+
+.error-text {
+  display: none;
+  text-align: center;
+  min-width: 100%;
+  background-color: #AC3232;
+  padding: 6px 0;
+  font-size: 16px;
+  font-family: "ff-dagny-web-pro";
+  color: #FFDFDF;
+  p { margin: 0; }
+}

@@ -12,9 +12,14 @@ class WikiApp.Views.EditableWikiPageView extends Backbone.View
 
     @savingIndicator = new WikiApp.Views.SavingIndicatorView
     @helpText = new WikiApp.Views.HelpTextView
+    @errorView = new WikiApp.Views.ErrorView
 
     @model.set('id', @getId())
-    @model.setAutoSaveCallbacks(success: @savingIndicator.saved, request: @savingIndicator.saving)
+    @model.setAutoSaveCallbacks(
+      success: _.sequence(@savingIndicator.saved, @errorView.hide)
+      request: @savingIndicator.saving,
+      error: => @errorView.show("An error has occured while saving the page. Please try again.")
+    )
     @model.once("change", @helpText.hide)
     @helpText.show()
 

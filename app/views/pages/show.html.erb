@@ -5,6 +5,11 @@
     </p>
   </div>
 
+  <div class="error-text row">
+    <p class="large-12-columns">
+    </p>
+  </div>
+
   <div class="row wiki-pages-view">
     <div class="large-3 columns wiki-pages-view-index">
       <ul class="wiki-pages-view-index-list">
@@ -19,6 +24,7 @@
     <div class="large-9 columns wiki-pages-view-single display" data-id=<%= @page.id %>>
       <a href="javascript:void(0);" class="edit-wiki-page-button button">Edit</a>
       <a href="javascript:void(0);" class="finish-edit-wiki-page-button button">Back</a>
+
       <div class="wiki-pages-view-single-title">
         <%= @page.title %>
       </div>
@@ -35,7 +41,11 @@
 <% end %>
 
 <script type="text/javascript">
-  $(document).on('page:fetch', function() { NProgress.start(); });
-  $(document).on('page:load',  function() { NProgress.done(); });
+  $(document).on('page:fetch', function () {
+    NProgress.start();
+  });
+  $(document).on('page:load', function () {
+    NProgress.done();
+  });
   new WikiApp.Views.WikiView();
 </script>
