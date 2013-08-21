@@ -14,6 +14,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'figaro'
 gem 'bourbon'
 gem 'thin'
+gem 'therubyracer'
 
 group :production do
   gem 'rails_12factor'
