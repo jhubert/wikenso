@@ -9,6 +9,13 @@ describe "PageTitleView", ->
     pageTextView = new WikiApp.Views.PageTitleView(@model)
     pageTextView.getTitle().should.equal "Foo"
 
-  it "updates the model with text from the DOM on initialize", =>
-    new WikiApp.Views.PageTitleView(@model)
-    @model.get('title').should.equal "Foo"
+  describe "on initialize", =>
+    it "updates the model with text from the DOM on initialize", =>
+      new WikiApp.Views.PageTitleView(@model)
+      @model.get('title').should.equal "Foo"
+
+    it "doesn't trigger a 'change' event", =>
+      spy = sinon.spy()
+      @model.on('change', spy)
+      new WikiApp.Views.PageTitleView(@model)
+      spy.callCount.should.equal 0

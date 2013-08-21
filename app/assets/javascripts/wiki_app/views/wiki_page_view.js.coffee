@@ -1,11 +1,7 @@
 class WikiApp.Views.WikiPageView extends Backbone.View
   el: ".wiki-pages-view-single"
 
-  events:
-    "keyup .wiki-pages-view-single-text": "updateText"
-
-  initialize: =>
-    @model = new WikiApp.Models.PageModel
+  initialize: (@model) =>
     @title = new WikiApp.Views.PageTitleView(@model)
     @text = new WikiApp.Views.PageTextView(@model)
 
@@ -24,14 +20,3 @@ class WikiApp.Views.WikiPageView extends Backbone.View
 
   getId: =>
     this.$el.data('id')
-
-  tearDown: (callback) =>
-    _.sequence(@savingIndicator.hide, @helpText.hide, @undelegateEvents)(this)
-    this.$el.animate(
-      width: "75%",
-      1000,
-      =>
-        this.$el.addClass("display")
-        this.$el.removeClass("edit")
-        callback()
-    )

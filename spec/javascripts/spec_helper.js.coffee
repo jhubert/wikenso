@@ -3,3 +3,5 @@
 #= require vendor/chai-jquery
 #= require vendor/sinon
 #= require_tree ./templates
+
+$.fx.off = true

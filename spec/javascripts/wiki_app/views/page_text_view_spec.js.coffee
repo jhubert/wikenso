@@ -9,6 +9,13 @@ describe "PageTextView", ->
     pageTextView = new WikiApp.Views.PageTextView(@model)
     pageTextView.getText().should.equal "<p>Foo</p>"
 
-  it "updates the model with text from the DOM on initialize", =>
-    new WikiApp.Views.PageTextView(@model)
-    @model.get('text').should.equal "<p>Foo</p>"
+  describe "on initialize", =>
+    it "updates the model with text from the DOM", =>
+      new WikiApp.Views.PageTextView(@model)
+      @model.get('text').should.equal "<p>Foo</p>"
+
+    it "doesn't trigger a 'change' event", =>
+      spy = sinon.spy()
+      @model.on('change', spy)
+      new WikiApp.Views.PageTextView(@model)
+      spy.callCount.should.equal 0

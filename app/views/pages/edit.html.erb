@@ -31,5 +31,6 @@
 </div>
 
 <script type="text/javascript">
-  new WikiApp.Views.WikiPageView();
+  var model = new WikiApp.Models.PageModel();
+  new WikiApp.Views.WikiPageView(model);
 </script>
