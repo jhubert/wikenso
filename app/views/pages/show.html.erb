@@ -11,7 +11,10 @@
     </div>
 
     <div class="large-9 columns wiki-pages-view-single display" data-id=<%= @page.id %>>
-      <%= link_to "Edit", edit_page_path(@page), class: "edit-wiki-page-button" %>
+
+      <div class="wiki-pages-view-single-actions">
+        <span class="wiki-pages-view-single-actions-edit"><%= link_to "Edit this Page", edit_page_path(@page) %></span>
+      </div>
 
       <div class="wiki-pages-view-single-title">
         <%= @page.title %>

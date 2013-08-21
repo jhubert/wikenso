@@ -11,7 +11,10 @@
 
 <div class="row wiki-pages-view">
   <div class="large-12 columns wiki-pages-view-single" data-id=<%= @page.id %>>
-    <%= link_to "Back", page_path(@page), { class: "finish-edit-wiki-page-button" } %>
+    <div class="wiki-pages-view-single-actions">
+      <span class="wiki-pages-view-single-actions-back"><%= link_to "Go Back", page_path(@page) %></span>
+    </div>
+
     <div class="wiki-pages-view-single-title" contenteditable=true>
       <%= @page.title %>
     </div>

@@ -1,4 +1,5 @@
-<nav class="wiki-header top-bar">
+<div class="contain-to-grid wiki-header">
+  <nav class="top-bar">
   <ul class="title-area">
 
   </ul>
@@ -11,7 +12,6 @@
           <%= link_to(image_tag("placeholder_logo.png"), "/") %>
         </div>
       </li>
-      <li class="divider"></li>
     </ul>
     <% if user_signed_in? %>
 
@@ -44,3 +44,4 @@
     <% end %>
   </section>
 </nav>
+</div>
