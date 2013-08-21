@@ -13,6 +13,7 @@ gem 'simple_form'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'figaro'
 gem 'bourbon'
+gem 'thin'
 
 group :production do
   gem 'rails_12factor'
