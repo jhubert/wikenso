@@ -27,28 +27,23 @@ describe "WikiPageView", =>
     from(false).to(true).
     when -> @model.set('title', "Foo123")
 
-  it "focusses the text of the page", =>
-    (-> $(".wiki-pages-view-single-text").is(":focus")).should.change.
-    from(false).to(true).
-    when => new WikiApp.Views.WikiPageView(@model)
-
   describe "after the model autosaves", =>
-    beforeAll => @server = sinon.fakeServer.create()
-    afterAll => @server.restore()
+
+    server = sinon.fakeServer.create()
+    after: -> server.restore()
 
     describe "when the response is a success", =>
-      beforeEach => @server.respondWith([200, { "Content-Type": "application/json" }, '{ "body": "OK" }'])
+      beforeEach => server.respondWith([200, { "Content-Type": "application/json" }, '{ "body": "OK" }'])
 
       it "changes the text of the saving indicator to 'Saved!'", =>
         new WikiApp.Views.WikiPageView(@model)
         @model.autoSave()
-        @server.respond()
+        server.respond()
         $(".saving-indicator").should.have.text "Saved!"
 
       it "hides the error view", =>
         new WikiApp.Views.WikiPageView(@model)
-        console.log @server
         @model.autoSave()
-        (-> $(".wiki-pages-view-single-text").is(":hidden")).should.change.
-        from(false).to(true).
-        when => @server.respond()
+        server.respond()
+        $(".error-text").should.be.hidden
+
