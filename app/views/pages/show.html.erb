@@ -30,5 +30,7 @@
 <% end %>
 
 <script type="text/javascript">
+  $(document).on('page:fetch', function() { NProgress.start(); });
+  $(document).on('page:load',  function() { NProgress.done(); });
   new WikiApp.Views.WikiView();
 </script>
