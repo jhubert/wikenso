@@ -1,3 +1,4 @@
 _.mixin
   sequence: (funcs...) ->
-    _(funcs).each (func) -> func.apply(this)
+    (context) =>
+      _(funcs).each (func) => func.apply(context)

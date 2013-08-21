@@ -7,39 +7,26 @@ class WikiApp.Views.EditableWikiPageView extends Backbone.View
   initialize: =>
     @model = new WikiApp.Models.PageModel
     @title = new WikiApp.Views.PageTitleView(@model)
-    @text = this.$el.find(".wiki-pages-view-single-text")
+    @text = new WikiApp.Views.PageTextView(@model)
     @setContentEditable()
 
     @savingIndicator = new WikiApp.Views.SavingIndicatorView
     @helpText = new WikiApp.Views.HelpTextView
 
-    @model.set(text: @getText(), id: @getId())
+    @model.set('id', @getId())
     @model.setAutoSaveCallbacks(success: @savingIndicator.saved, request: @savingIndicator.saving)
     @model.once("change", @helpText.hide)
     @helpText.show()
 
-  updateText: =>
-    @model.set('text', @getText())
-
   getId: =>
     this.$el.data('id')
 
-  getText: =>
-    @text.html().trim()
+  setContentEditable: => _.sequence(@title.setContentEditable, @text.setContentEditable, @text.focus)(this)
 
-  setContentEditable: =>
-    @title.setContentEditable()
-    @text.attr('contenteditable', true)
-    @text.focus()
-
-  unsetContentEditable: =>
-    @title.unsetContentEditable()
-    @text.attr('contenteditable', false)
+  unsetContentEditable: => _.sequence(@title.unsetContentEditable, @text.unsetContentEditable)(this)
 
   tearDown: (callback) =>
-    @unsetContentEditable()
-    @savingIndicator.hide()
-    @helpText.hide()
+    _.sequence(@unsetContentEditable, @savingIndicator.hide, @helpText.hide, @undelegateEvents)(this)
     this.$el.animate(
       width: "75%",
       1000,
@@ -48,4 +35,3 @@ class WikiApp.Views.EditableWikiPageView extends Backbone.View
         this.$el.removeClass("edit")
         callback()
     )
-    @undelegateEvents()
