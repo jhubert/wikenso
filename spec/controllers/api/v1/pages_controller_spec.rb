@@ -7,7 +7,7 @@ module Api
         context "when the save is successful" do
           it "returns http success" do
             page = create(:page, title: "Bar")
-            put :update, id: page.id, page: {title: "Foo"}
+            put :update, controller: "api/v1/pages", id: page.id, page: {title: "Foo"}
             response.should be_success
           end
 
