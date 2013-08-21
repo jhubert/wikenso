@@ -28,9 +28,14 @@ group :test do
   gem 'factory_girl_rails'
   gem 'forgery'
   gem 'database_cleaner'
+  gem 'ejs'
 end
 
 group :development do
   gem 'pry-rails'
   gem 'zeus'
+end
+
+group :test, :development do
+  gem 'konacha'
 end
