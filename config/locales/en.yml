@@ -35,3 +35,6 @@ en:
     errors:
       messages:
         subdomain_format: "cannot contain spaces or special characters."
+  pages:
+    show:
+      editor_help_text: "Click anywhere to edit. Your changes will be saved automatically."

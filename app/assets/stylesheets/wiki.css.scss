@@ -67,3 +67,14 @@ $page-title-margin-top: 35px;
   font-weight: 600;
   color: #8A8A8A;
 }
+
+.help-text {
+  display: none;
+  text-align: center;
+  min-width: 100%;
+  background-color: #FFFE95;
+  padding: 4px 0;
+  font-size: 16px;
+  font-family: "ff-dagny-web-pro";
+  p { margin: 0; }
+}

@@ -14,6 +14,5 @@ class WikiApp.Models.PageModel extends Backbone.Model
     @requestCallback = options.request || (->)
 
   autoSave: =>
-    console.log @changed
     @requestCallback()
     @save().done(@successCallback).fail(@errorCallback)

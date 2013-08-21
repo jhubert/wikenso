@@ -11,7 +11,6 @@ class WikiApp.Views.WikiView extends Backbone.View
     @backButton = this.$el.find(".finish-edit-wiki-page-button")
     @backButton.hide()
 
-
   makeEditable: =>
     $(".wiki-pages-view-index").fadeOut "fast", =>
       @wiki_page_view.tearDown =>

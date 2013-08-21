@@ -1,6 +1,11 @@
 <% if @wiki.pages.present? %>
-  <div class="row wiki-pages-view">
+  <div class="help-text row">
+    <p class="large-12-columns">
+      <%= t(".editor_help_text") %>
+    </p>
+  </div>
 
+  <div class="row wiki-pages-view">
     <div class="large-3 columns wiki-pages-view-index">
       <ul class="wiki-pages-view-index-list">
         <% @wiki.pages.each do |page| %>
