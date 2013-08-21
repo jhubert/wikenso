@@ -1,19 +1,25 @@
 language: ruby
 rvm:
-  - 2.0.0
-
+- 2.0.0
 env:
-  - secret_token=thisisasecrettoken
-
+- secret_token=thisisasecrettoken
 script:
-  - bundle exec rake default konacha:run
-
+- bundle exec rake default konacha:run
 before_script:
-  - psql -c 'create database wiki_test;' -U postgres
-  - cp config/database.yml.sample config/database.yml
-  - bundle exec rake db:migrate
-  - bundle exec rake db:test:prepare
+- psql -c 'create database wiki_test;' -U postgres
+- cp config/database.yml.sample config/database.yml
+- bundle exec rake db:migrate
+- bundle exec rake db:test:prepare
 
 notifications:
   email:
-    - wikenso@nilenso.com
+  - wikenso@nilenso.com
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: iq+qZDYqRN7i+jHkzx1zTUjk6JUjBXPhsPtHI+PL3MqOPFeGXUjUVjWBCpWGctA39x7loDa5BUDWqmXC0plFleLRZ3yi5PXlDlaNICgqKw8gkGxggOchorobmzLJMYvaW9CeY9giVsLZb9tckpTvacxYdo90b5XXcuJ8tE8IPVk=
+  app: wikenso-staging
+  run: "rake db:migrate"
+  on:
+    repo: nilenso/wikenso
