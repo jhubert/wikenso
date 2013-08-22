@@ -6,6 +6,8 @@ class WikiApp.Views.PageTextView extends Backbone.View
     'ctrl+b': "toggleBoldForSelection"
     '⌘+i': "toggleItalicForSelection"
     'ctrl+i': "toggleItalicForSelection"
+    '⌘+k': "showAddLinkDialog"
+    'ctrl+k': "showAddLinkDialog"
 
   events:
     "keyup": "updateText"
@@ -27,3 +29,16 @@ class WikiApp.Views.PageTextView extends Backbone.View
 
   toggleBoldForSelection: => document.execCommand('bold', false, null)
   toggleItalicForSelection: => document.execCommand('italic', false, null)
+  addLinkForSelection: (link) => document.execCommand('CreateLink', false, link)
+
+  getSelection: => new WikiApp.DocumentSelection
+
+  showAddLinkDialog: =>
+    selection = @getSelection()
+    addLinkView = new WikiApp.Views.AddLinkView
+    addLinkView.show()
+
+    addLinkView.on("link:added", (link) =>
+      selection.restore()
+      @addLinkForSelection(link)
+    )

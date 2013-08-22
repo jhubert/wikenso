@@ -115,3 +115,42 @@ $page-title-margin-top: 35px;
   color: #FFDFDF;
   p { margin: 0; }
 }
+
+.add-link-modal-heading {
+  font-family: "ff-dagny-web-pro";
+  font-size: 25px;
+  padding-left: 5px;
+}
+
+input.add-link-modal-input {
+  font-family: "ff-tisa-web-pro";
+  font-size: 26px;
+}
+
+.add-link-modal-done {
+  padding-left: 5px;
+  color: #7ABD30;
+  font-family: "ff-dagny-web-pro";
+  font-weight: 700;
+  font-size: 25px;
+  &:hover {
+    text-decoration: underline;
+    color: #578522;
+  }
+}
+.add-link-modal-or {
+  padding: 0 5px;
+  font-size: 23px;
+  color: #BBB;
+}
+
+.add-link-modal-cancel {
+  font-size: 25px;
+  color: #BBB;
+  font-family: "ff-dagny-web-pro";
+  font-weight: 400;
+  &:hover {
+    text-decoration: underline;
+    color: #999;
+  }
+}

@@ -25,3 +25,31 @@ describe "PageTextView", ->
       @model.on('change', spy)
       new WikiApp.Views.PageTextView(@model)
       spy.callCount.should.equal 0
+
+  describe "when adding a link", =>
+    beforeEach => $("#add-link-modal").hide()
+
+    it "brings up the modal dialog", =>
+      view = new WikiApp.Views.PageTextView(@model)
+      (-> $("#add-link-modal").is(":hidden")).should.change.
+      from(true).to(false).
+      when -> view.showAddLinkDialog()
+
+    it "restores the selected text after the modal has been closed", =>
+      view = new WikiApp.Views.PageTextView(@model)
+
+      selection = new WikiApp.DocumentSelection
+      sinon.stub(view, 'getSelection').returns(selection)
+      spy = sinon.spy(selection, 'restore')
+
+      view.showAddLinkDialog()
+      $(".add-link-modal-done").click()
+      spy.callCount.should.equal 1
+
+    it "adds a link for the selection", =>
+      view = new WikiApp.Views.PageTextView(@model)
+      spy = sinon.spy(view, 'addLinkForSelection')
+
+      view.showAddLinkDialog()
+      $(".add-link-modal-done").click()
+      spy.callCount.should.equal 1

@@ -5,3 +5,4 @@
 #= require_tree ./templates
 
 $.fx.off = true
+$(document).foundation('reveal', {animation: 'none'});

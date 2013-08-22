@@ -30,6 +30,13 @@
 <div class="saving-indicator">
 </div>
 
+<div id="add-link-modal" class="reveal-modal small">
+  <input type="text" placeholder="http://example.com/" class="add-link-modal-input" />
+  <a href="javascript:void(0);" class="add-link-modal-done">Add Link</a>
+  <span class="add-link-modal-or">/</span>
+  <a href="javascript:void(0);" class="add-link-modal-cancel">Cancel</a>
+</div>
+
 <script type="text/javascript">
   var model = new WikiApp.Models.PageModel();
   new WikiApp.Views.WikiPageView(model);
