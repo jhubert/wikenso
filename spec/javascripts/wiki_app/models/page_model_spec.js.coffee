@@ -38,14 +38,6 @@ describe "PageModel", ->
       clock.tick(801)
       spy.callCount.should.equal 2
 
-    it "optionally accepts arguments which it passes to Backbone.save", =>
-      model.setAutoSaveCallbacks({})
-      spy = sinon.spy(model, 'save')
-      args = { wait: true }
-      spy.withArgs({}, args)
-      model.autoSave(args)
-      spy.withArgs({}, args).callCount.should.equal 1
-
   describe "callbacks", =>
     describe "when the server responds with a success", =>
 

@@ -15,6 +15,6 @@ class WikiApp.Models.PageModel extends Backbone.Model
     console.log("Error while saving the page.", model, xhr, options)
     @errorCallback()
 
-  autoSave: (options = {}) =>
+  autoSave: =>
     @requestCallback()
-    @save({}, _.extend(options, { success: @handleSuccess, error: @handleError}))
+    @save({}, success: @handleSuccess, error: @handleError)

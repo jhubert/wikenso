@@ -29,6 +29,6 @@ class WikiApp.Views.WikiPageView extends Backbone.View
     this.$el.data('id')
 
   throttledSaveModel: (event) =>
-    @throttledSaveModelFunc ||= _.throttle((=> @model.autoSave(wait: true)), 1000)
+    @throttledSaveModelFunc ||= _.throttle(@model.autoSave, 1000)
     @throttledSaveModelFunc()
     event.preventDefault()
