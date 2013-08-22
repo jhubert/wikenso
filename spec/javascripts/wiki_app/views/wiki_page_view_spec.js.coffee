@@ -27,10 +27,15 @@ describe "WikiPageView", =>
     from(false).to(true).
     when -> @model.set('title', "Foo123")
 
-  describe "after the model autosaves", =>
-
+  describe "saving", =>
     server = sinon.fakeServer.create()
     after: -> server.restore()
+
+    it "changes the text of the saving indicator to 'Saving… while the save is in progress", =>
+      new WikiApp.Views.WikiPageView(@model)
+      @model.autoSave()
+      server.respond()
+      $(".saving-indicator").should.have.text "Saving…"
 
     describe "when the response is a success", =>
       beforeEach => server.respondWith([200, { "Content-Type": "application/json" }, '{ "body": "OK" }'])
@@ -47,3 +52,12 @@ describe "WikiPageView", =>
         server.respond()
         $(".error-text").should.be.hidden
 
+    describe "when the response is an error", =>
+      beforeEach => server.respondWith([400, { "Content-Type": "application/json" }, '{ "body": "Bad Request" }'])
+
+      it "shows the error view", =>
+        $(".error-text").hide()
+        new WikiApp.Views.WikiPageView(@model)
+        @model.autoSave()
+        server.respond()
+        $(".error-text").should.not.be.hidden
