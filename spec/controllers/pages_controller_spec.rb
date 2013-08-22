@@ -29,21 +29,21 @@ describe PagesController do
 
     context "for a valid subdomain" do
       it "returns HTTP success" do
-        create(:wiki, subdomain: "nilenso")
+        create(:wiki, :single_page, subdomain: "nilenso")
         @request.host = "nilenso.wikenso.com"
         get "show"
         response.should be_success
       end
 
       it "assigns the wiki whose subdomain is the same as the request subdomain" do
-        wiki = create(:wiki, subdomain: "nilenso")
+        wiki = create(:wiki, :single_page, subdomain: "nilenso")
         @request.host = "nilenso.wikenso.com"
         get "show"
         assigns(:wiki).should == wiki
       end
 
       it "matches a subdomain even when it's case is different" do
-        wiki = create(:wiki, subdomain: "UPPERCASE")
+        wiki = create(:wiki, :single_page, subdomain: "UPPERCASE")
         @request.host = "uppercase.wikenso.com"
         get "show"
         assigns(:wiki).should == wiki

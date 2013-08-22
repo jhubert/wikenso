@@ -8,5 +8,9 @@ FactoryGirl.define do
       users_attributes { { "0" => attributes_for(:user) } }
     end
 
+    trait :single_page do
+      pages { FactoryGirl.create_list(:page, 1) }
+    end
+
   end
 end
