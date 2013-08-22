@@ -67,7 +67,7 @@ describe "WikiPageView", =>
 
     beforeEach =>
       clock = sinon.useFakeTimers()
-      event = sinon.createStubInstance(KeyboardEvent)
+      event = document.createEvent("KeyboardEvent")
 
     afterEach => clock.restore()
 
@@ -81,3 +81,9 @@ describe "WikiPageView", =>
       view.throttledSaveModel(event)
       view.throttledSaveModel(event)
       spy.callCount.should.equal 2
+
+    it "prevents the default event (browser save tab opening)", =>
+      spy = sinon.spy(event, 'preventDefault')
+      view = new WikiApp.Views.WikiPageView(@model)
+      view.throttledSaveModel(event)
+      spy.callCount.should.equal 1
