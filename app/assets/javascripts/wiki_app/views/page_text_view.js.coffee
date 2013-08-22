@@ -19,6 +19,7 @@ class WikiApp.Views.PageTextView extends Backbone.View
     @model.set('text', @getText(), options)
 
   getText: =>
+    this.$el.find("p:empty").remove()
     this.$el.html().trim()
 
   focus: =>

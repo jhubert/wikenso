@@ -5,9 +5,16 @@ describe "PageTextView", ->
     $('body').html(JST['templates/page_text_view'])
     @model = new WikiApp.Models.PageModel
 
-  it "gets the text HTML out of the DOM", =>
-    pageTextView = new WikiApp.Views.PageTextView(@model)
-    pageTextView.getText().should.equal "<p>Foo</p>"
+  describe "text", =>
+    it "gets the text HTML out of the DOM", =>
+      pageTextView = new WikiApp.Views.PageTextView(@model)
+      pageTextView.getText().should.equal "<p>Foo</p>"
+
+    it "gets rid of all empty <p> tags in the text", =>
+      console.log "FOOOOOOOOOOO!"
+      $(".wiki-pages-view-single-text").html("<p></p><p>Foo</p><p></p>")
+      pageTextView = new WikiApp.Views.PageTextView(@model)
+      pageTextView.getText().should.equal "<p>Foo</p>"
 
   describe "on initialize", =>
     it "updates the model with text from the DOM", =>
