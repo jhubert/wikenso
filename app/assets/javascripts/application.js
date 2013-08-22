@@ -14,9 +14,13 @@
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks
+
 //= require vendor/underscore
 //= require vendor/backbone
 //= require vendor/nprogress
+//= require vendor/keymaster
+//= require vendor/backbone_shortcuts
+
 //= require wiki_app/wiki_app
 //= require_tree ./wiki_app
 //= require_tree .

@@ -15,6 +15,7 @@ gem 'figaro'
 gem 'bourbon'
 gem 'thin'
 gem 'therubyracer'
+gem 'draper'
 
 group :production do
   gem 'rails_12factor'
