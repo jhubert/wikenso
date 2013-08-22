@@ -6,14 +6,20 @@ describe "AddLinkView", ->
     $("#add-link-modal").hide()
 
   it "clears the input field before it is opened", =>
-    $(".add-link-modal-input").val("FOO!")
+    $(".add-link-modal-input").val("http://example.com")
     new WikiApp.Views.AddLinkView
     $(".add-link-modal-input").val().should.equal ""
 
-  it "gets the text of the link from the input field", =>
-    view = new WikiApp.Views.AddLinkView
-    $(".add-link-modal-input").val("FOO!")
-    view.getLinkText().should.equal "FOO!"
+  describe "when getting link text", =>
+    it "gets the text of the link from the input field", =>
+      view = new WikiApp.Views.AddLinkView
+      $(".add-link-modal-input").val("http://example.com")
+      view.getLinkText().should.equal "http://example.com"
+
+    it "prepends https:// if the typed link doesn't have '://'", =>
+      view = new WikiApp.Views.AddLinkView
+      $(".add-link-modal-input").val("foo.com")
+      view.getLinkText().should.equal "http://foo.com"
 
   describe "after adding the link", =>
     it "triggers an event", =>
@@ -27,15 +33,16 @@ describe "AddLinkView", ->
       view = new WikiApp.Views.AddLinkView
       spy = sinon.spy()
       view.on("link:added", spy)
-      $(".add-link-modal-input").val("FOO!")
-      spy.withArgs("FOO!")
+      $(".add-link-modal-input").val("http://example.com")
+      spy.withArgs("http://example.com")
       view.linkAdded()
-      spy.withArgs("FOO!").callCount.should.equal 1
+      spy.withArgs("http://example.com").callCount.should.equal 1
 
     it "hides the modal", =>
       view = new WikiApp.Views.AddLinkView
       view.linkAdded()
       $("#add-link-modal").is(":hidden").should.be.true
+
 
   describe "when pressing enter while typing the link", =>
     it "adds the link to the page", =>

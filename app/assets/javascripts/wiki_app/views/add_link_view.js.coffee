@@ -16,7 +16,11 @@ class WikiApp.Views.AddLinkView extends Backbone.View
 
   hide: => this.$el.foundation('reveal', 'close')
 
-  getLinkText: => @input.val()
+  getLinkText: =>
+    linkText = @input.val()
+    linkText = "http://" + linkText unless linkText.match(/\:\/\//)
+    linkText
+
 
   linkAdded: =>
     @trigger("link:added", @getLinkText())
