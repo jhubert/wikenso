@@ -13,10 +13,6 @@ before_script:
 - bundle exec rake db:migrate
 - bundle exec rake db:test:prepare
 
-notifications:
-  email:
-  - wikenso@nilenso.com
-
 deploy:
   provider: heroku
   api_key:
