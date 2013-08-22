@@ -26,7 +26,8 @@ class WikiApp.Views.PageTextView extends Backbone.View
     this.$el.html().trim()
 
   refreshLinkView: =>
-    new WikiApp.Views.LinkView
+    @linkView.tearDown() if @linkView
+    @linkView = new WikiApp.Views.LinkView
 
   focus: =>
     this.$el.focus()

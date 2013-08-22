@@ -12,6 +12,7 @@ class WikiApp.Views.AddLinkView extends Backbone.View
 
   show: =>
     this.$el.on("opened", => @input.focus())
+    this.$el.on("closed", => @undelegateEvents())
     this.$el.foundation("reveal", "open")
 
   hide: => this.$el.foundation('reveal', 'close')
