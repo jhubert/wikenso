@@ -61,3 +61,23 @@ describe "WikiPageView", =>
         @model.autoSave()
         server.respond()
         $(".error-text").should.not.be.hidden
+
+  describe "throttled model save", =>
+    clock = event = null
+
+    beforeEach =>
+      clock = sinon.useFakeTimers()
+      event = sinon.createStubInstance(KeyboardEvent)
+
+    afterEach => clock.restore()
+
+    it "saves the model a maximum of once per second", =>
+      spy = sinon.spy(@model, 'autoSave')
+      view = new WikiApp.Views.WikiPageView(@model)
+      clock.tick(1000)
+      view.throttledSaveModel(event)
+      view.throttledSaveModel(event)
+      clock.tick(1000)
+      view.throttledSaveModel(event)
+      view.throttledSaveModel(event)
+      spy.callCount.should.equal 2

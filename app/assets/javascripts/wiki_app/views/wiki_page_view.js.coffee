@@ -1,7 +1,14 @@
 class WikiApp.Views.WikiPageView extends Backbone.View
   el: ".wiki-pages-view-single"
 
+  shortcuts:
+    '⌘+s': "throttledSaveModel"
+    'ctrl+s': "throttledSaveModel"
+
   initialize: (@model) =>
+    _.extend(this, new Backbone.Shortcuts)
+    @delegateShortcuts()
+
     @title = new WikiApp.Views.PageTitleView(@model)
     @text = new WikiApp.Views.PageTextView(@model)
 
@@ -20,3 +27,8 @@ class WikiApp.Views.WikiPageView extends Backbone.View
 
   getId: =>
     this.$el.data('id')
+
+  throttledSaveModel: (event) =>
+    @throttledSaveModelFunc ||= _.throttle((=> @model.autoSave(wait: true)), 1000)
+    @throttledSaveModelFunc()
+    event.preventDefault()

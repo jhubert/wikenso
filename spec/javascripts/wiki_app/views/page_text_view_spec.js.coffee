@@ -11,7 +11,6 @@ describe "PageTextView", ->
       pageTextView.getText().should.equal "<p>Foo</p>"
 
     it "gets rid of all empty <p> tags in the text", =>
-      console.log "FOOOOOOOOOOO!"
       $(".wiki-pages-view-single-text").html("<p></p><p>Foo</p><p></p>")
       pageTextView = new WikiApp.Views.PageTextView(@model)
       pageTextView.getText().should.equal "<p>Foo</p>"
