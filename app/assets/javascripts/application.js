@@ -20,6 +20,7 @@
 //= require vendor/nprogress
 //= require vendor/keymaster
 //= require vendor/backbone_shortcuts
+//= require vendor/opentip
 
 //= require wiki_app/wiki_app
 //= require_tree ./wiki_app

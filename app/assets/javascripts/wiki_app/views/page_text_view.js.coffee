@@ -16,6 +16,7 @@ class WikiApp.Views.PageTextView extends Backbone.View
     @updateText(silent: true)
     _.extend(this, new Backbone.Shortcuts)
     @delegateShortcuts()
+    @refreshLinkView()
 
   updateText: (options) =>
     @model.set('text', @getText(), options)
@@ -23,6 +24,9 @@ class WikiApp.Views.PageTextView extends Backbone.View
   getText: =>
     this.$el.find("p:empty").remove()
     this.$el.html().trim()
+
+  refreshLinkView: =>
+    new WikiApp.Views.LinkView
 
   focus: =>
     this.$el.focus()
@@ -41,4 +45,5 @@ class WikiApp.Views.PageTextView extends Backbone.View
     addLinkView.on("link:added", (link) =>
       selection.restore()
       @addLinkForSelection(link)
+      @refreshLinkView()
     )

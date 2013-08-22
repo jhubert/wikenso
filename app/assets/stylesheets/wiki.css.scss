@@ -56,7 +56,19 @@ $page-title-margin-top: 35px;
   font-size: 17px;
   outline: 0 solid transparent;
   &:focus { outline: 0 solid transparent; }
+  a:hover { text-decoration: underline; }
 }
+
+.style-wiki-pages-view-single-text-link-tooltip {
+  .ot-content {
+    color: white;
+    font-family: "ff-dagny-web-pro";
+    font-size: 15px;
+    font-weight: 400;
+    text-shadow: none;
+  }
+}
+
 
 @mixin page-action-button {
   font-family: ff-dagny-web-pro;

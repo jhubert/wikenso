@@ -53,3 +53,11 @@ describe "PageTextView", ->
       view.showAddLinkDialog()
       $(".add-link-modal-done").click()
       spy.callCount.should.equal 1
+
+    it "refreshses the link view", =>
+      view = new WikiApp.Views.PageTextView(@model)
+      spy = sinon.spy(view, 'refreshLinkView')
+
+      view.showAddLinkDialog()
+      $(".add-link-modal-done").click()
+      spy.callCount.should.equal 1
