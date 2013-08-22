@@ -20,7 +20,7 @@ class WikiApp.Views.LinkView extends Backbone.View
   }
 
   showTooltip: (event) =>
-    link = $(event.target)
+    link = $(event.target).closest('a')
     linkHref = link.attr("href")
     @tip = new Opentip(link, linkHref, style: 'linkTooltip', target: link)
     @tip.show()
