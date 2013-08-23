@@ -27,19 +27,22 @@ describe "PageTextView", ->
       spy.callCount.should.equal 0
 
   describe "when adding a link", =>
-    beforeEach => $("#add-link-modal").hide()
+    event = null
+    beforeEach =>
+      $("#add-link-modal").hide()
+      event = document.createEvent("KeyboardEvent")
 
     it "brings up the modal dialog", =>
       view = new WikiApp.Views.PageTextView(@model)
       (-> $("#add-link-modal").is(":hidden")).should.change.
       from(true).to(false).
-      when -> view.showAddLinkDialog()
+      when -> view.showAddLinkDialog(event)
 
     it "restores the selected text after the modal has been closed", =>
       view = new WikiApp.Views.PageTextView(@model)
       spy = sinon.spy(rangy, 'restoreSelection')
 
-      view.showAddLinkDialog()
+      view.showAddLinkDialog(event)
       $(".add-link-modal-done").click()
       spy.callCount.should.equal 1
 
@@ -47,7 +50,7 @@ describe "PageTextView", ->
       view = new WikiApp.Views.PageTextView(@model)
       spy = sinon.spy(view, 'addLinkForSelection')
 
-      view.showAddLinkDialog()
+      view.showAddLinkDialog(event)
       $(".add-link-modal-done").click()
       spy.callCount.should.equal 1
 
@@ -55,7 +58,7 @@ describe "PageTextView", ->
       view = new WikiApp.Views.PageTextView(@model)
       spy = sinon.spy(view, 'refreshLinkView')
 
-      view.showAddLinkDialog()
+      view.showAddLinkDialog(event)
       $(".add-link-modal-done").click()
       spy.callCount.should.equal 1
 

@@ -1,6 +1,11 @@
 class WikiApp.Views.FormattingView extends Backbone.View
   el: ".wiki-pages-view-formatting"
 
+  events:
+    "click .wiki-pages-view-formatting-bold": "triggerBold"
+    "click .wiki-pages-view-formatting-italic": "triggerItalic"
+    "click .wiki-pages-view-formatting-link": "triggerLink"
+
   marginRight: 80
   marginBottom: 50
 
@@ -14,3 +19,7 @@ class WikiApp.Views.FormattingView extends Backbone.View
 
   hide: =>
     this.$el.hide()
+
+  triggerBold: (event) => @trigger("formatting:bold", event)
+  triggerItalic: (event) => @trigger("formatting:italic", event)
+  triggerLink: (event) => @trigger("formatting:link", event)

@@ -15,11 +15,17 @@ class WikiApp.Views.PageTextView extends Backbone.View
   initialize: (@model) =>
     @updateText(silent: true)
     _.extend(this, new Backbone.Shortcuts)
-    @delegateShortcuts()
-    @refreshLinkView()
     $(document).on("mouseup", @showFormattingTooltip)
     this.$el.on("keyup", @showFormattingTooltip)
+    @delegateShortcuts()
+    @refreshLinkView()
+    @setupFormatting()
+
+  setupFormatting: =>
     @formattingView = new WikiApp.Views.FormattingView
+    @formattingView.on("formatting:link", @showAddLinkDialog)
+    @formattingView.on("formatting:bold", @toggleBoldForSelection)
+    @formattingView.on("formatting:italic", @toggleItalicForSelection)
 
   updateText: (options) =>
     @model.set('text', @getText(), options)
@@ -41,11 +47,18 @@ class WikiApp.Views.PageTextView extends Backbone.View
   focus: =>
     this.$el.focus()
 
-  toggleBoldForSelection: => document.execCommand('bold', false, null)
-  toggleItalicForSelection: => document.execCommand('italic', false, null)
+  toggleBoldForSelection: (event) =>
+    document.execCommand('bold', false, null)
+    event.preventDefault()
+
+  toggleItalicForSelection: =>
+    document.execCommand('italic', false, null)
+    event.preventDefault()
+
   addLinkForSelection: (link) => document.execCommand('CreateLink', false, link)
 
-  showAddLinkDialog: =>
+  showAddLinkDialog: (event) =>
+    event.preventDefault()
     selection = rangy.saveSelection()
     addLinkView = new WikiApp.Views.AddLinkView
     addLinkView.show()
@@ -55,6 +68,7 @@ class WikiApp.Views.PageTextView extends Backbone.View
       @addLinkForSelection(link)
       @refreshLinkView()
     )
+
 
   hasSelectionChanged: () =>
     oldSelection = @selection
