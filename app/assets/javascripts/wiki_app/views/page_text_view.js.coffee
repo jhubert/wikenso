@@ -60,7 +60,8 @@ class WikiApp.Views.PageTextView extends Backbone.View
   showAddLinkDialog: (event) =>
     event.preventDefault()
     selection = rangy.saveSelection()
-    addLinkView = new WikiApp.Views.AddLinkView
+    existingLink = $(rangy.getSelection().anchorNode).parent().attr("href")
+    addLinkView = new WikiApp.Views.AddLinkView(existingLink: existingLink)
     addLinkView.show()
 
     addLinkView.on("link:added", (link) =>

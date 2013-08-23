@@ -6,9 +6,9 @@ class WikiApp.Views.AddLinkView extends Backbone.View
     "click .add-link-modal-cancel": "hide"
     "keydown .add-link-modal-input": "handleEnterKeypress"
 
-  initialize: =>
+  initialize: (options = {}) =>
     @input = this.$el.find(".add-link-modal-input")
-    @input.val('')
+    @input.val(options.existingLink || '')
 
   show: =>
     this.$el.on("opened", => @input.focus())
