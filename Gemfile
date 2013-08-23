@@ -16,6 +16,7 @@ gem 'bourbon'
 gem 'thin'
 gem 'therubyracer'
 gem 'draper'
+gem 'friendly_id', '5.0.0.beta4'
 
 group :production do
   gem 'rails_12factor'

@@ -70,6 +70,8 @@ GEM
       bundler (~> 1.0)
       rails (>= 3, < 5)
     forgery (0.5.0)
+    friendly_id (5.0.0.beta4)
+      activerecord (~> 4.0.0)
     hike (1.2.3)
     http_parser.rb (0.5.3)
     i18n (0.6.5)
@@ -200,6 +202,7 @@ DEPENDENCIES
   factory_girl_rails
   figaro
   forgery
+  friendly_id (= 5.0.0.beta4)
   jquery-rails
   konacha
   pg

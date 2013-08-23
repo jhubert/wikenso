@@ -8,9 +8,9 @@ describe PagesController do
     let(:wiki) { create(:wiki, subdomain: "foo") }
     before(:each) { @request.host = "foo.example.com" }
 
-    it "assigns the page corresponding to the passed ID" do
-      page = create(:page, wiki: wiki)
-      get :edit, id: page.id
+    it "assigns the page corresponding to the passed friendly ID" do
+      page = create(:page, wiki: wiki, title: "foo")
+      get :edit, id: "foo"
       assigns(:page).should == page
     end
 
@@ -53,9 +53,9 @@ describe PagesController do
         let(:wiki) { create(:wiki, subdomain: "foo") }
         before(:each) { @request.host = "foo.wikenso.com" }
 
-        it "assigns the page corresponding to the passed ID" do
-          page = create(:page, wiki: wiki)
-          get :show, id: page.id
+        it "assigns the page corresponding to the passed friendly ID" do
+          page = create(:page, wiki: wiki, title: "foo")
+          get :show, id: "foo"
           assigns(:page).should == page
         end
 
