@@ -173,6 +173,7 @@ a.wiki-pages-view-formatting-link {
 input.add-link-modal-input {
   font-family: "ff-tisa-web-pro";
   font-size: 26px;
+  @include placeholder { color: #AAA; }
 }
 
 .add-link-modal-done {
