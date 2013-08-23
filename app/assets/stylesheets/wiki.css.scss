@@ -54,6 +54,7 @@ $page-title-margin-top: 35px;
   line-height: 30px;
   font-size: 17px;
   outline: 0 solid transparent;
+  min-height: 800px;
   &:focus { outline: 0 solid transparent; }
   a:hover { text-decoration: underline; }
 }
