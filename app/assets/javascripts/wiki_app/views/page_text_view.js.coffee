@@ -65,7 +65,7 @@ class WikiApp.Views.PageTextView extends Backbone.View
 
     addLinkView.on("link:added", (link) =>
       rangy.restoreSelection(selection)
-      @addLinkForSelection(link)
+      @addLinkForSelection(link) if link
       @refreshLinkView()
     )
 
