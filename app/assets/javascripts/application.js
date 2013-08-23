@@ -21,6 +21,7 @@
 //= require vendor/keymaster
 //= require vendor/backbone_shortcuts
 //= require vendor/opentip
+//= require_tree ./vendor/rangy
 
 //= require mustache
 //= require_tree ../../templates
