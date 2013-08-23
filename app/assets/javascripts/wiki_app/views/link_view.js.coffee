@@ -17,14 +17,13 @@ class WikiApp.Views.LinkView extends Backbone.View
     className: "wiki-pages-view-single-text-link-tooltip"
     borderWidth: 0
     removeElementsOnHide: true
+    fixed: true
   }
-
-  tearDown: => @undelegateEvents()
 
   showTooltip: (event) =>
     link = $(event.target).closest('a')
     linkHref = link.attr("href")
-    @tip = new Opentip(link, linkHref, style: 'linkTooltip', target: link)
+    @tip = new Opentip(link, linkHref, style: 'linkTooltip', target: true)
     @tip.show()
 
   hideTooltip: =>

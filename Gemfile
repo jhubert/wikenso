@@ -17,6 +17,7 @@ gem 'thin'
 gem 'therubyracer'
 gem 'draper'
 gem 'friendly_id', '5.0.0.beta4'
+gem 'smt_rails'
 
 group :production do
   gem 'rails_12factor'
