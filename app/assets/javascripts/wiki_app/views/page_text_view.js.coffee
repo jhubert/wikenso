@@ -17,9 +17,18 @@ class WikiApp.Views.PageTextView extends Backbone.View
     _.extend(this, new Backbone.Shortcuts)
     @delegateShortcuts()
     @refreshLinkView()
+    $(document).on("mouseup", @showFormattingTooltip)
+    this.$el.on("keyup", @showFormattingTooltip)
+    @formattingView = new WikiApp.Views.FormattingView
 
   updateText: (options) =>
     @model.set('text', @getText(), options)
+
+  showFormattingTooltip: =>
+    if @isSelectionEmpty()
+      @formattingView.hide()
+    else if @hasSelectionChanged()
+      @formattingView.showFormattingElementsForSelection(rangy.getSelection())
 
   getText: =>
     this.$el.find("p:empty").remove()
@@ -37,12 +46,20 @@ class WikiApp.Views.PageTextView extends Backbone.View
   addLinkForSelection: (link) => document.execCommand('CreateLink', false, link)
 
   showAddLinkDialog: =>
-    selection = rangy.getSelection()
+    selection = rangy.saveSelection()
     addLinkView = new WikiApp.Views.AddLinkView
     addLinkView.show()
 
     addLinkView.on("link:added", (link) =>
-      rangy.restore(selection)
+      rangy.restoreSelection(selection)
       @addLinkForSelection(link)
       @refreshLinkView()
     )
+
+  hasSelectionChanged: () =>
+    oldSelection = @selection
+    @selection = rangy.getSelection().toString()
+    oldSelection != @selection
+
+  isSelectionEmpty: =>
+    rangy.getSelection().isCollapsed

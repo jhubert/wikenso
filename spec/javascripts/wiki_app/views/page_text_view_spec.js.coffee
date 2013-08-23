@@ -37,10 +37,7 @@ describe "PageTextView", ->
 
     it "restores the selected text after the modal has been closed", =>
       view = new WikiApp.Views.PageTextView(@model)
-
-      selection = new WikiApp.DocumentSelection
-      sinon.stub(view, 'getSelection').returns(selection)
-      spy = sinon.spy(selection, 'restore')
+      spy = sinon.spy(rangy, 'restoreSelection')
 
       view.showAddLinkDialog()
       $(".add-link-modal-done").click()
@@ -61,3 +58,14 @@ describe "PageTextView", ->
       view.showAddLinkDialog()
       $(".add-link-modal-done").click()
       spy.callCount.should.equal 1
+
+  describe "text selection", =>
+    it "checks if the selection has changed", =>
+      view = new WikiApp.Views.PageTextView(@model)
+      toStringStub = sinon.stub()
+      sinon.stub(rangy, 'getSelection').returns(toStringStub)
+
+      stub = sinon.stub(toStringStub, 'toString').returns("Foo")
+      view.hasSelectionChanged().should.be.true
+      stub.returns("Foo")
+      view.hasSelectionChanged().should.be.false

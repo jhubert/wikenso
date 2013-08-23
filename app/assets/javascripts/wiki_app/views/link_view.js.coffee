@@ -20,6 +20,8 @@ class WikiApp.Views.LinkView extends Backbone.View
     fixed: true
   }
 
+  tearDown: => @undelegateEvents()
+
   showTooltip: (event) =>
     link = $(event.target).closest('a')
     linkHref = link.attr("href")

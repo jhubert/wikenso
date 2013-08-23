@@ -1,26 +1,16 @@
 class WikiApp.Views.FormattingView extends Backbone.View
-  tagName: "div"
+  el: ".wiki-pages-view-formatting"
 
-  initialize: (target) =>
-    this.$el.html(Mustache.render(SMT["pages/edit/formatting_tooltip"]()))
+  marginRight: 80
+  marginBottom: 50
 
-  Opentip.styles.formattingTooltip = {
-    shadow: false,
-    escapeContent: false,
-    tipJoint: 'bottom',
-    delay: 0,
-    showEffect: false,
-    hideEffect: false,
-    hideDelay: 0,
-    background: "white"
-    borderWidth: 0
-    removeElementsOnHide: true
-    fixed: true
-  }
+  showFormattingElementsForSelection: (selection) =>
+    coords = selection._ranges[0].nativeRange.getBoundingClientRect()
+    left = ((coords.left + (coords.right - coords.left) / 2) - @marginRight)
+    top = $(document).scrollTop() + coords.top - @marginBottom
+    this.$el.css("left", "#{left}px")
+    this.$el.css("top", "#{top}px")
+    this.$el.show()
 
-  showTooltip: (target) =>
-    @tip = new Opentip(target, this.$el.html(), style: 'formattingTooltip', target: true)
-    @tip.show()
-
-  hideTooltip: =>
-    @tip.hide()
+  hide: =>
+    this.$el.hide()
