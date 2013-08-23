@@ -15,6 +15,10 @@ class WikisController < ApplicationController
     end
   end
 
+  def edit
+    @wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first!
+  end
+
   private
 
   def wiki_params
