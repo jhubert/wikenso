@@ -15,14 +15,14 @@ class WikiApp.Views.PageTextView extends Backbone.View
   initialize: (@model) =>
     @updateText(silent: true)
     _.extend(this, new Backbone.Shortcuts)
-    $(document).on("mouseup", @showFormattingTooltip)
-    this.$el.on("keyup", @showFormattingTooltip)
     @delegateShortcuts()
     @refreshLinkView()
     @setupFormatting()
 
   setupFormatting: =>
     @formattingView = new WikiApp.Views.FormattingView
+    this.$el.on("mouseup", @showFormattingTooltip)
+    this.$el.on("keyup", @showFormattingTooltip)
     @formattingView.on("formatting:link", @showAddLinkDialog)
     @formattingView.on("formatting:bold", @toggleBoldForSelection)
     @formattingView.on("formatting:italic", @toggleItalicForSelection)
@@ -50,12 +50,16 @@ class WikiApp.Views.PageTextView extends Backbone.View
   toggleBoldForSelection: (event) =>
     document.execCommand('bold', false, null)
     event.preventDefault()
+    @updateText()
 
   toggleItalicForSelection: (event) =>
     document.execCommand('italic', false, null)
     event.preventDefault()
+    @updateText()
 
-  addLinkForSelection: (link) => document.execCommand('CreateLink', false, link)
+  addLinkForSelection: (link) =>
+    document.execCommand('CreateLink', false, link)
+    @updateText()
 
   showAddLinkDialog: (event) =>
     event.preventDefault()
