@@ -24,7 +24,6 @@
 //= require_tree ./vendor/rangy
 
 //= require mustache
-//= require_tree ../../templates
 
 //= require wiki_app/wiki_app
 //= require_tree ./wiki_app
