@@ -51,7 +51,7 @@ class WikiApp.Views.PageTextView extends Backbone.View
     document.execCommand('bold', false, null)
     event.preventDefault()
 
-  toggleItalicForSelection: =>
+  toggleItalicForSelection: (event) =>
     document.execCommand('italic', false, null)
     event.preventDefault()
 
@@ -68,7 +68,6 @@ class WikiApp.Views.PageTextView extends Backbone.View
       @addLinkForSelection(link)
       @refreshLinkView()
     )
-
 
   hasSelectionChanged: () =>
     oldSelection = @selection
