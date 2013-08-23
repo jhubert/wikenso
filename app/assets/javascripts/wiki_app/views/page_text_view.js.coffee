@@ -36,15 +36,13 @@ class WikiApp.Views.PageTextView extends Backbone.View
   toggleItalicForSelection: => document.execCommand('italic', false, null)
   addLinkForSelection: (link) => document.execCommand('CreateLink', false, link)
 
-  getSelection: => new WikiApp.DocumentSelection
-
   showAddLinkDialog: =>
-    selection = @getSelection()
+    selection = rangy.getSelection()
     addLinkView = new WikiApp.Views.AddLinkView
     addLinkView.show()
 
     addLinkView.on("link:added", (link) =>
-      selection.restore()
+      rangy.restore(selection)
       @addLinkForSelection(link)
       @refreshLinkView()
     )
