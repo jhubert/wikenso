@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130822173322) do
+ActiveRecord::Schema.define(version: 20130826111251) do
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
@@ -47,6 +47,8 @@ ActiveRecord::Schema.define(version: 20130822173322) do
     t.integer  "wiki_id"
     t.string   "password_digest"
     t.string   "email"
+    t.string   "status"
+    t.string   "type"
   end
 
   add_index "users", ["email", "wiki_id"], name: "index_users_on_email_and_wiki_id", unique: true, using: :btree
