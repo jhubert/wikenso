@@ -1,5 +1,5 @@
 .wiki-users-header {
-  margin-top: 15px;
+  margin-top: 25px;
   padding: 0;
 }
 
@@ -19,6 +19,32 @@
 }
 
 .wiki-users-table {
-  margin-top: 20px;
+  td { color: #444; }
+  font-family: ff-dagny-web-pro;
+  font-size: 20px;
+  font-weight: 400;
   width: 100%;
+}
+
+.wiki-users-add-user {
+  margin-top: 5px;
+}
+
+.wiki-users-add-user-fields {
+  font-family: ff-dagny-web-pro;
+  font-weight: 400;
+}
+
+.wiki-users-add-user-button-wrapper {
+  text-align: center;
+}
+
+.wiki-users-add-user-button {
+  text-align: center;
+  color: #69B32D;
+  border: none;
+  font-family: ff-dagny-web-pro;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 35px;
 }

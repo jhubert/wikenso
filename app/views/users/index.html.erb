@@ -1,26 +1,46 @@
 <div class="wiki-users">
   <div class="wiki-users-header row">
-    <div class="columns large-12">
+    <div class="columns large-8">
       <span class="wiki-users-header-wiki-name"><%= @wiki.subdomain %></span>
       <span class="wiki-users-header-wiki-users">Users</span>
     </div>
+
+    <div class="large-4 columns wiki-users-add-user">
+      <div class="row collapse">
+        <%= simple_form_for :user do |f| %>
+          <div class="row collapse">
+            <div class="small-9 columns">
+              <%= f.input :email,
+                          label: false,
+                          required: false,
+                          placeholder: "Add User by Email…",
+                          wrapper_html: {:class => 'wiki-users-add-user-fields'} %>
+            </div>
+            <div class="small-3 columns wiki-users-add-user-button-wrapper">
+              <%= link_to "Add", users_path, method: :post, class: "wiki-users-add-user-button" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
+
   <div class="row">
     <div class="large-12 columns">
       <table class="wiki-users-table">
         <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-          </tr>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
         </thead>
         <tbody>
-          <% @users.each do |user| %>
-            <tr>
-              <td><%= user.name %></td>
-              <td><%= user.email %></td>
-            </tr>
-          <% end %>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+          </tr>
+        <% end %>
         </tbody>
       </table>
     </div>
