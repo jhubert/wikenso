@@ -34,6 +34,7 @@ group :test do
   gem 'forgery'
   gem 'database_cleaner'
   gem 'ejs'
+  gem 'fuubar'
 end
 
 group :development do
