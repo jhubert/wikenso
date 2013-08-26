@@ -1,0 +1,28 @@
+<div class="wiki-users">
+  <div class="wiki-users-header row">
+    <div class="columns large-12">
+      <span class="wiki-users-header-wiki-name"><%= @wiki.subdomain %></span>
+      <span class="wiki-users-header-wiki-users">Users</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <table class="wiki-users-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= user.name %></td>
+              <td><%= user.email %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

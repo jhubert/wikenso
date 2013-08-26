@@ -3,6 +3,7 @@ Wikenso::Application.routes.draw do
   scope :constraints => { :subdomain => /.+/ } do
     get "/settings" => "wikis#edit"
     resources :sessions, :only => [:new, :create, :destroy]
+    resources :users, :only => [:index]
     resources :pages, :only => [:show, :edit]
     get "/" => "pages#show"
   end

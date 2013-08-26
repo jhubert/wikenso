@@ -77,32 +77,4 @@ describe WikisController do
       end
     end
   end
-
-  context "GET 'edit'" do
-    it "returns HTTP success" do
-      wiki = create(:wiki, subdomain: "foobar")
-      @request.host = "foobar.nilenso.com"
-      get :edit, id: wiki
-      response.should be_success
-    end
-
-    it "assigns the wiki corresponding to the subdomain" do
-      wiki = create(:wiki, subdomain: "foobar")
-      @request.host = "foobar.nilenso.com"
-      get :edit
-      assigns(:wiki).should == wiki
-    end
-
-    it "raises an exception if the passed ID is invalid" do
-      @request.host = "doesnotexist.nilenso.com"
-      expect { get :edit }.to raise_error
-    end
-
-    it "renders the `edit` template" do
-      wiki = create(:wiki, subdomain: "foobar")
-      @request.host = "foobar.nilenso.com"
-      get :edit, id: wiki
-      response.should render_template 'edit'
-    end
-  end
 end
