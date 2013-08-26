@@ -15,14 +15,6 @@ describe UsersController do
       expect { get :index }.to raise_error
     end
 
-    it "assigns all the users of the wiki" do
-      wiki = create(:wiki, subdomain: "foo")
-      @request.host = "foo.example.com"
-      users = create_list(:active_user, 5, wiki: wiki)
-      get :index
-      assigns(:users).should =~ users
-    end
-
     it 'assigns the wiki' do
       wiki = create(:wiki, subdomain: "foo")
       @request.host = "foo.example.com"
@@ -48,6 +40,11 @@ describe UsersController do
         post :create, user: attributes_for(:active_user, wiki: wiki)
         response.should redirect_to users_path
       end
+
+      it "creates a user belonging to the current wiki" do
+        post :create, user: attributes_for(:active_user, wiki: wiki)
+        User.last.wiki.should == wiki
+      end
     end
 
     context "when the creation fails" do
@@ -66,6 +63,18 @@ describe UsersController do
         user_attributes = attributes_for(:active_user, wiki: wiki, email: "thisisnotanemail")
         post :create, user: user_attributes
         response.should render_template :index
+      end
+
+      it "assigns the wiki" do
+        user_attributes = attributes_for(:active_user, wiki: wiki, email: "thisisnotanemail")
+        post :create, user: user_attributes
+        assigns(:wiki).should == wiki
+      end
+
+      it "sets the flash error" do
+        user_attributes = attributes_for(:active_user, wiki: wiki, email: "thisisnotanemail")
+        post :create, user: user_attributes
+        flash[:error].should include "Email is invalid"
       end
     end
   end

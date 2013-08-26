@@ -1,15 +1,16 @@
 class UsersController < ApplicationController
   def index
     @wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first!
-    @users = @wiki.users
   end
 
   def create
-    pending_user = PendingUser.new(user_params)
+    @wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first
+    pending_user = @wiki.users.pending.new(user_params)
     if pending_user.save
       redirect_to users_path
     else
-      render :index, :status => :bad_request
+      flash.now[:error] = pending_user.errors.full_messages
+      render(:index, subdomain: request.subdomain, status: :bad_request)
     end
   end
 

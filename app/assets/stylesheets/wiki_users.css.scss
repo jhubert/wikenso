@@ -47,4 +47,11 @@
   font-weight: 700;
   font-size: 22px;
   line-height: 35px;
+  padding: 0;
+  margin-bottom: 0;
+  background: none;
+  &:hover {
+    background: none;
+    color: #578522;
+  }
 }

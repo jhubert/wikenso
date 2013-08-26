@@ -17,7 +17,7 @@
                           wrapper_html: {:class => 'wiki-users-add-user-fields'} %>
             </div>
             <div class="small-3 columns wiki-users-add-user-button-wrapper">
-              <%= link_to "Add", users_path, method: :post, class: "wiki-users-add-user-button" %>
+              <%= f.button :submit, "Add", class: "wiki-users-add-user-button" %>
             </div>
           </div>
         <% end %>
@@ -35,7 +35,7 @@
         </tr>
         </thead>
         <tbody>
-        <% @users.each do |user| %>
+        <% @wiki.users.each do |user| %>
           <tr>
             <td><%= user.name %></td>
             <td><%= user.email %></td>
