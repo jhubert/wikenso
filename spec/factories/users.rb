@@ -1,14 +1,15 @@
 FactoryGirl.define do
-  factory :user do
+  factory :active_user, class: "ActiveUser" do
     name { Forgery::Name.full_name }
     email { Forgery(:internet).email_address }
     password "foo"
     password_confirmation "foo"
+  end
 
-    factory :active_user, class: "ActiveUser" do
-    end
-
-    factory :pending_user, class: "PendingUser" do
-    end
+  factory :pending_user, class: "PendingUser" do
+    name { Forgery::Name.full_name }
+    email { Forgery(:internet).email_address }
+    password "foo"
+    password_confirmation "foo"
   end
 end

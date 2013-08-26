@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 
   def create
     wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first!
-    user = wiki.users.find_by_email(user_params[:email])
+    user = wiki.users.active.find_by_email(user_params[:email])
     if user && user.authenticate(user_params[:password])
       sign_in(user)
       redirect_to root_url(subdomain: request.subdomain)

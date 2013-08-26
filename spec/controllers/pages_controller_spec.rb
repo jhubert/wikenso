@@ -3,7 +3,7 @@ require 'spec_helper'
 describe PagesController do
 
   context "GET 'edit'" do
-    before(:each) { sign_in(create(:user)) }
+    before(:each) { sign_in(create(:active_user)) }
 
     let(:wiki) { create(:wiki, subdomain: "foo") }
     before(:each) { @request.host = "foo.example.com" }
@@ -25,7 +25,7 @@ describe PagesController do
   end
 
   context "GET 'show'" do
-    before(:each) { sign_in(create(:user)) }
+    before(:each) { sign_in(create(:active_user)) }
 
     context "for a valid subdomain" do
       it "returns HTTP success" do

@@ -22,7 +22,7 @@ describe WikisController do
 
   context "GET 'create'" do
     context "when save is successful" do
-      let(:users_attributes) { {"0" => attributes_for(:user)} }
+      let(:users_attributes) { {"0" => attributes_for(:active_user)} }
 
       it "creates a new wiki" do
         expect do
