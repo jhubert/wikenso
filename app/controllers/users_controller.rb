@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     @wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first
     pending_user = @wiki.users.pending.new(user_params)
     if pending_user.save
+      flash[:notice] = t("users.create.successful", wiki_name: @wiki.subdomain, user_email: pending_user.email)
       redirect_to users_path
     else
       flash.now[:error] = pending_user.errors.full_messages

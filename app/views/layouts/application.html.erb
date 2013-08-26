@@ -28,6 +28,14 @@
   <%= render "layouts/header" %>
 <% end %>
 
+<% if flash[:notice] %>
+  <div class="flash-notice row">
+    <p class="large-12-columns">
+      <%= flash[:notice] %>
+    </p>
+  </div>
+<% end %>
+
 <% if flash[:error] %>
   <div class="flash-error row">
     <p class="large-12-columns">

@@ -38,3 +38,6 @@ en:
   pages:
     edit:
       editor_help_text: "Click anywhere to edit. Your changes will be saved automatically."
+  users:
+    create:
+      successful: "%{user_email} has been sent an invitation to join %{wiki_name}."
