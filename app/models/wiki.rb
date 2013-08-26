@@ -8,4 +8,12 @@ class Wiki < ActiveRecord::Base
   validates_uniqueness_of :subdomain, case_sensitive: false
   validates_associated :users
   validates_format_of :subdomain, with: /\A\w+\z/, message: I18n.t("activerecord.errors.messages.subdomain_format")
+
+  def create_pending_user(email)
+    user = PendingUser.create(email: email, wiki_id: self.id)
+    if user.errors.empty?
+      UserMailer.invitation_mail(user, self).deliver
+    end
+    user
+  end
 end

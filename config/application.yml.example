@@ -1,2 +1,4 @@
 host_name: "wikenso.dev"
 secret_token: "somelongstringhere"
+SENDGRID_USERNAME: "foo@example.com"
+SENDGRID_PASSWORD: "foo123"

@@ -40,6 +40,7 @@ end
 group :development do
   gem 'pry-rails'
   gem 'zeus'
+  gem 'letter_opener'
 end
 
 group :test, :development do

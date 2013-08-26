@@ -33,4 +33,51 @@ describe Wiki do
       end
     end
   end
+
+  context "#create_pending_user" do
+    let(:wiki) { create(:wiki) }
+
+    context "when the creation is successful" do
+      it "creates a pending user" do
+        expect { wiki.create_pending_user("foo@example.com") }.to change { PendingUser.count }.by(1)
+      end
+
+      it "returns the created user" do
+        wiki.create_pending_user("foo@example.com").should be_a PendingUser
+      end
+
+      it "creates a user with the passed email" do
+        user = wiki.create_pending_user("foo@example.com")
+        User.last.email.should == "foo@example.com"
+      end
+
+      it "creates a user belonging to the current wiki" do
+        user = wiki.create_pending_user("foo@example.com")
+        User.last.wiki.should == wiki
+      end
+
+      context "when sending an invitation email" do
+        it "sends an email" do
+          expect {
+            wiki.create_pending_user("foo@example.com")
+          }.to change { ActionMailer::Base.deliveries.count }.by(1)
+        end
+
+        it "addresses the email to the created user" do
+          wiki.create_pending_user("foo@example.com")
+          ActionMailer::Base.deliveries.last.to.should == ["foo@example.com"]
+        end
+      end
+    end
+
+    context "when the creation is unsuccessful" do
+      it "returns the user with errors" do
+        wiki.create_pending_user("thisisnotanemail").errors.should be_present
+      end
+
+      it "doesn't create a user" do
+        expect { wiki.create_pending_user("thisisnotanemail") }.not_to change { User.count }
+      end
+    end
+  end
 end
