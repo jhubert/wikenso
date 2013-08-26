@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe UsersController do
+  before(:each) { sign_in(create(:user)) }
 
   context "GET 'index'" do
     it "returns http success" do
@@ -20,6 +21,12 @@ describe UsersController do
       @request.host = "foo.example.com"
       get :index
       assigns(:wiki).should == wiki
+    end
+
+    it "doesn't allow access if the user is not logged in" do
+      session[:user_id] = nil
+      get :index
+      response.should redirect_to new_session_path
     end
   end
 
@@ -76,6 +83,12 @@ describe UsersController do
         post :create, user: user_attributes
         flash[:error].should include "Email is invalid"
       end
+    end
+
+    it "doesn't allow access if the user is not logged in" do
+      session[:user_id] = nil
+      post :create, user: attributes_for(:active_user, wiki: wiki)
+      response.should redirect_to new_session_path
     end
   end
 end
