@@ -2,11 +2,16 @@
 <html>
 <head>
   <title>Wikenso</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
   <script type="text/javascript" src="//use.typekit.net/fdl3yrh.js"></script>
-  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <script type="text/javascript">
+    try {
+      Typekit.load();
+    } catch (e) {
+    }
+  </script>
 
   <script type="text/javascript">
     $(document).on('page:fetch', function () {
@@ -15,12 +20,20 @@
     $(document).on('page:load', function () {
       NProgress.done();
     });
-   </script>
+  </script>
 </head>
 <body>
 
 <% if subdomain? %>
   <%= render "layouts/header" %>
+<% end %>
+
+<% if flash[:error] %>
+  <div class="flash-error row">
+    <p class="large-12-columns">
+      <%= flash[:error].join(",") %>
+    </p>
+  </div>
 <% end %>
 
 <%= yield %>
