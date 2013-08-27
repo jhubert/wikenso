@@ -1,7 +1,43 @@
-<h1><%= @wiki.subdomain %></h1>
+<style>
+  .container {
+    width: 800px;
+    margin: 20px auto 0 auto;
+    font-family: Helvetica Neue, sans-serif;
+    font-size: 21px;
+    border: 1px solid #BBB;
+    border-radius: 5px;
+    padding: 0 20px 20px 20px;
+  }
 
-<p>You have been invited to join <%= @wiki.subdomain %></p>
+  img { width: 200px;}
 
-<p>Click this link to create your account.</p>
+  .body {
+    font-size: 16px;
+    margin-bottom: 20px
+  }
 
-<a href="<%= @user.invitation_link %>"><%= @user.invitation_link %></a>
+  .footer {
+    border-top: 1px solid #DDD;
+    color: #888;
+    padding-top: 5px;
+    font-size: 12px;
+  }
+
+  .copyright {
+    float: right;
+  }
+</style>
+
+<div class="container">
+  <h2 class="header">You have been invited to join <%= @wiki.subdomain %></h2>
+
+  <div class="body">
+    <p>Click on this link to set up your account and log in.</p>
+    <a href="<%= @user.invitation_link %>"><%= @user.invitation_link %></a>
+  </div>
+
+  <div class="footer">
+    <%= @wiki.subdomain %> is powered by <a href="wikenso.com">Wikenso</a>
+    <span class="copyright">© Nilenso Software LLP</span>
+  </div>
+</div>
