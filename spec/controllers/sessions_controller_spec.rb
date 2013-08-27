@@ -19,7 +19,7 @@ describe SessionsController do
       session[:user_id] = nil
       @request.host = "foo.wikenso.dev"
       @wiki = create(:wiki, subdomain: "Foo")
-      @active_user = create(:active_user, wiki: @wiki, email: "a@example.com", password: "foo", password_confirmation: "foo")
+      @active_user = create(:active_user, wiki: @wiki, email: "a@example.com", password: "foo")
     end
 
     context "when the credentials are correct" do

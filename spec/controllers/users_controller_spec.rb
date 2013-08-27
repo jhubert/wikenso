@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe UsersController do
-  before(:each) { sign_in(create(:user)) }
+  before(:each) { sign_in(create(:active_user)) }
 
   context "GET 'index'" do
     it "returns http success" do
