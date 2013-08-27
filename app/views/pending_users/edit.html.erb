@@ -1,2 +1,23 @@
-<h1>PendingUsers#edit</h1>
-<p>Find me in app/views/pending_users/edit.html.erb</p>
+<div class="wiki-user-edit row">
+  <div class="wiki-user-edit-form columns large-9 large-centered">
+    <%= simple_form_for @user do |f| %>
+      <fieldset>
+        <legend class="wiki-user-edit-form-legend">
+          Activate your
+          <span class="wiki-user-edit-form-legend-wiki-name">
+            <%= @user.wiki_subdomain %>
+          </span>
+          account
+        </legend>
+
+        <%= f.input :email, disabled: true, required: false, wrapper_html: {class: "wiki-user-edit-form-input"} %>
+        <%= f.input :name, wrapper_html: {class: "wiki-user-edit-form-input"} %>
+        <%= f.input :password, wrapper_html: {class: "wiki-user-edit-form-input"} %>
+        <%= f.input :password_confirmation, wrapper_html: {class: "wiki-user-edit-form-input"} %>
+        <div class="wiki-user-edit-form-submit-wrapper">
+          <%= f.button :submit, "Join", class: "wiki-user-edit-form-submit" %>
+        </div>
+      </fieldset>
+    <% end %>
+  </div>
+</div>
