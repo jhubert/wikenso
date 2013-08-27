@@ -1,43 +1,23 @@
-<style>
-  .container {
-    width: 800px;
-    margin: 20px auto 0 auto;
-    font-family: Helvetica Neue, sans-serif;
-    font-size: 21px;
-    border: 1px solid #BBB;
-    border-radius: 5px;
-    padding: 0 20px 20px 20px;
-  }
+<!doctype html>
 
-  img { width: 200px;}
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
 
-  .body {
-    font-size: 16px;
-    margin-bottom: 20px
-  }
+<body>
+  <div class="container" style="width: 800px; margin: 20px auto 0 auto; font-family: Helvetica Neue, sans-serif; font-size: 21px; border: 1px solid #BBB; border-radius: 5px; padding: 0 20px 20px 20px;">
+    <h2 class="header">You have been invited to join <%= @wiki.subdomain %></h2>
 
-  .footer {
-    border-top: 1px solid #DDD;
-    color: #888;
-    padding-top: 5px;
-    font-size: 12px;
-  }
+    <div class="body" style="font-size: 16px; margin-bottom: 20px">
+      <p>Click on this link to set up your account and log in.</p>
+      <a href="<%= @user.invitation_link %>"><%= @user.invitation_link %></a>
+    </div>
 
-  .copyright {
-    float: right;
-  }
-</style>
-
-<div class="container">
-  <h2 class="header">You have been invited to join <%= @wiki.subdomain %></h2>
-
-  <div class="body">
-    <p>Click on this link to set up your account and log in.</p>
-    <a href="<%= @user.invitation_link %>"><%= @user.invitation_link %></a>
+    <div class="footer" style="border-top: 1px solid #DDD; color: #888; padding-top: 5px; font-size: 12px;">
+      <%= @wiki.subdomain %> is powered by <a href="wikenso.com">Wikenso</a>
+      <span class="copyright" style="float: right;">© Nilenso Software LLP</span>
+    </div>
   </div>
-
-  <div class="footer">
-    <%= @wiki.subdomain %> is powered by <a href="wikenso.com">Wikenso</a>
-    <span class="copyright">© Nilenso Software LLP</span>
-  </div>
-</div>
+</body>
+</html>
