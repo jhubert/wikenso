@@ -1,8 +1,8 @@
 Wikenso::Application.routes.draw do
   resources :wikis, only: [:new, :create]
   scope constraints: {:subdomain => /.+/} do
-    resources :users, only: [:index, :create]
-    resources :pending_users, only: [:update]
+    resources :users, only: [:index]
+    resources :pending_users, only: [:update, :create]
     get '/redeem/:invitation_code' => "pending_users#edit", as: 'redeem_invitation_code'
 
     get "/settings" => "wikis#edit"
