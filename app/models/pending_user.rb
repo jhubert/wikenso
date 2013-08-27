@@ -12,4 +12,8 @@ class PendingUser < User
     end
     user
   end
+
+  def self.find_by_invitation_code_and_wiki_id(invitation_code, wiki_id)
+    joins(:invitations).where("user_invitations.code = ? AND users.wiki_id = ?", invitation_code, wiki_id).first
+  end
 end

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe PendingUser do
-  context "#create_with_invitation" do
+  context ".create_with_invitation" do
     context "when creation is successful" do
       it "creates a pending user" do
         expect {
@@ -47,6 +47,26 @@ describe PendingUser do
         user = PendingUser.create_with_invitation(email: "notanemail")
         user.errors.should_not be_empty
       end
+    end
+  end
+
+  context ".find_by_invitation_code_and_wiki_id" do
+    let(:wiki) { create(:wiki) }
+
+    it "returns the user who owns the given invitation code" do
+      user = create(:pending_user, wiki: wiki)
+      invitation = create(:user_invitation, code: "foo", user: user)
+      PendingUser.find_by_invitation_code_and_wiki_id("foo", wiki.id).should == user
+    end
+
+    it "returns nil if the user belongs to a different wiki" do
+      user = create(:pending_user, wiki: create(:wiki))
+      invitation = create(:user_invitation, code: "foo", user: user)
+      PendingUser.find_by_invitation_code_and_wiki_id("foo", wiki.id).should be_nil
+    end
+
+    it "returns nil if no user owns the given invitation code" do
+      PendingUser.find_by_invitation_code_and_wiki_id("bar", wiki.id).should be_nil
     end
   end
 end
