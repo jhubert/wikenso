@@ -110,39 +110,39 @@ describe PendingUsersController do
   context "PUT 'update'" do
     context "when the save is successful" do
       it "updates the user with the given name" do
-        user = create(:pending_user, name: "Foo Bar")
+        user = create(:pending_user, wiki: wiki, name: "Foo Bar")
         put :update, id: user.id, user: {name: "Bar Foo", password: "foo", password_confirmation: "foo"}
         User.find(user.id).name.should == "Bar Foo"
       end
 
       it "updates the user's password" do
-        user = create(:pending_user)
+        user = create(:pending_user, wiki: wiki)
         put :update, id: user.id, user: {password: "foo", password_confirmation: "foo"}
         User.find(user.id).reload.password_digest.should_not be_empty
       end
 
       it "makes the user active" do
-        user = create(:pending_user)
+        user = create(:pending_user, wiki: wiki)
         put :update, id: user.id, user: {password: "foo", password_confirmation: "foo"}
         User.find(user.id).should be_a ActiveUser
       end
 
       it "logs the user in" do
-        user = create(:pending_user)
+        user = create(:pending_user, wiki: wiki)
         put :update, id: user.id, user: { password: "foo", password_confirmation: "foo" }
         session[:user_id].should_not be_nil
       end
 
       it "redirects to the wiki home page" do
-        user = create(:pending_user)
+        user = create(:pending_user, wiki: wiki)
         put :update, id: user.id, user: { password: "foo", password_confirmation: "foo" }
         response.should redirect_to root_path(subdomain: "foo")
       end
 
       it "sets a flash notice" do
-        user = create(:pending_user, wiki: create(:wiki))
+        user = create(:pending_user, wiki: wiki)
         put :update, id: user.id, user: { password: "foo", password_confirmation: "foo" }
-        flash[:notice].should_not be_empty
+
       end
     end
 

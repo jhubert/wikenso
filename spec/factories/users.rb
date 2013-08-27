@@ -16,5 +16,4 @@ FactoryGirl.define do
       invitations { create_list(:user_invitation, 1) }
     end
   end
-
 end
