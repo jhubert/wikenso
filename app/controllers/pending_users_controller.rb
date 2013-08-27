@@ -1,5 +1,5 @@
 class PendingUsersController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, only: [:create]
 
   def edit
     wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first
