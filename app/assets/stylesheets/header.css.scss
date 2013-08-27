@@ -51,6 +51,10 @@ input.wiki-header-search-input {
   background-color: $topbar-bg;
   padding: 0 20px 0 20px;
   font-size: 17px;
+  &:hover {
+    background-color: #A3D35C;
+    cursor: pointer;
+  }
 }
 
 .wiki-header-signed-in-signed-in-as {
