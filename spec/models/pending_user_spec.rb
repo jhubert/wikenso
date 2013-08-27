@@ -109,6 +109,24 @@ describe PendingUser do
         user = create(:pending_user)
         user.activate_with_params(name: "Bar Foo", password: "foo", password_confirmation: "foo").should be_a ActiveUser
       end
+
+      context "invitations" do
+        it "removes all invitations belonging to the user" do
+          user = create(:pending_user)
+          create_list(:user_invitation, 5, user: user)
+          expect {
+            user.activate_with_params(name: "Bar Foo", password: "foo", password_confirmation: "foo")
+          }.to change { user.invitations.count }.from(5).to(0)
+        end
+
+        it "doesn't remove any other invitations" do
+          user = create(:pending_user)
+          create_list(:user_invitation, 5)
+          expect {
+            user.activate_with_params(name: "Bar Foo", password: "foo", password_confirmation: "foo")
+          }.not_to change { UserInvitation.count }
+        end
+      end
     end
 
     context "when the activation fails" do

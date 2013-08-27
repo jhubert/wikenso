@@ -127,6 +127,14 @@ describe PendingUsersController do
         User.find(user.id).should be_a ActiveUser
       end
 
+      it "removes all invitations belonging to the user" do
+        user = create(:pending_user, wiki: wiki)
+        invitations = create_list(:user_invitation, 5, user: user)
+        expect {
+          put :update, id: user.id, user: {password: "foo", password_confirmation: "foo"}
+        }.to change { user.invitations.count }.from(5).to(0)
+      end
+
       it "logs the user in" do
         user = create(:pending_user, wiki: wiki)
         put :update, id: user.id, user: { password: "foo", password_confirmation: "foo" }

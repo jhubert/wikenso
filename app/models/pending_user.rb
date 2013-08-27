@@ -27,6 +27,7 @@ class PendingUser < User
       update_attributes(type: "ActiveUser")
       active_user = becomes(ActiveUser)
       if active_user.update_attributes(params)
+        invitations.destroy_all
         active_user
       else
         raise ActiveRecord::Rollback
