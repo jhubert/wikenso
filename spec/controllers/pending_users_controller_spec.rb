@@ -3,44 +3,13 @@ require 'spec_helper'
 describe PendingUsersController do
   let!(:wiki) { create(:wiki, subdomain: "foo") }
   before(:each) { @request.host = "foo.example.com" }
-
-  context "GET 'edit'" do
-    context "for a valid invitation code" do
-      it "assigns the pending user who owns the passed invitation code" do
-        user = create(:pending_user, wiki: wiki)
-        invitation = create(:user_invitation, code: "abcd", user: user)
-        get 'edit', invitation_code: "abcd"
-        assigns(:user).should == user
-      end
-
-      it "returns a 400 if the user's wiki and the subdomain don't match" do
-        user = create(:pending_user, wiki: wiki)
-        create(:wiki, subdomain: "abcd")
-        @request.host = "abcd.example.com"
-        get 'edit', invitation_code: create(:user_invitation, user: user).code
-        response.status.should == 400
-      end
-
-      it "returns http success" do
-        user = create(:pending_user, wiki: wiki)
-        get 'edit', invitation_code: create(:user_invitation, user: user).code
-        response.should be_success
-      end
-    end
-
-    context "for an invalid invitation code" do
-      it "returns a 400" do
-        get 'edit', invitation_code: "FOO"
-        response.status.should == 400
-      end
-    end
-  end
+  after(:each) { session[:user_id] = nil }
 
   context "POST 'create'" do
     let(:wiki) { create(:wiki, subdomain: "foo") }
     before(:each) do
       @request.host = "foo.example.com"
-      sign_in(create(:active_user))
+      sign_in(create(:active_user, wiki: wiki))
     end
 
     context "when the creation succeeds" do
@@ -106,11 +75,43 @@ describe PendingUsersController do
     end
   end
 
+  context "GET 'edit'" do
+    context "for a valid invitation code" do
+      it "assigns the pending user who owns the passed invitation code" do
+        user = create(:pending_user, wiki: wiki)
+        invitation = create(:user_invitation, code: "abcd", user: user)
+        get 'edit', invitation_code: "abcd"
+        assigns(:user).should == user
+      end
+
+      it "returns a 400 if the user's wiki and the subdomain don't match" do
+        user = create(:pending_user, wiki: wiki)
+        create(:wiki, subdomain: "abcd")
+        @request.host = "abcd.example.com"
+        get 'edit', invitation_code: create(:user_invitation, user: user).code
+        response.status.should == 400
+      end
+
+      it "returns http success" do
+        user = create(:pending_user, wiki: wiki)
+        get 'edit', invitation_code: create(:user_invitation, user: user).code
+        response.should be_success
+      end
+    end
+
+    context "for an invalid invitation code" do
+      it "returns a 400" do
+        get 'edit', invitation_code: "FOO"
+        response.status.should == 400
+      end
+    end
+  end
+
   context "PUT 'update'" do
     context "when the save is successful" do
       it "updates the user with the given name" do
         user = create(:pending_user, name: "Foo Bar")
-        put :update, id: user.id, user: {name: "Bar Foo"}
+        put :update, id: user.id, user: {name: "Bar Foo", password: "foo", password_confirmation: "foo"}
         User.find(user.id).name.should == "Bar Foo"
       end
 
@@ -128,13 +129,13 @@ describe PendingUsersController do
 
       it "logs the user in" do
         user = create(:pending_user)
-        put :update, id: user.id, user: {email: "foo@foo.com"}
+        put :update, id: user.id, user: { password: "foo", password_confirmation: "foo" }
         session[:user_id].should_not be_nil
       end
 
       it "redirects to the wiki home page" do
         user = create(:pending_user)
-        put :update, id: user.id, user: {email: "foo@foo.com"}
+        put :update, id: user.id, user: { password: "foo", password_confirmation: "foo" }
         response.should redirect_to root_path(subdomain: "foo")
       end
     end

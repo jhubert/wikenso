@@ -89,7 +89,7 @@ describe PendingUser do
     context "when the activation succeeds" do
       it "updates the user with the given name" do
         user = create(:pending_user, name: "Foo Bar")
-        user.activate_with_params(name: "Bar Foo")
+        user.activate_with_params(name: "Bar Foo", password: "foo", password_confirmation: "foo")
         User.find(user.id).reload.name.should == "Bar Foo"
       end
 
@@ -107,7 +107,7 @@ describe PendingUser do
 
       it "returns the active user" do
         user = create(:pending_user)
-        user.activate_with_params(name: "Bar Foo").should be_a ActiveUser
+        user.activate_with_params(name: "Bar Foo", password: "foo", password_confirmation: "foo").should be_a ActiveUser
       end
     end
 
