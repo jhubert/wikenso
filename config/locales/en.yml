@@ -41,3 +41,6 @@ en:
   users:
     create:
       successful: "%{user_email} has been sent an invitation to join %{wiki_name}."
+  pending_users:
+    update:
+      welcome_flash_message: "Your account has been successfully created. Welcome to %{wiki_name}!"

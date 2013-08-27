@@ -138,6 +138,12 @@ describe PendingUsersController do
         put :update, id: user.id, user: { password: "foo", password_confirmation: "foo" }
         response.should redirect_to root_path(subdomain: "foo")
       end
+
+      it "sets a flash notice" do
+        user = create(:pending_user, wiki: create(:wiki))
+        put :update, id: user.id, user: { password: "foo", password_confirmation: "foo" }
+        flash[:notice].should_not be_empty
+      end
     end
 
     context "when the save is unsuccessful" do
