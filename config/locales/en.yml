@@ -44,3 +44,7 @@ en:
   pending_users:
     update:
       welcome_flash_message: "Your account has been successfully created. Welcome to %{wiki_name}!"
+  user_invitation_emails:
+    create:
+      successful_flash: "We've re-sent an invitation email to %{email}"
+      error_flash: "Something seems to have gone wrong while resending the invitation."

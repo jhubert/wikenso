@@ -39,7 +39,7 @@
 <% if flash[:error] %>
   <div class="flash-error row">
     <p class="large-12-columns">
-      <%= flash[:error].join(",") %>
+      <%= [flash[:error]].flatten.join(",") %>
     </p>
   </div>
 <% end %>

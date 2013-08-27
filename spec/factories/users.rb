@@ -12,6 +12,10 @@ FactoryGirl.define do
     password "foo"
     password_confirmation { |u| u.password }
 
+    trait :wiki do
+      wiki { create(:wiki) }
+    end
+
     trait :invitation do
       invitations { create_list(:user_invitation, 1) }
     end

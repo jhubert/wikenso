@@ -40,7 +40,7 @@
           <tr>
             <td><%= user.name %></td>
             <td><%= user.email %></td>
-            <td><%= user.status_in_words %></td>
+            <td><%= user.status_for_table.html_safe %></td>
           </tr>
         <% end %>
         </tbody>
