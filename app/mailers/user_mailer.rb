@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "robot@wikenso.com"
+  default from: "Wikenso Robot <robot@wikenso.com>"
 
   def invitation_mail(user, wiki)
     @user = user.decorate
