@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130826111251) do
+ActiveRecord::Schema.define(version: 20130827050008) do
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
@@ -37,6 +37,15 @@ ActiveRecord::Schema.define(version: 20130826111251) do
   end
 
   add_index "pages", ["slug"], name: "index_pages_on_slug", unique: true, using: :btree
+
+  create_table "user_invitations", force: true do |t|
+    t.string   "code"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_invitations", ["user_id"], name: "index_user_invitations_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
