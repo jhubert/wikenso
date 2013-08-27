@@ -1,6 +1,6 @@
 <div class="wiki-user-edit row">
   <div class="wiki-user-edit-form columns large-9 large-centered">
-    <%= simple_form_for @user do |f| %>
+    <%= simple_form_for @user.becomes(User), url: pending_user_path(@user) do |f| %>
       <fieldset>
         <legend class="wiki-user-edit-form-legend">
           Activate your

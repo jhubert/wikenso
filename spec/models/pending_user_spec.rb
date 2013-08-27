@@ -84,4 +84,50 @@ describe PendingUser do
       user.invitation_code.should == second_invitation.code
     end
   end
+
+  context "#activate_with_params" do
+    context "when the activation succeeds" do
+      it "updates the user with the given name" do
+        user = create(:pending_user, name: "Foo Bar")
+        user.activate_with_params(name: "Bar Foo")
+        User.find(user.id).reload.name.should == "Bar Foo"
+      end
+
+      it "updates the user's password and password confirmation" do
+        user = create(:pending_user, password: nil, password_confirmation: nil)
+        active_user = user.activate_with_params(password: "foo", password_confirmation: "foo")
+        active_user.authenticate("foo").should be_true
+      end
+
+      it "makes the user active" do
+        user = create(:pending_user)
+        user.activate_with_params(password: "foo", password_confirmation: "foo")
+        User.find(user.id).should be_a ActiveUser
+      end
+
+      it "returns the active user" do
+        user = create(:pending_user)
+        user.activate_with_params(name: "Bar Foo").should be_a ActiveUser
+      end
+    end
+
+    context "when the activation fails" do
+      it "doesn't update the user" do
+        user = create(:pending_user, name: "Foobar")
+        user.activate_with_params(email: "notanemail", name: "Hello!")
+        user.reload.name.should == "Foobar"
+      end
+
+      it "doesn't change the type of the user" do
+        user = create(:pending_user)
+        user.activate_with_params(email: "notanemail")
+        User.find(user.id).should be_a PendingUser
+      end
+
+      it "returns false" do
+        user = create(:pending_user)
+        user.activate_with_params(email: "notanemail").should be_false
+      end
+    end
+  end
 end

@@ -2,12 +2,9 @@ require 'spec_helper'
 
 describe PendingUsersController do
   let!(:wiki) { create(:wiki, subdomain: "foo") }
-  before(:each) do
-    @request.host = "foo.example.com"
-    sign_in(create(:active_user))
-  end
+  before(:each) { @request.host = "foo.example.com" }
 
-  describe "GET 'edit'" do
+  context "GET 'edit'" do
     context "for a valid invitation code" do
       it "assigns the pending user who owns the passed invitation code" do
         user = create(:pending_user, wiki: wiki)
@@ -41,7 +38,10 @@ describe PendingUsersController do
 
   context "POST 'create'" do
     let(:wiki) { create(:wiki, subdomain: "foo") }
-    before(:each) { @request.host = "foo.example.com" }
+    before(:each) do
+      @request.host = "foo.example.com"
+      sign_in(create(:active_user))
+    end
 
     context "when the creation succeeds" do
       it "creates a pending user" do
@@ -103,6 +103,60 @@ describe PendingUsersController do
       session[:user_id] = nil
       post :create, user: attributes_for(:active_user, wiki: wiki)
       response.should redirect_to new_session_path
+    end
+  end
+
+  context "PUT 'update'" do
+    context "when the save is successful" do
+      it "updates the user with the given name" do
+        user = create(:pending_user, name: "Foo Bar")
+        put :update, id: user.id, user: {name: "Bar Foo"}
+        User.find(user.id).name.should == "Bar Foo"
+      end
+
+      it "updates the user's password" do
+        user = create(:pending_user)
+        put :update, id: user.id, user: {password: "foo", password_confirmation: "foo"}
+        User.find(user.id).reload.password_digest.should_not be_empty
+      end
+
+      it "makes the user active" do
+        user = create(:pending_user)
+        put :update, id: user.id, user: {password: "foo", password_confirmation: "foo"}
+        User.find(user.id).should be_a ActiveUser
+      end
+
+      it "logs the user in" do
+        user = create(:pending_user)
+        put :update, id: user.id, user: {email: "foo@foo.com"}
+        session[:user_id].should_not be_nil
+      end
+
+      it "redirects to the wiki home page" do
+        user = create(:pending_user)
+        put :update, id: user.id, user: {email: "foo@foo.com"}
+        response.should redirect_to root_path(subdomain: "foo")
+      end
+    end
+
+    context "when the save is unsuccessful" do
+      it "doesn't log the user in" do
+        user = create(:pending_user)
+        put :update, id: user.id, user: { name: nil }
+        session[:user_id].should be_nil
+      end
+
+      it "renders the :edit template" do
+        user = create(:pending_user)
+        put :update, id: user.id, user: { name: nil }
+        response.should render_template :edit
+      end
+
+      it "assigns the user" do
+        user = create(:pending_user)
+        put :update, id: user.id, user: { name: nil }
+        assigns(:user).should == user
+      end
     end
   end
 end

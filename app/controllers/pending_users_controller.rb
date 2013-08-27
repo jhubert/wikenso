@@ -9,7 +9,7 @@ class PendingUsersController < ApplicationController
 
   def create
     @wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first
-    pending_user = @wiki.create_pending_user(user_params[:email])
+    pending_user = @wiki.create_pending_user(user_creation_params[:email])
     if pending_user.errors.empty?
       flash[:notice] = t("users.create.successful", wiki_name: @wiki.subdomain, user_email: pending_user.email)
       redirect_to users_path
@@ -19,9 +19,25 @@ class PendingUsersController < ApplicationController
     end
   end
 
+  def update
+    user = PendingUser.find(params[:id])
+    active_user = user.activate_with_params(user_updation_params)
+    if active_user
+      sign_in(active_user)
+      redirect_to root_path(subdomain: request.subdomain)
+    else
+      @user = user
+      render :edit
+    end
+  end
+
   private
 
-  def user_params
+  def user_creation_params
     params.require(:user).permit(:email)
+  end
+
+  def user_updation_params
+    params.require(:user).permit(:name, :password, :password_confirmation)
   end
 end

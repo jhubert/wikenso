@@ -20,4 +20,17 @@ class PendingUser < User
   def invitation_code
     invitations.last.code
   end
+
+  def activate_with_params(params)
+    transaction do
+      assign_attributes(params) # Need to do this so that the "Password confirmation can't be blank" error doesn't show up
+      update_attributes(type: "ActiveUser")
+      active_user = becomes(ActiveUser)
+      if active_user.update_attributes(params)
+        active_user
+      else
+        raise ActiveRecord::Rollback
+      end
+    end
+  end
 end
