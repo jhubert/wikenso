@@ -13,6 +13,10 @@ FactoryGirl.define do
     password "foo"
     password_confirmation "foo"
     after(:build) { |u| u.password_confirmation = u.password }
+
+    trait :invitation do
+      invitations { create_list(:user_invitation, 1) }
+    end
   end
 
 end

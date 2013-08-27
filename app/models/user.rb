@@ -8,4 +8,6 @@ class User < ActiveRecord::Base
 
   scope :active, -> { where(type: 'ActiveUser') }
   scope :pending, -> { where(type: 'PendingUser') }
+
+  delegate :subdomain, to: :wiki, prefix: true
 end

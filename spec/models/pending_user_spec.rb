@@ -69,4 +69,19 @@ describe PendingUser do
       PendingUser.find_by_invitation_code_and_wiki_id("bar", wiki.id).should be_nil
     end
   end
+
+  context "#invitation_code" do
+    it "returns the invitation code for the user" do
+      user = create(:pending_user)
+      invitation = create(:user_invitation, user: user)
+      user.invitation_code.should == invitation.code
+    end
+
+    it "returns the latest code if there are multiple" do
+      user = create(:pending_user)
+      first_invitation = create(:user_invitation, user: user)
+      second_invitation = create(:user_invitation, user: user)
+      user.invitation_code.should == second_invitation.code
+    end
+  end
 end
