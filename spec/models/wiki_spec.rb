@@ -56,6 +56,11 @@ describe Wiki do
         User.last.wiki.should == wiki
       end
 
+      it "creates an invitation for the user" do
+        user = wiki.create_pending_user("foo@example.com")
+        user.invitations.should_not be_empty
+      end
+
       context "when sending an invitation email" do
         it "sends an email" do
           expect {

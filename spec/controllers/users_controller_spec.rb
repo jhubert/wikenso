@@ -52,6 +52,11 @@ describe UsersController do
         post :create, user: attributes_for(:active_user, wiki: wiki)
         User.last.wiki.should == wiki
       end
+
+      it "creates an invitation for the user" do
+        post :create, user: attributes_for(:active_user, wiki: wiki)
+        User.last.invitations.should_not be_empty
+      end
     end
 
     context "when the creation fails" do
