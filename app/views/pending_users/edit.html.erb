@@ -11,7 +11,7 @@
         </legend>
 
         <%= f.input :email, disabled: true, required: false, wrapper_html: {class: "wiki-user-edit-form-input"} %>
-        <%= f.input :name, wrapper_html: {class: "wiki-user-edit-form-input"} %>
+        <%= f.input :name, wrapper_html: {class: "wiki-user-edit-form-input"}, input_html: {class: "wiki-user-edit-form-input-name"} %>
         <%= f.input :password, wrapper_html: {class: "wiki-user-edit-form-input"} %>
         <%= f.input :password_confirmation, wrapper_html: {class: "wiki-user-edit-form-input"} %>
         <div class="wiki-user-edit-form-submit-wrapper">
@@ -21,3 +21,7 @@
     <% end %>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(".wiki-user-edit-form-input-name").focus();
+</script>
