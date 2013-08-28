@@ -12,7 +12,8 @@
 <div class="row wiki-pages-view">
   <div class="large-12 columns wiki-pages-view-single" data-draft-page-id=<%= @draft_page.id %>>
     <div class="wiki-pages-view-single-actions">
-      <span class="wiki-pages-view-single-actions-back"><%= link_to "Go Back", page_path(@draft_page) %></span>
+      <span class="wiki-pages-view-single-actions-item back"><%= link_to "Go Back", page_path(@page) %></span>
+      <span class="wiki-pages-view-single-actions-item publish"><%= link_to "Publish", "javascript:void(0);" %></span>
     </div>
 
     <div class="wiki-pages-view-single-title-prefix">Editing Draft</div>
@@ -24,6 +25,11 @@
       <p><%= sanitize @draft_page.text, tags: @draft_page.allowed_html_tags %></p>
     </div>
   </div>
+
+  <%= simple_form_for @draft_page, url: page_path(@page), as: :page, html: { class: "wiki-pages-view-single-shadow-form" } do |f| %>
+    <%= f.input :title, input_html: { class: "wiki-pages-view-single-shadow-form-title-input" }%>
+    <%= f.input :text, input_html: { class: "wiki-pages-view-single-shadow-form-text-input" } %>
+  <% end %>
 </div>
 
 <ul class="wiki-pages-view-formatting">

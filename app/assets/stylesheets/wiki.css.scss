@@ -127,7 +127,8 @@ a.wiki-pages-view-formatting-link {
   float: right;
 }
 
-.wiki-pages-view-single-actions-back {
+.wiki-pages-view-single-actions-item {
+  &.publish { font-weight: 700; }
   a { @include page-action-button; }
   float: right;
 }
@@ -203,4 +204,8 @@ input.add-link-modal-input {
     text-decoration: underline;
     color: #999;
   }
+}
+
+.wiki-pages-view-single-shadow-form {
+  display: none;
 }

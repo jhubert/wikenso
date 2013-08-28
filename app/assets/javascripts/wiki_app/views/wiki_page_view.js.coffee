@@ -1,6 +1,9 @@
 class WikiApp.Views.WikiPageView extends Backbone.View
   el: ".wiki-pages-view-single"
 
+  events:
+    "click .wiki-pages-view-single-actions-item.publish": "submitShadowForm"
+
   shortcuts:
     '⌘+s': "throttledSaveModel"
     'ctrl+s': "throttledSaveModel"
@@ -15,6 +18,7 @@ class WikiApp.Views.WikiPageView extends Backbone.View
     @savingIndicator = new WikiApp.Views.SavingIndicatorView
     @helpText = new WikiApp.Views.HelpTextView
     @errorView = new WikiApp.Views.ErrorView
+    @shadowFormView = new WikiApp.Views.ShadowFormView(@model)
 
     @model.set('id', @getId(), silent: true)
     @model.setAutoSaveCallbacks(
@@ -32,3 +36,6 @@ class WikiApp.Views.WikiPageView extends Backbone.View
     @throttledSaveModelFunc ||= _.throttle(@model.autoSave, 1000)
     @throttledSaveModelFunc()
     event.preventDefault()
+
+  submitShadowForm: =>
+    @shadowFormView.submit()

@@ -21,6 +21,12 @@ describe PagesController do
       expect { get :edit, id: "foo" }.to change { page.draft_pages.count }.from(0).to(1)
     end
 
+    it "assigns the page" do
+      page = create(:page, wiki: wiki, title: "foo")
+      get :edit, id: "foo"
+      assigns(:page).should == page
+    end
+
     it "assigns the created draft page" do
       page = create(:page, wiki: wiki, title: "foo")
       get :edit, id: "foo"
@@ -204,8 +210,14 @@ describe PagesController do
     context "when the updation is unsuccessful" do
       it "assigns the draft page" do
         page = create(:page, wiki: wiki, user: user)
-        put :update, id: page.id, page: {title: "Bar"}
+        put :update, id: page.id, page: {title: nil}
         assigns(:draft_page).should be_a DraftPage
+      end
+
+      it "assigns the page" do
+        page = create(:page, wiki: wiki, user: user)
+        put :update, id: page.id, page: {title: nil}
+        assigns(:page).should == page
       end
 
       it "renders the edit page" do

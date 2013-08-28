@@ -41,7 +41,8 @@ class PagesController < ApplicationController
       flash[:notice] = t("pages.update.successful_flash")
       redirect_to page_path(page)
     else
-      flash[:error] = t("pages.update.error_flash")
+      flash.now[:error] = t("pages.update.error_flash")
+      @page = page
       @draft_page = page.find_or_create_draft_page_for_user(current_user).decorate
       render :edit
     end

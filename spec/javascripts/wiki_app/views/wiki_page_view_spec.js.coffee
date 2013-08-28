@@ -44,7 +44,7 @@ describe "WikiPageView", =>
         new WikiApp.Views.WikiPageView(@model)
         @model.autoSave()
         server.respond()
-        $(".saving-indicator").should.have.text "Saved!"
+        $(".saving-indicator").should.have.text "Saved draft"
 
       it "hides the error view", =>
         new WikiApp.Views.WikiPageView(@model)
