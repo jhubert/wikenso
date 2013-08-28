@@ -1,10 +1,23 @@
+<script type="text/javascript">
+  Opentip.styles.action = {
+    shadow: false,
+    escapeContent: true,
+    tipJoint: 'bottom',
+    delay: 0,
+    showEffect: false,
+    hideEffect: false,
+    hideDelay: 0,
+    background: "#333",
+    className: "wiki-header-actions-single-action-tooltip",
+    borderWidth: 0,
+    removeElementsOnHide: true,
+    fixed: true,
+    target: true
+  };
+</script>
+
 <div class="contain-to-grid wiki-header">
   <nav class="top-bar">
-  <ul class="title-area">
-
-  </ul>
-
-
   <section class="top-bar-section">
     <ul class="left">
       <li>
@@ -16,18 +29,19 @@
     <% if user_signed_in? %>
 
       <ul class="right">
-        <li class="wiki-header-search search has-form">
-          <form>
-            <div class="row collapse">
-              <div class="small-2 columns">
-                <i class="foundicon-search wiki-header-search-icon"></i>
-              </div>
+        <li class="wiki-header-actions">
+          <span class="wiki-header-actions-single-action">
 
-              <div class="small-10 columns">
-                <input type="text" class="wiki-header-search-input" placeholder="<%= t(".search_bar_placeholder_text") %>"/>
-              </div>
-            </div>
-          </form>
+            <a href="#" class="wiki-header-actions-single-action-link" data-ot="<%= t(".add_page_tooltip") %>" data-ot-style="action">
+              <i class="foundicon-plus"></i>
+            </a>
+          </span>
+
+          <span class="wiki-header-actions-single-action">
+            <a href="#" class="wiki-header-actions-single-action-link" data-ot="<%= t(".search_tooltip") %>" data-ot-style="action">
+              <i class="foundicon-search"></i>
+            </a>
+          </span>
         </li>
 
         <li class="divider"></li>

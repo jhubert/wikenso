@@ -31,6 +31,8 @@ en:
       search_bar_placeholder_text: "Search…"
 
       signed_in_as_text: "Signed in as"
+      add_page_tooltip: "Add a page"
+      search_tooltip: "Search"
   activerecord:
     errors:
       messages:
