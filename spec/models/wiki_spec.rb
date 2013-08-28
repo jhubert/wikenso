@@ -85,4 +85,29 @@ describe Wiki do
       end
     end
   end
+
+  context ".build_with_active_user" do
+    it "builds an active user if a single user is passed" do
+      wiki_params = attributes_for(:wiki)
+      user_params = attributes_for(:active_user, type: nil)
+      wiki = Wiki.build_with_active_user(wiki_params.merge(users_attributes: { "0" => user_params }))
+      wiki.users.first.should be_a ActiveUser
+    end
+
+    it "doesn't build a user if none are passed" do
+      wiki_params = attributes_for(:wiki)
+      wiki = Wiki.build_with_active_user(wiki_params)
+      wiki.users.should be_empty
+    end
+
+    it "builds multiple active users if more than one are passed" do
+      wiki_params = attributes_for(:wiki)
+      users_attributes = 5.times.inject({}) do |hash, index|
+        hash[index.to_s] = attributes_for(:active_user, type: nil)
+        hash
+      end
+      wiki = Wiki.build_with_active_user(wiki_params.merge(users_attributes: users_attributes))
+      wiki.users.map(&:type).uniq.should == ["ActiveUser"]
+    end
+  end
 end

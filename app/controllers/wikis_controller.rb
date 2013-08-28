@@ -6,7 +6,7 @@ class WikisController < ApplicationController
   end
 
   def create
-    @wiki = Wiki.new(wiki_params)
+    @wiki = Wiki.build_with_active_user(wiki_params)
     if @wiki.save
       sign_in(@wiki.users.first)
       redirect_to root_url(subdomain: @wiki.subdomain)

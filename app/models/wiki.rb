@@ -9,6 +9,13 @@ class Wiki < ActiveRecord::Base
   validates_associated :users
   validates_format_of :subdomain, with: /\A\w+\z/, message: I18n.t("activerecord.errors.messages.subdomain_format")
 
+  def self.build_with_active_user(params)
+    if params[:users_attributes]
+      params[:users_attributes].each { |_,user_attributes| user_attributes[:type] = "ActiveUser" }
+    end
+    Wiki.new(params)
+  end
+
   def create_pending_user(email)
     user = PendingUser.create_with_invitation(email: email, wiki_id: self.id)
     if user.errors.empty?

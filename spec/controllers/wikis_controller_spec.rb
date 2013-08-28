@@ -30,10 +30,10 @@ describe WikisController do
         end.to change { Wiki.count }.by(1)
       end
 
-      it "creates a new user" do
+      it "creates a new active user" do
         expect do
           get 'create', wiki: attributes_for(:wiki, :users_attributes)
-        end.to change { User.count }.by(1)
+        end.to change { ActiveUser.count }.by(1)
       end
 
       it "signs the new user in" do
