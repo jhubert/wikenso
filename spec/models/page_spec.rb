@@ -28,16 +28,34 @@ describe Page do
       draft_page.wiki.should == wiki
     end
 
-    it "creates a draft page with the same text as the current page" do
-      page = create(:page, wiki: wiki, text: "FOO!")
-      draft_page = page.find_or_create_draft_page_for_user(user)
-      draft_page.text.should == "FOO!"
-    end
+    context "when changing the title and text" do
 
-    it "creates a draft page with the same title as the current page" do
-      page = create(:page, wiki: wiki, title: "BAR!")
-      draft_page = page.find_or_create_draft_page_for_user(user)
-      draft_page.title.should == "BAR!"
+      it "creates a draft page with the same text as the current page" do
+        page = create(:page, wiki: wiki, text: "FOO!")
+        draft_page = page.find_or_create_draft_page_for_user(user)
+        draft_page.text.should == "FOO!"
+      end
+
+      it "creates a draft page with the same title as the current page" do
+        page = create(:page, wiki: wiki, title: "BAR!")
+        draft_page = page.find_or_create_draft_page_for_user(user)
+        draft_page.title.should == "BAR!"
+      end
+
+      it "doesn't change the title if a draft already exists" do
+        page = create(:page, wiki: wiki, title: "Foo")
+        draft_page = page.find_or_create_draft_page_for_user(user)
+        draft_page.update(title: "Bar")
+        page.find_or_create_draft_page_for_user(user).title.should == "Bar"
+      end
+
+      it "creates a draft page with the same title as the current page" do
+        page = create(:page, wiki: wiki, text: "Foo")
+        draft_page = page.find_or_create_draft_page_for_user(user)
+        draft_page.update(text: "Bar")
+        page.find_or_create_draft_page_for_user(user).text.should == "Bar"
+      end
+
     end
 
     it "doesn't create multiple draft pages for the same user" do
