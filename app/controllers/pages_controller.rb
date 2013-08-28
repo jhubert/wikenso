@@ -6,6 +6,19 @@ class PagesController < ApplicationController
     @page = wiki.pages.new
   end
 
+  def create
+    wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first
+    page = wiki.pages.new(page_params.merge(user_id: current_user.id))
+    if page.save
+      flash[:notice] = t("pages.create.successful_flash")
+      redirect_to page_path(page)
+    else
+      @page = page
+      flash[:error] = t("pages.create.error_flash")
+      render :new
+    end
+  end
+
   def edit
     wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first!
     @page = wiki.pages.friendly.find(params[:id]).decorate
@@ -18,5 +31,11 @@ class PagesController < ApplicationController
     else
       @page = @wiki.pages.order("created_at").first.decorate
     end
+  end
+
+  private
+
+  def page_params
+    params.require(:page).permit(:title)
   end
 end

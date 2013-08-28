@@ -105,4 +105,63 @@ describe PagesController do
       assigns(:page).wiki.should == wiki
     end
   end
+
+  context "POST 'create'" do
+    let!(:wiki) { create(:wiki, subdomain: "foo") }
+    before(:each) { @request.host = "foo.example.com" }
+
+    context "when creation is successful" do
+      it "creates a page" do
+        page_params = attributes_for(:page)
+        expect { post :create, page: page_params }.to change { Page.count }.by(1)
+      end
+
+      it "creates a page with the passed title" do
+        page_params = attributes_for(:page, title: "Foo")
+        post :create, page: page_params
+        Page.last.title.should == "Foo"
+      end
+
+      it "creates a page belonging to the current wiki" do
+        wiki = create(:wiki, subdomain: "bar")
+        @request.host = "bar.example.com"
+        post :create, page: attributes_for(:page, title: "Foo")
+        Page.last.wiki.should == wiki
+      end
+
+      it "creates a page belonging to the current user" do
+        user = create(:active_user)
+        sign_in(user)
+        post :create, page: attributes_for(:page, title: "Foo")
+        Page.last.user.should == user
+      end
+
+      it "sets a flash notice" do
+        post :create, page: attributes_for(:page)
+        flash[:notice].should_not be_empty
+      end
+
+      it "redirects to the 'show' action for the created page" do
+        post :create, page: attributes_for(:page)
+        response.should redirect_to page_path(Page.last)
+      end
+    end
+
+    context "when creation is unsuccesssful" do
+      it "renders the new page" do
+        post :create, page: attributes_for(:page, title: nil)
+        response.should render_template :new
+      end
+
+      it "assigns the page" do
+        post :create, page: attributes_for(:page, title: nil)
+        assigns(:page).should be_a Page
+      end
+
+      it "sets a flash error" do
+        post :create, page: attributes_for(:page, title: nil)
+        flash[:error].should_not be_empty
+      end
+    end
+  end
 end
