@@ -1,5 +1,5 @@
 class WikiApp.Models.PageModel extends Backbone.Model
-  urlRoot: "/api/v1/pages"
+  urlRoot: "/api/v1/draft_pages"
 
   initialize: =>
     @on('change', _.debounce(@autoSave, 800))

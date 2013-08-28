@@ -15,7 +15,7 @@ Wikenso::Application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :pages, only: :update
+      resources :draft_pages, only: :update
     end
   end
 end

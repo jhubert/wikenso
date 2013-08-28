@@ -1,4 +1,4 @@
-class Api::V1::PagesController < ApplicationController
+class Api::V1::DraftPagesController < ApplicationController
   def update
     page = Page.find(params[:id])
     if page.update(page_params)
@@ -12,6 +12,6 @@ class Api::V1::PagesController < ApplicationController
   private
 
   def page_params
-    params.require(:page).permit(:text, :title)
+    params.require(:draft_page).permit(:text, :title)
   end
 end
