@@ -32,13 +32,13 @@
         <li class="wiki-header-actions">
           <span class="wiki-header-actions-single-action">
 
-            <a href="<%= new_page_path %>" class="wiki-header-actions-single-action-link" data-ot="<%= t(".add_page_tooltip") %>" data-ot-style="action">
+            <a href="<%= new_page_path %>" class="wiki-header-actions-single-action-link" title="<%= t(".add_page_tooltip") %>" data-ot-style="action">
               <i class="foundicon-plus"></i>
             </a>
           </span>
 
           <span class="wiki-header-actions-single-action">
-            <a href="#" class="wiki-header-actions-single-action-link" data-ot="<%= t(".search_tooltip") %>" data-ot-style="action">
+            <a href="#" class="wiki-header-actions-single-action-link" title="<%= t(".search_tooltip") %>" data-ot-style="action">
               <i class="foundicon-search"></i>
             </a>
           </span>
@@ -73,5 +73,9 @@
     $(".wiki-header-signed-in-signed-in-as").click(function(){
       $(".wiki-header-signed-in").click();
     });
+
+    $(".wiki-header-actions-single-action-link").each(function(index, elem){
+      new Opentip(elem, $(elem).attr('title'), "", { style: "action" });
+    })
   });
 </script>
