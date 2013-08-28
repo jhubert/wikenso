@@ -35,6 +35,7 @@ group :test do
   gem 'database_cleaner'
   gem 'ejs'
   gem 'fuubar'
+  gem 'simplecov'
 end
 
 group :development do
