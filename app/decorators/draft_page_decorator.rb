@@ -1,4 +1,4 @@
-class PageDecorator < Draper::Decorator
+class DraftPageDecorator < Draper::Decorator
   delegate_all
   include PageSanitizable
 end

@@ -7,12 +7,6 @@ describe PagesController do
     let(:wiki) { create(:wiki, subdomain: "foo") }
     before(:each) { @request.host = "foo.example.com" }
 
-    it "assigns the page corresponding to the passed friendly ID" do
-      page = create(:page, wiki: wiki, title: "foo")
-      get :edit, id: "foo"
-      assigns(:page).should == page
-    end
-
     it "raises an error if the ID is invalid" do
       expect { get :edit, id: 1234 }.to raise_error
     end

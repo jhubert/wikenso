@@ -12,16 +12,16 @@
 <div class="row wiki-pages-view">
   <div class="large-12 columns wiki-pages-view-single" data-draft-page-id=<%= @draft_page.id %>>
     <div class="wiki-pages-view-single-actions">
-      <span class="wiki-pages-view-single-actions-back"><%= link_to "Go Back", page_path(@page) %></span>
+      <span class="wiki-pages-view-single-actions-back"><%= link_to "Go Back", page_path(@draft_page) %></span>
     </div>
 
     <div class="wiki-pages-view-single-title-prefix">Editing </div>
     <div class="wiki-pages-view-single-title" contenteditable=true>
-      <%= @page.title %>
+      <%= @draft_page.title %>
     </div>
 
     <div class="wiki-pages-view-single-text" contenteditable=true>
-      <p><%= sanitize @page.text, tags: @page.allowed_html_tags %></p>
+      <p><%= sanitize @draft_page.text, tags: @draft_page.allowed_html_tags %></p>
     </div>
   </div>
 </div>
