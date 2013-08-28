@@ -6,6 +6,6 @@ class WikiApp.Views.SavingIndicatorView extends Backbone.View
     this.$el.show()
 
   saved: =>
-    this.$el.text("Saved!")
+    this.$el.text("Saved draft")
 
   hide: => this.$el.hide()
