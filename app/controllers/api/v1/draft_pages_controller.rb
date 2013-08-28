@@ -1,17 +1,17 @@
 class Api::V1::DraftPagesController < ApplicationController
   def update
-    page = Page.find(params[:id])
-    if page.update(page_params)
+    draft_page = DraftPage.find(params[:id])
+    if draft_page.update(draft_page_params)
       render json: {}
     else
-      render json: page.errors, status: :bad_request
+      render json: draft_page.errors, status: :bad_request
     end
 
   end
 
   private
 
-  def page_params
+  def draft_page_params
     params.require(:draft_page).permit(:text, :title)
   end
 end

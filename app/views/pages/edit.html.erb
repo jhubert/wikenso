@@ -10,7 +10,7 @@
 </div>
 
 <div class="row wiki-pages-view">
-  <div class="large-12 columns wiki-pages-view-single" data-id=<%= @page.id %>>
+  <div class="large-12 columns wiki-pages-view-single" data-draft-page-id=<%= @draft_page.id %>>
     <div class="wiki-pages-view-single-actions">
       <span class="wiki-pages-view-single-actions-back"><%= link_to "Go Back", page_path(@page) %></span>
     </div>
@@ -42,6 +42,6 @@
 </div>
 
 <script type="text/javascript">
-  var model = new WikiApp.Models.PageModel();
+  var model = new WikiApp.Models.DraftPageModel();
   new WikiApp.Views.WikiPageView(model);
 </script>

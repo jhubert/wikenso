@@ -26,7 +26,7 @@ class WikiApp.Views.WikiPageView extends Backbone.View
     @text.focus()
 
   getId: =>
-    this.$el.data('id')
+    this.$el.data('draft-page-id')
 
   throttledSaveModel: (event) =>
     @throttledSaveModelFunc ||= _.throttle(@model.autoSave, 1000)

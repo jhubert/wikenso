@@ -1,4 +1,4 @@
-class WikiApp.Models.PageModel extends Backbone.Model
+class WikiApp.Models.DraftPageModel extends Backbone.Model
   urlRoot: "/api/v1/draft_pages"
 
   initialize: =>

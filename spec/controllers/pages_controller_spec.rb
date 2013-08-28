@@ -21,6 +21,17 @@ describe PagesController do
       page = create(:page, wiki: create(:wiki))
       expect { get :edit, id: page.id }.to raise_error
     end
+
+    it "creates a draft page if one does't exist" do
+      page = create(:page, wiki: wiki, title: "foo")
+      expect { get :edit, id: "foo" }.to change { page.draft_pages.count }.from(0).to(1)
+    end
+
+    it "assigns the created draft page" do
+      page = create(:page, wiki: wiki, title: "foo")
+      get :edit, id: "foo"
+      assigns(:draft_page).should be_a DraftPage
+    end
   end
 
   context "GET 'show'" do

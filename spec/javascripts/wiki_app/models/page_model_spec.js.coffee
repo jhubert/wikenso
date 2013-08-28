@@ -1,11 +1,11 @@
 #= require spec_helper
 
-describe "PageModel", ->
+describe "DraftPageModel", ->
   server = clock = model = null
 
   beforeEach ->
     server = sinon.fakeServer.create()
-    model = new WikiApp.Models.PageModel
+    model = new WikiApp.Models.DraftPageModel
     clock = sinon.useFakeTimers()
 
   after =>

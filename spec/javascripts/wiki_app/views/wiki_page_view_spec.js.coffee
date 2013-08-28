@@ -3,7 +3,7 @@
 describe "WikiPageView", =>
   beforeEach =>
     $('body').html(JST['templates/wiki_page_view'])
-    @model = new WikiApp.Models.PageModel
+    @model = new WikiApp.Models.DraftPageModel
 
   it "gets the ID of the model from a `data` attribute set in the DOM", =>
     wikiPageView = new WikiApp.Views.WikiPageView(@model)

@@ -3,7 +3,7 @@
 describe "PageTextView", ->
   beforeEach =>
     $('body').html(JST['templates/page_text_view'])
-    @model = new WikiApp.Models.PageModel
+    @model = new WikiApp.Models.DraftPageModel
 
   describe "text", =>
     it "gets the text HTML out of the DOM", =>

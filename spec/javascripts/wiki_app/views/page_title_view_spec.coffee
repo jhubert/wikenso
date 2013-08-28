@@ -3,7 +3,7 @@
 describe "PageTitleView", ->
   beforeEach =>
     $('body').html(JST['templates/page_title_view'])
-    @model = new WikiApp.Models.PageModel
+    @model = new WikiApp.Models.DraftPageModel
 
   it "gets the title text out of the DOM", =>
     pageTextView = new WikiApp.Views.PageTitleView(@model)

@@ -22,6 +22,7 @@ class PagesController < ApplicationController
   def edit
     wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first!
     @page = wiki.pages.friendly.find(params[:id]).decorate
+    @draft_page = @page.find_or_create_draft_page_for_user(current_user)
   end
 
   def show
