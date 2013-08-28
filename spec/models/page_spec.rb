@@ -53,5 +53,11 @@ describe Page do
         5.times { page.find_or_create_draft_page_for_user(create(:active_user)) }
       }.to change { DraftPage.count }.by(5)
     end
+
+    it "returns the existing draft page if one already exists" do
+      page = create(:page, wiki: wiki)
+      draft_page = page.find_or_create_draft_page_for_user(user)
+      page.find_or_create_draft_page_for_user(user).should == draft_page
+    end
   end
 end
