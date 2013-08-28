@@ -8,7 +8,7 @@ class PagesController < ApplicationController
 
   def create
     wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first
-    page = wiki.pages.new(page_params.merge(user_id: current_user.id))
+    page = ActivePage.new(page_params.merge(user_id: current_user.id, wiki_id: wiki.id))
     if page.save
       flash[:notice] = t("pages.create.successful_flash")
       redirect_to page_path(page)

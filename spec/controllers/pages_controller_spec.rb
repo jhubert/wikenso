@@ -10,7 +10,7 @@ describe PagesController do
     it "assigns the page corresponding to the passed friendly ID" do
       page = create(:page, wiki: wiki, title: "foo")
       get :edit, id: "foo"
-      assigns(:page).should == page
+      assigns(:page).id.should == page.id
     end
 
     it "raises an error if the ID is invalid" do
@@ -53,14 +53,14 @@ describe PagesController do
         it "assigns the page corresponding to the passed friendly ID" do
           page = create(:page, wiki: wiki, title: "foo")
           get :show, id: "foo"
-          assigns(:page).should == page
+          assigns(:page).id.should == page.id
         end
 
         it "assigns the first page if no ID is passed" do
           first_page = create(:page, wiki: wiki)
           second_page = create(:page, wiki: wiki)
           get :show
-          assigns(:page).should == first_page
+          assigns(:page).id.should == first_page.id
         end
 
         it "raises an error if an invalid ID is passed" do
@@ -111,9 +111,9 @@ describe PagesController do
     before(:each) { @request.host = "foo.example.com" }
 
     context "when creation is successful" do
-      it "creates a page" do
+      it "creates an active page" do
         page_params = attributes_for(:page)
-        expect { post :create, page: page_params }.to change { Page.count }.by(1)
+        expect { post :create, page: page_params }.to change { ActivePage.count }.by(1)
       end
 
       it "creates a page with the passed title" do
