@@ -1,3 +1,0 @@
-class DraftPage < Page
-
-end

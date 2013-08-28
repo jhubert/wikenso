@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130828075433) do
+ActiveRecord::Schema.define(version: 20130828084549) do
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
@@ -34,7 +34,6 @@ ActiveRecord::Schema.define(version: 20130828075433) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
-    t.string   "type",       default: "ActivePage"
   end
 
   add_index "pages", ["slug"], name: "index_pages_on_slug", unique: true, using: :btree

@@ -1,2 +1,0 @@
-class ActivePageDecorator < PageDecorator
-end
