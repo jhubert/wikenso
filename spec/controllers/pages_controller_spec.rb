@@ -169,4 +169,56 @@ describe PagesController do
       end
     end
   end
+
+  context "PUT 'update'" do
+    let!(:wiki) { create(:wiki, subdomain: "foo") }
+    let!(:user) { create(:active_user, wiki: wiki) }
+    before(:each) { @request.host = "foo.example.com" }
+
+    context "when the updation is successful" do
+      it "updates the page's title" do
+        page = create(:page, wiki: wiki, user: user)
+        put :update, id: page.id, page: {title: "Foo"}
+        page.reload.title.should == "Foo"
+      end
+
+      it "updates the page's text" do
+        page = create(:page, wiki: wiki, user: user)
+        put :update, id: page.id, page: {title: "Bar"}
+        page.reload.title.should == "Bar"
+      end
+
+      it "redirects to the 'show' action for that page" do
+        page = create(:page, wiki: wiki, user: user)
+        put :update, id: page.id, page: {title: "Bar"}
+        response.should redirect_to page_path(page)
+      end
+
+      it "sets a flash notice" do
+        page = create(:page, wiki: wiki, user: user)
+        put :update, id: page.id, page: {title: "Bar"}
+        flash[:notice].should_not be_empty
+      end
+    end
+
+    context "when the updation is unsuccessful" do
+      it "assigns the draft page" do
+        page = create(:page, wiki: wiki, user: user)
+        put :update, id: page.id, page: {title: "Bar"}
+        assigns(:draft_page).should be_a DraftPage
+      end
+
+      it "renders the edit page" do
+        page = create(:page, wiki: wiki, user: user)
+        put :update, id: page.id, page: { title: nil }
+        response.should render_template :edit
+      end
+
+      it "sets a flash error" do
+        page = create(:page, wiki: wiki, user: user)
+        put :update, id: page.id, page: { title: nil }
+        flash[:error].should_not be_empty
+      end
+    end
+  end
 end

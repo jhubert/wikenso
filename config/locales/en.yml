@@ -43,6 +43,9 @@ en:
     create:
       successful_flash: "Your page was successfully created!"
       error_flash: "There was an error while creating your page."
+    update:
+      successful_flash: "Your page was published!"
+      error_flash: "There was an error publishing this page."
   users:
     create:
       successful: "%{user_email} has been sent an invitation to join %{wiki_name}."

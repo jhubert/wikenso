@@ -8,7 +8,7 @@ class PagesController < ApplicationController
 
   def create
     wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first
-    page = wiki.pages.new(page_params.merge(user_id: current_user.id))
+    page = wiki.pages.new(creation_page_params.merge(user_id: current_user.id))
     if page.save
       flash[:notice] = t("pages.create.successful_flash")
       redirect_to page_path(page)
@@ -21,8 +21,8 @@ class PagesController < ApplicationController
 
   def edit
     wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first!
-    page = wiki.pages.friendly.find(params[:id]).decorate
-    @draft_page = page.find_or_create_draft_page_for_user(current_user).decorate
+    @page = wiki.pages.friendly.find(params[:id]).decorate
+    @draft_page = @page.find_or_create_draft_page_for_user(current_user).decorate
   end
 
   def show
@@ -34,9 +34,26 @@ class PagesController < ApplicationController
     end
   end
 
+  def update
+    wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first!
+    page = wiki.pages.friendly.find(params[:id])
+    if page.update(updation_page_params)
+      flash[:notice] = t("pages.update.successful_flash")
+      redirect_to page_path(page)
+    else
+      flash[:error] = t("pages.update.error_flash")
+      @draft_page = page.find_or_create_draft_page_for_user(current_user).decorate
+      render :edit
+    end
+  end
+
   private
 
-  def page_params
+  def creation_page_params
     params.require(:page).permit(:title)
+  end
+
+  def updation_page_params
+    params.require(:page).permit(:title, :text)
   end
 end
