@@ -37,7 +37,7 @@ class PagesController < ApplicationController
   def update
     wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first!
     page = wiki.pages.friendly.find(params[:id])
-    if page.update(updation_page_params)
+    if page.update_destroying_draft_pages_for_user(updation_page_params, current_user)
       flash[:notice] = t("pages.update.successful_flash")
       redirect_to page_path(page)
     else

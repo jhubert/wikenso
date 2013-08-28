@@ -179,7 +179,10 @@ describe PagesController do
   context "PUT 'update'" do
     let!(:wiki) { create(:wiki, subdomain: "foo") }
     let!(:user) { create(:active_user, wiki: wiki) }
-    before(:each) { @request.host = "foo.example.com" }
+    before(:each) do
+      @request.host = "foo.example.com"
+      sign_in(user)
+    end
 
     context "when the updation is successful" do
       it "updates the page's title" do
@@ -204,6 +207,13 @@ describe PagesController do
         page = create(:page, wiki: wiki, user: user)
         put :update, id: page.id, page: {title: "Bar"}
         flash[:notice].should_not be_empty
+      end
+
+      it "destroys the draft page" do
+        page = create(:page, wiki: wiki, user: user)
+        draft_page = DraftPage.create(user_id: user.id, wiki_id: wiki.id, page: page)
+        put :update, id: page.id, page: {title: "Bar"}
+        expect { draft_page.reload }.to raise_error { ActiveRecord::RecordNotFound }
       end
     end
 
@@ -230,6 +240,13 @@ describe PagesController do
         page = create(:page, wiki: wiki, user: user)
         put :update, id: page.id, page: { title: nil }
         flash[:error].should_not be_empty
+      end
+
+      it "doesn't destroy the draft page" do
+        page = create(:page, wiki: wiki, user: user)
+        draft_page = DraftPage.create(user_id: user.id, wiki_id: wiki.id, page: page)
+        put :update, id: page.id, page: {title: nil}
+        expect { draft_page.reload }.not_to raise_error { ActiveRecord::RecordNotFound }
       end
     end
   end

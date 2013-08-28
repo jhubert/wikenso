@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Page do
-  context ".find_or_create_draft_page_for_user" do
+  context "#find_or_create_draft_page_for_user" do
     let(:user) { create(:active_user) }
     let(:wiki) { create(:wiki) }
 
@@ -76,6 +76,54 @@ describe Page do
       page = create(:page, wiki: wiki)
       draft_page = page.find_or_create_draft_page_for_user(user)
       page.find_or_create_draft_page_for_user(user).should == draft_page
+    end
+  end
+
+  context "#update_destroying_draft_pages_for_user" do
+    let(:wiki) { create(:wiki) }
+    let(:user) { create(:active_user, wiki: wiki) }
+
+    it "updates the page" do
+      page = create(:page, wiki: wiki, user: user)
+      page.update_destroying_draft_pages_for_user({title: "Foo!"}, user)
+      page.reload.title.should == "Foo!"
+    end
+
+    context "when destroying draft pages" do
+      it "destroys draft pages belonging to the user" do
+        page = create(:page, wiki: wiki, user: user)
+        draft_page = create(:draft_page, user_id: user.id, wiki_id: wiki.id, page: page)
+        page.update_destroying_draft_pages_for_user({title: "Foo!"}, user)
+        expect { draft_page.reload }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+
+      it "doesn't destroy draft pages belonging to a different page" do
+        page = create(:page, wiki: wiki, user: user)
+        draft_page = create(:draft_page, user_id: user.id, wiki_id: wiki.id, page: create(:page))
+        page.update_destroying_draft_pages_for_user({title: "Foo!"}, user)
+        expect { draft_page.reload }.not_to raise_error(ActiveRecord::RecordNotFound)
+      end
+
+      it "doesn't destroy draft pages belonging to a different user" do
+        page = create(:page, wiki: wiki, user: user)
+        draft_page = create(:draft_page, user: create(:active_user), wiki_id: wiki.id, page: page)
+        page.update_destroying_draft_pages_for_user({title: "Foo!"}, user)
+        expect { draft_page.reload }.not_to raise_error(ActiveRecord::RecordNotFound)
+      end
+
+      it "doesn't destroy draft pages belonging to another wiki" do
+        page = create(:page, wiki: wiki, user: user)
+        draft_page = create(:draft_page, user_id: user.id, wiki: create(:wiki), page: page)
+        page.update_destroying_draft_pages_for_user({title: "Foo!"}, user)
+        expect { draft_page.reload }.not_to raise_error(ActiveRecord::RecordNotFound)
+      end
+
+      it "doesn't destroy draft pages if the update fails" do
+        page = create(:page, wiki: wiki, user: user)
+        draft_page = create(:draft_page, user_id: user.id, wiki_id: wiki.id, page: page)
+        page.update_destroying_draft_pages_for_user({title: nil}, user)
+        expect { draft_page.reload }.not_to raise_error(ActiveRecord::RecordNotFound)
+      end
     end
   end
 end
