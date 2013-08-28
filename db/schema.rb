@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130828084549) do
+ActiveRecord::Schema.define(version: 20130828103145) do
+
+  create_table "draft_pages", force: true do |t|
+    t.string   "title"
+    t.text     "text"
+    t.integer  "wiki_id"
+    t.integer  "user_id"
+    t.integer  "page_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "draft_pages", ["page_id"], name: "index_draft_pages_on_page_id", using: :btree
+  add_index "draft_pages", ["user_id"], name: "index_draft_pages_on_user_id", using: :btree
+  add_index "draft_pages", ["wiki_id"], name: "index_draft_pages_on_wiki_id", using: :btree
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
