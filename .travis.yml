@@ -2,7 +2,7 @@ language: ruby
 rvm:
 - 2.0.0
 env:
-- secret_token=thisisasecrettoken
+- secret_token=thisisasecrettoken ACTION_MAILER_HOST=wikensotest.com
 
 script:
 - bundle exec rake
