@@ -1,10 +1,9 @@
 require 'spec_helper'
 
 describe PagesController do
+  before(:each) { sign_in(create(:active_user)) }
 
   context "GET 'edit'" do
-    before(:each) { sign_in(create(:active_user)) }
-
     let(:wiki) { create(:wiki, subdomain: "foo") }
     before(:each) { @request.host = "foo.example.com" }
 
@@ -25,8 +24,6 @@ describe PagesController do
   end
 
   context "GET 'show'" do
-    before(:each) { sign_in(create(:active_user)) }
-
     context "for a valid subdomain" do
       it "returns HTTP success" do
         create(:wiki, :single_page, subdomain: "nilenso")
@@ -94,4 +91,18 @@ describe PagesController do
     end
   end
 
+  context "GET 'new'" do
+    let!(:wiki) { create(:wiki, subdomain: "foo") }
+    before(:each) { @request.host = "foo.example.com" }
+
+    it "assigns a page" do
+      get :new
+      assigns(:page).should be_a Page
+    end
+
+    it "assigns a page belonging to the current wiki" do
+      get :new
+      assigns(:page).wiki.should == wiki
+    end
+  end
 end

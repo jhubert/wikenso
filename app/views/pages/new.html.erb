@@ -1,0 +1,24 @@
+<div class="wiki-new-page row">
+  <div class="wiki-new-page-form columns large-9 large-centered">
+    <%= simple_form_for @page do |f| %>
+      <fieldset>
+        <legend class="wiki-new-page-form-legend">
+          Enter a
+          <span class="wiki-new-page-form-legend-emphasis">
+            Title
+          </span>
+          for the Page
+        </legend>
+
+        <%= f.input :title, wrapper_html: {class: "wiki-new-page-form-input"} %>
+        <div class="wiki-new-page-form-submit-wrapper">
+          <%= f.button :submit, "Create", class: "wiki-new-page-form-submit" %>
+        </div>
+      </fieldset>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(".wiki-new-page-form-input > input").first().focus();
+</script>

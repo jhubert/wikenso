@@ -29,6 +29,9 @@ a.wiki-header-actions-single-action-link {
   background-color: transparent !important;
   padding: 0 10px !important;
   color: #6D9136;
+  &:hover {
+    color: #55751B;
+  }
 }
 
 .style-wiki-header-actions-single-action-tooltip {

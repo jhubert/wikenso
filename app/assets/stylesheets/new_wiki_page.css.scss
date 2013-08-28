@@ -1,0 +1,42 @@
+.wiki-new-page {
+  margin-top: 50px;
+  font-family: "ff-dagny-web-pro";
+}
+
+.wiki-new-page-form-legend {
+  font-size: 22px;
+  text-align: center;
+  font-weight: 400;
+  font-family: ff-dagny-web-pro;
+}
+
+.wiki-new-page-form-legend-emphasis {
+  font-weight: 700;
+}
+
+.wiki-new-page-form-input {
+  margin: 30px;
+  font-size: 20px;
+}
+
+.wiki-new-page-form-submit-wrapper {
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  margin: 10px 0 20px 0;
+}
+
+.wiki-new-page-form-submit {
+  border: none;
+  color: #7ABD30;
+  font-weight: 700;
+  font-size: 45px;
+  padding: 0;
+  margin: 0;
+
+  background: transparent;
+  &:hover {
+    background: transparent;
+    color: #578522;
+  }
+}

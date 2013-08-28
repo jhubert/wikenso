@@ -1,6 +1,11 @@
 class PagesController < ApplicationController
   before_filter :authenticate_user!
 
+  def new
+    wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first
+    @page = wiki.pages.new
+  end
+
   def edit
     wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first!
     @page = wiki.pages.friendly.find(params[:id]).decorate
