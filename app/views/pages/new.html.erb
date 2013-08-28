@@ -10,7 +10,7 @@
           for the Page
         </legend>
 
-        <%= f.input :title, wrapper_html: {class: "wiki-new-page-form-input"} %>
+        <%= f.input :title, required: false, wrapper_html: {class: "wiki-new-page-form-input"} %>
         <div class="wiki-new-page-form-submit-wrapper">
           <%= f.button :submit, "Create", class: "wiki-new-page-form-submit" %>
         </div>
