@@ -1,0 +1,72 @@
+$page-title-font: "ff-dagny-web-pro";
+$page-title-margin-top: 35px;
+
+.page-history-view {
+  margin-top: 20px;
+}
+
+.page-history-view-title-prefix {
+  font-family: ff-tisa-web-pro;
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #ccc;
+  font-style: oblique;
+}
+
+.page-history-view-title {
+  font-family: $page-title-font;
+  font-weight: 700;
+  font-size: 60px;
+  outline: 0 solid transparent;
+  &:focus { outline: 0 solid transparent; }
+  &.placeholder { color: #BBB; }
+}
+
+@mixin page-action-button {
+  font-family: ff-dagny-web-pro;
+  font-size: 17px;
+  color: #578522;
+  padding: 5px 10px;
+  @include transition(0.25s);
+  &:hover {
+    background-color: rgba(166,255,66, 0.15);
+  }
+}
+
+.page-history-view-actions {
+  margin-bottom: 10px;
+}
+
+.page-history-view-actions-item {
+  a { @include page-action-button; }
+  float: right;
+}
+
+.page-history-view-list {
+  list-style-type: none;
+  margin: 28px 0 0 10px;
+  font-weight: 400;
+  font-size: 22px;
+  font-family: ff-dagny-web-pro;
+  color: #333;
+}
+
+.page-history-view-list-item {
+  margin-top: 20px;
+}
+
+
+.page-history-view-list-item-user-name {
+  font-weight: 700;
+  color: #111;
+}
+
+.page-history-view-list-item-time {
+  font-size: 18px;
+  font-family: ff-dagny-web-pro;
+  a { color: #5B8129; }
+  &:hover {
+    a { color: #7FC633; }
+    text-decoration: underline;
+  }
+}

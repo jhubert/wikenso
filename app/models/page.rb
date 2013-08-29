@@ -2,6 +2,8 @@ class Page < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: :slugged
 
+  has_paper_trail
+
   belongs_to :user
   belongs_to :wiki
   has_many :draft_pages

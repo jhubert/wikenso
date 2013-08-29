@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="large-12 large-centered columns page-history-view">
+    <div class="page-history-view-actions">
+      <span class="page-history-view-actions-item back"><%= link_to "Go Back", page_path(@page) %></span>
+    </div>
+
+    <div class="page-history-view-title-prefix">History of</div>
+    <div class="page-history-view-title">
+      <%= @page.title %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="columns">
+    <ul class="page-history-view-list">
+      <% @page_versions.each do |version| %>
+          <li class="page-history-view-list-item">
+            <div class="page-history-view-list-item-time">
+              <a><%= version.update_time_string %></a>
+            </div>
+
+            <div>
+              <span class="page-history-view-list-item-user-name"><%= version.user_name %></span>
+              <span><%= version.index == 0 ? 'created this page' : 'made a change' %></span>
+            </div>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
