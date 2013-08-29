@@ -1,4 +1,4 @@
-class PageChangesDecorator < Draper::Decorator
+class PageVersionDecorator < Draper::Decorator
   delegate_all
 
   def user_name

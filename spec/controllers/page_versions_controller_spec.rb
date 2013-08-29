@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PageChangesController do
+describe PageVersionsController do
   describe "GET 'index'" do
     let!(:wiki) { create(:wiki, subdomain: "foo") }
     before(:each) do
