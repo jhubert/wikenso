@@ -9,6 +9,7 @@ Wikenso::Application.routes.draw do
     get "/settings" => "wikis#edit"
     resources :sessions, only: [:new, :create, :destroy]
     resources :pages, except: [:index, :destroy]
+    resources :draft_pages, only: [:destroy]
     get "/" => "pages#show"
   end
   root :to => 'wikis#new'

@@ -3,6 +3,7 @@ class Wiki < ActiveRecord::Base
 
   has_many :users
   has_many :pages
+  has_many :draft_pages
   accepts_nested_attributes_for :users
 
   validates_uniqueness_of :subdomain, case_sensitive: false

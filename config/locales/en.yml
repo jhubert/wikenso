@@ -56,3 +56,7 @@ en:
     create:
       successful_flash: "We've re-sent an invitation email to %{email}"
       error_flash: "Something seems to have gone wrong while resending the invitation."
+  draft_pages:
+    destroy:
+      successful_flash: "Your draft was discarded."
+      error_flash: "There was an issue while discarding your draft."
