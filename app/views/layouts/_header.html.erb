@@ -64,7 +64,7 @@
   <ul id="user-dropdown" class="f-dropdown" data-dropdown-content>
     <li><%= link_to "Users", users_path(subdomain: request.subdomain) %></li>
     <li><a href="#">Profile</a></li>
-    <li><a href="#">Logout</a></li>
+    <li><%= link_to "Logout", logout_path, method: :delete %></a></li>
   </ul>
 <% end %>
 

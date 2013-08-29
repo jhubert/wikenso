@@ -2,7 +2,8 @@ class SessionsController < ApplicationController
   include ControllerAuthentication
 
   def new
-    @user = User.new
+    wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first
+    @user = wiki.users.new
   end
 
   def create

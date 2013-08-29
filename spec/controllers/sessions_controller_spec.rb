@@ -3,6 +3,9 @@ require 'spec_helper'
 describe SessionsController do
 
   context "GET 'new'" do
+    let!(:wiki) { create(:wiki, subdomain: "foo") }
+    before(:each) { @request.host = "foo.example.com" }
+
     it "returns http success" do
       get 'new'
       response.should be_success
@@ -11,6 +14,11 @@ describe SessionsController do
     it "assigns a user" do
       get 'new'
       assigns(:user).should be_a User
+    end
+
+    it "assigns a user belonging to the current wiki" do
+      get 'new'
+      assigns(:user).wiki.should == wiki
     end
   end
 
@@ -79,14 +87,14 @@ describe SessionsController do
       user = create(:active_user)
       @controller.sign_in(user)
       @request.host = "foo.wikenso.com"
-      delete 'destroy', :id => user.id
+      delete 'destroy'
       response.should redirect_to "http://foo.wikenso.com/"
     end
 
     it "clears user ID from the session" do
       user = create(:active_user)
       @controller.sign_in(user)
-      expect { delete 'destroy', :id => user.id }.to change { session[:user_id] }.from(user.id).to(nil)
+      expect { delete 'destroy' }.to change { session[:user_id] }.from(user.id).to(nil)
     end
   end
 

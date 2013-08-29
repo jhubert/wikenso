@@ -1,5 +1,20 @@
-<%= simple_form_for @user, url: sessions_path, method: :post do |f| %>
-  <%= f.input :email %>
-  <%= f.input :password %>
-  <%= f.button :submit, t(".login_button_label") %>
-<% end %>
+<div class="wiki-new-session row">
+  <div class="columns large-9 large-centered">
+    <%= simple_form_for @user, url: sessions_path, method: :post, html: {class: "wiki-new-session-form"} do |f| %>
+      <fieldset>
+        <legend class="wiki-new-session-form-legend">
+          <%= t(".form_title_log_in_to") %>
+          <span class="wiki-new-session-form-legend-wiki-name">
+            <%= @user.wiki_subdomain %>
+          </span>
+        </legend>
+
+        <%= f.input :email, required: false, wrapper_html: {class: "wiki-new-session-form-input"} %>
+        <%= f.input :password, wrapper_html: {class: "wiki-new-session-form-input"} %>
+        <div class="wiki-new-session-form-submit-wrapper">
+          <%= f.button :submit, t(".login_button_label"), class: "wiki-new-session-form-submit" %>
+        </div>
+      </fieldset>
+    <% end %>
+  </div>
+</div>

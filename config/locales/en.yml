@@ -26,6 +26,7 @@ en:
       sign_in_unsuccessful: "Login failed. Please check your username and/or password and try again."
     new:
       login_button_label: "Log In"
+      form_title_log_in_to: "Log in to"
   layouts:
     header:
       search_bar_placeholder_text: "Search…"
