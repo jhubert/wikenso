@@ -1,0 +1,16 @@
+<div class="row wiki-pages-view">
+  <div class="large-12 columns wiki-pages-view-single" data-draft-page-id=<%= @page.id %>>
+    <div class="wiki-pages-view-single-actions">
+      <span class="wiki-pages-view-single-actions-item back"><%= link_to "Go Back", page_changes_path(@page) %></span>
+    </div>
+
+    <div class="wiki-pages-view-single-title-prefix">Earlier version of</div>
+    <div class="wiki-pages-view-single-title">
+      <%= @page_version.reify.title %>
+    </div>
+
+    <div class="wiki-pages-view-single-text">
+      <p><%= sanitize @page_version.reify.text, tags: @page.allowed_html_tags %></p>
+    </div>
+  </div>
+</div>

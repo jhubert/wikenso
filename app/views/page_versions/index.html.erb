@@ -17,12 +17,12 @@
       <% @page_versions.each do |version| %>
           <li class="page-history-view-list-item">
             <div class="page-history-view-list-item-time">
-              <a><%= version.update_time_string %></a>
+              <%= link_to  version.created_at_time_string, page_change_path(@page, version) %>
             </div>
 
             <div>
               <span class="page-history-view-list-item-user-name"><%= version.user_name %></span>
-              <span><%= version.index == 0 ? 'created this page' : 'made a change' %></span>
+              <span><%= version.event == 'create' ? 'created this page' : 'published a change' %></span>
             </div>
           </li>
       <% end %>
