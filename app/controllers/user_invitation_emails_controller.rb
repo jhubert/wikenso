@@ -1,6 +1,9 @@
 class UserInvitationEmailsController < ApplicationController
+  before_filter :authenticate_user!
+
   def create
-    user = PendingUser.find_by_id(params[:user_id])
+    wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first
+    user = wiki.users.pending.find_by_id(params[:user_id])
     if user
       UserMailer.invitation_mail(user, user.wiki).deliver
       flash[:notice] = t("user_invitation_emails.create.successful_flash", email: user.email)
