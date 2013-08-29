@@ -11,8 +11,9 @@
 
 .keep
 .idea/
-# Ignore application configuration
+
 /config/application.yml
+/config/database.yml
 
 .sass-cache/
 coverage/
