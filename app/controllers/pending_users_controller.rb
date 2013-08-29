@@ -4,6 +4,7 @@ class PendingUsersController < ApplicationController
   def edit
     wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first
     @user = PendingUser.find_by_invitation_code_and_wiki_id(params[:invitation_code], wiki.id)
+    @invitation_code = params[:invitation_code]
     render(nothing: true, status: :bad_request) unless @user
   end
 
@@ -20,8 +21,9 @@ class PendingUsersController < ApplicationController
   end
 
   def update
-    user = PendingUser.find(params[:id])
-    active_user = user.activate_with_params(user_updation_params)
+    wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first
+    user = PendingUser.find_by_invitation_code_and_wiki_id(params[:invitation_code], wiki.id)
+    active_user = user.activate_with_params(user_updation_params) if user
     if active_user
       sign_in(active_user)
       flash[:notice] = t("pending_users.update.welcome_flash_message", wiki_name: user.wiki_subdomain)

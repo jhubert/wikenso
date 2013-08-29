@@ -68,6 +68,13 @@ describe PendingUser do
     it "returns nil if no user owns the given invitation code" do
       PendingUser.find_by_invitation_code_and_wiki_id("bar", wiki.id).should be_nil
     end
+
+    it "doesn't return a readonly record" do
+      user = create(:pending_user, wiki: wiki)
+      invitation = create(:user_invitation, code: "foo", user: user)
+      user = PendingUser.find_by_invitation_code_and_wiki_id("foo", wiki.id)
+      expect { user.update(name: "new name") }.not_to raise_error(ActiveRecord::ReadOnlyRecord)
+    end
   end
 
   context "#invitation_code" do

@@ -84,6 +84,13 @@ describe PendingUsersController do
         assigns(:user).should == user
       end
 
+      it "assigns the invitation code" do
+        user = create(:pending_user, wiki: wiki)
+        invitation = create(:user_invitation, code: "abcd", user: user)
+        get 'edit', invitation_code: "abcd"
+        assigns(:invitation_code).should == "abcd"
+      end
+
       it "returns a 400 if the user's wiki and the subdomain don't match" do
         user = create(:pending_user, wiki: wiki)
         create(:wiki, subdomain: "abcd")
@@ -110,20 +117,20 @@ describe PendingUsersController do
   context "PUT 'update'" do
     context "when the save is successful" do
       it "updates the user with the given name" do
-        user = create(:pending_user, wiki: wiki, name: "Foo Bar")
-        put :update, id: user.id, user: {name: "Bar Foo", password: "foo", password_confirmation: "foo"}
+        user = create(:pending_user, :invitation, wiki: wiki, name: "Foo Bar")
+        put :update, invitation_code: user.invitations.first.code, user: {name: "Bar Foo", password: "foo", password_confirmation: "foo"}
         User.find(user.id).name.should == "Bar Foo"
       end
 
       it "updates the user's password" do
-        user = create(:pending_user, wiki: wiki)
-        put :update, id: user.id, user: {password: "foo", password_confirmation: "foo"}
+        user = create(:pending_user, :invitation, wiki: wiki)
+        put :update, invitation_code: user.invitations.first.code, user: {password: "foo", password_confirmation: "foo"}
         User.find(user.id).reload.password_digest.should_not be_empty
       end
 
       it "makes the user active" do
-        user = create(:pending_user, wiki: wiki)
-        put :update, id: user.id, user: {password: "foo", password_confirmation: "foo"}
+        user = create(:pending_user, :invitation, wiki: wiki)
+        put :update, invitation_code: user.invitations.first.code, user: {password: "foo", password_confirmation: "foo"}
         User.find(user.id).should be_a ActiveUser
       end
 
@@ -131,46 +138,60 @@ describe PendingUsersController do
         user = create(:pending_user, wiki: wiki)
         invitations = create_list(:user_invitation, 5, user: user)
         expect {
-          put :update, id: user.id, user: {password: "foo", password_confirmation: "foo"}
+          put :update, invitation_code: user.invitations.first.code, user: {password: "foo", password_confirmation: "foo"}
         }.to change { user.invitations.count }.from(5).to(0)
       end
 
       it "logs the user in" do
-        user = create(:pending_user, wiki: wiki)
-        put :update, id: user.id, user: { password: "foo", password_confirmation: "foo" }
+        user = create(:pending_user, :invitation, wiki: wiki)
+        put :update, invitation_code: user.invitations.first.code, user: { password: "foo", password_confirmation: "foo" }
         session[:user_id].should_not be_nil
       end
 
       it "redirects to the wiki home page" do
-        user = create(:pending_user, wiki: wiki)
-        put :update, id: user.id, user: { password: "foo", password_confirmation: "foo" }
+        user = create(:pending_user, :invitation, wiki: wiki)
+        put :update, invitation_code: user.invitations.first.code, user: { password: "foo", password_confirmation: "foo" }
         response.should redirect_to root_path(subdomain: "foo")
       end
 
       it "sets a flash notice" do
-        user = create(:pending_user, wiki: wiki)
-        put :update, id: user.id, user: { password: "foo", password_confirmation: "foo" }
+        user = create(:pending_user, :invitation, wiki: wiki)
+        put :update, invitation_code: user.invitations.first.code, user: { password: "foo", password_confirmation: "foo" }
 
       end
     end
 
     context "when the save is unsuccessful" do
       it "doesn't log the user in" do
-        user = create(:pending_user)
-        put :update, id: user.id, user: { name: nil }
+        user = create(:pending_user, :invitation, wiki: wiki)
+        put :update, invitation_code: user.invitations.first.code, user: { name: nil }
         session[:user_id].should be_nil
       end
 
       it "renders the :edit template" do
-        user = create(:pending_user)
-        put :update, id: user.id, user: { name: nil }
+        user = create(:pending_user, :invitation, wiki: wiki)
+        put :update, invitation_code: user.invitations.first.code, user: { name: nil }
         response.should render_template :edit
       end
 
       it "assigns the user" do
-        user = create(:pending_user)
-        put :update, id: user.id, user: { name: nil }
+        user = create(:pending_user, :invitation, wiki: wiki)
+        put :update, invitation_code: user.invitations.first.code, user: { name: nil }
         assigns(:user).should == user
+      end
+    end
+
+    context "authorization" do
+      it "doesn't allow updating of a user from another wiki" do
+        user = create(:pending_user, :invitation, wiki: create(:wiki))
+        put :update, invitation_code: user.invitations.first.code, user: { password: "foo", password_confirmation: "foo", name: "foo" }
+        User.find(user.id).reload.name.should_not == "foo"
+      end
+
+      it "doesn't allow an invalid invitation code" do
+        user = create(:pending_user, :invitation, wiki: wiki)
+        put :update, invitation_code: "notacode", user: { password: "foo", password_confirmation: "foo", name: "foo" }
+        User.find(user.id).reload.name.should_not == "foo"
       end
     end
   end
