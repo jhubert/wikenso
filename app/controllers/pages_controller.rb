@@ -14,7 +14,7 @@ class PagesController < ApplicationController
       redirect_to page_path(page)
     else
       @page = page
-      flash[:error] = t("pages.create.error_flash")
+      flash.now[:error] = t("pages.create.error_flash")
       render :new
     end
   end

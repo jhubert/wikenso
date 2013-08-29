@@ -11,7 +11,7 @@ class WikisController < ApplicationController
       sign_in(@wiki.users.first)
       redirect_to root_url(subdomain: @wiki.subdomain)
     else
-      flash[:error] = t("wikis.create.error_flash")
+      flash.now[:error] = t("wikis.create.error_flash")
       render :new
     end
   end
