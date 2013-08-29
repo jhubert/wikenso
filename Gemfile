@@ -44,6 +44,7 @@ group :development do
   gem 'pry-rails'
   gem 'zeus'
   gem 'letter_opener'
+  gem "parallel_tests"
 end
 
 group :test, :development do
