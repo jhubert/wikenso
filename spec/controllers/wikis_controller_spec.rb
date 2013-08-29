@@ -69,6 +69,11 @@ describe WikisController do
         get 'create', wiki: attributes_for(:wiki, :users_attributes, subdomain: "Foo")
         controller.current_user.should be_nil
       end
+
+      it "sets a flash error" do
+        get 'create', wiki: attributes_for(:wiki, :users_attributes, subdomain: "Foo")
+        flash[:error].should_not be_empty
+      end
     end
 
     context "when the params don't contain a key named 'wiki'" do

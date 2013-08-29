@@ -1,10 +1,37 @@
-<%= simple_form_for @wiki do |f| %>
-  <%= f.input :subdomain %>
-  <%= f.simple_fields_for :users do |users_form| %>
-    <%= users_form.input :name %>
-    <%= users_form.input :email %>
-    <%= users_form.input :password %>
-    <%= users_form.input :password_confirmation %>
-  <% end %>
-  <%= f.button :submit %>
-<% end %>
+<div class="create-wiki row">
+  <div class="columns large-9 large-centered">
+    <%= simple_form_for @wiki do |f| %>
+      <fieldset>
+        <legend class="create-wiki-form-legend">
+          Create a
+          <span class="create-wiki-form-legend-emphasis">
+            Wikenso
+          </span>
+          Wiki
+        </legend>
+
+        <div class="row collapse create-wiki-form-input">
+            <%= f.label :subdomain, "Web Address" %>
+          <div class="large-8 columns">
+            <%= f.input_field :subdomain %>
+            <%= f.full_error :subdomain %>
+          </div>
+          <div class="large-4 columns">
+            <span class="postfix">.wikenso.com</span>
+          </div>
+        </div>
+
+        <%= f.simple_fields_for :users do |users_form| %>
+          <%= users_form.input :name, label: "Your name", wrapper_html: {class: "create-wiki-form-input"} %>
+          <%= users_form.input :email, required: false, wrapper_html: {class: "create-wiki-form-input"} %>
+          <%= users_form.input :password, wrapper_html: {class: "create-wiki-form-input"} %>
+          <%= users_form.input :password_confirmation, label: "Confirm password", wrapper_html: {class: "create-wiki-form-input"} %>
+        <% end %>
+        <div class="create-wiki-form-submit-wrapper">
+          <%= f.button :submit, "Create", class: "create-wiki-form-submit" %>
+        </div>
+
+      </fieldset>
+    <% end %>
+  </div>
+</div>
