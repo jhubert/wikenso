@@ -40,6 +40,7 @@ en:
   pages:
     edit:
       editor_help_text: "Click anywhere to edit. Your changes will not be visible to anyone else until you publish this draft."
+      discard_draft_confirmation: "Are you sure you want to discard this draft? You will lose all your changes."
     create:
       successful_flash: "Your page was successfully created!"
       error_flash: "There was an error while creating your page."

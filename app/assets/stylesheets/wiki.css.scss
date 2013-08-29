@@ -128,9 +128,12 @@ a.wiki-pages-view-formatting-link {
 }
 
 .wiki-pages-view-single-actions-item {
-  &.publish { font-weight: 700; }
   a { @include page-action-button; }
   float: right;
+}
+
+.wiki-pages-view-single-actions-item.publish {
+  font-weight: 700;
 }
 
 .saving-indicator {

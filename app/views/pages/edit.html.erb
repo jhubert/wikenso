@@ -13,6 +13,9 @@
   <div class="large-12 columns wiki-pages-view-single" data-draft-page-id=<%= @draft_page.id %>>
     <div class="wiki-pages-view-single-actions">
       <span class="wiki-pages-view-single-actions-item back"><%= link_to "Go Back", page_path(@page) %></span>
+      <span class="wiki-pages-view-single-actions-item discard">
+        <%= link_to "Discard Draft", draft_page_path(@draft_page), method: :delete, confirm: t(".discard_draft_confirmation") %>
+      </span>
       <span class="wiki-pages-view-single-actions-item publish"><%= link_to "Publish", "javascript:void(0);" %></span>
     </div>
 
