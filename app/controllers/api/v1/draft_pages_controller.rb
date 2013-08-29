@@ -1,12 +1,14 @@
 class Api::V1::DraftPagesController < ApplicationController
+  before_filter :authenticate_user!
+  include ControllerAuthentication
+
   def update
-    draft_page = DraftPage.find(params[:id])
+    draft_page = current_user.draft_pages.find(params[:id])
     if draft_page.update(draft_page_params)
       render json: {}
     else
       render json: draft_page.errors, status: :bad_request
     end
-
   end
 
   private

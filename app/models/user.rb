@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   belongs_to :wiki
   has_many :pages
+  has_many :draft_pages
 
   validates_uniqueness_of :email, scope: :wiki_id
   validates_presence_of :email
