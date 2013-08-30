@@ -18,18 +18,18 @@
 
 <div class="contain-to-grid wiki-header">
   <nav class="top-bar">
-  <section class="top-bar-section">
-    <ul class="left">
-      <li>
-        <div class="wiki-header-logo">
-          <%= link_to(image_tag("placeholder_logo.png"), "/") %>
-        </div>
-      </li>
-    </ul>
-    <% if user_signed_in? %>
+    <section class="top-bar-section">
+      <ul class="left">
+        <li>
+          <div class="wiki-header-logo">
+            <%= link_to(image_tag(@wiki.logo.url), "/") %>
+          </div>
+        </li>
+      </ul>
+      <% if user_signed_in? %>
 
-      <ul class="right">
-        <li class="wiki-header-actions">
+        <ul class="right">
+          <li class="wiki-header-actions">
           <span class="wiki-header-actions-single-action">
 
             <a href="<%= new_page_path %>" class="wiki-header-actions-single-action-link" title="<%= t(".add_page_tooltip") %>" data-ot-style="action">
@@ -42,22 +42,22 @@
               <i class="foundicon-search"></i>
             </a>
           </span>
-        </li>
+          </li>
 
-        <li class="divider"></li>
+          <li class="divider"></li>
 
-        <li class="wiki-header-signed-in" data-dropdown="user-dropdown">
+          <li class="wiki-header-signed-in" data-dropdown="user-dropdown">
           <span class="wiki-header-signed-in-signed-in-as" data-dropdown="user-dropdown">
             <%= t(".signed_in_as_text") %>
           </span>
           <span class="wiki-header-signed-in-first-name" data-dropdown="user-dropdown">
             <%= current_user.name %>
           </span>
-        </li>
-      </ul>
-    <% end %>
-  </section>
-</nav>
+          </li>
+        </ul>
+      <% end %>
+    </section>
+  </nav>
 </div>
 
 <% if user_signed_in? %>
@@ -70,12 +70,12 @@
 <% end %>
 
 <script type='text/javascript'>
-  $(document).ready(function() {
-    $(".wiki-header-signed-in-signed-in-as").click(function(){
+  $(document).ready(function () {
+    $(".wiki-header-signed-in-signed-in-as").click(function () {
       $(".wiki-header-signed-in").click();
     });
 
-    $(".wiki-header-actions-single-action-link").each(function(index, elem){
+    $(".wiki-header-actions-single-action-link").each(function (index, elem) {
       new Opentip(elem, $(elem).attr('title'), "", { style: "action" });
     })
   });
