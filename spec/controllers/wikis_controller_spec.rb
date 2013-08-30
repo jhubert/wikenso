@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'concerns/controller_authentication_spec'
 
 describe WikisController do
   context "GET 'new'" do
@@ -90,6 +89,47 @@ describe WikisController do
     it "assigns the current wiki" do
       get :edit
       assigns(:wiki).should == wiki
+    end
+  end
+
+  context "PUT 'update'" do
+    let!(:wiki) { create(:wiki, subdomain: "foo") }
+    before(:each) { @request.host = "foo.example.com" }
+
+    context "when updation is successful" do
+      it "updates the logo of the current wiki" do
+        logo = fixture_file_upload("logo.png")
+        put :update, wiki: {logo: logo}
+        wiki.reload.logo.file.read.should == logo.read
+      end
+
+      it "sets a flash notice" do
+        logo = fixture_file_upload("logo.png")
+        put :update, wiki: {logo: logo}
+        flash[:notice].should_not be_empty
+      end
+
+      it "redirects to the root page" do
+        logo = fixture_file_upload("logo.png")
+        put :update, wiki: {logo: logo}
+        response.should redirect_to root_path
+      end
+    end
+
+    context "when the updation is unsuccessful" do
+      before(:each) { Wiki.any_instance.stub(:update).and_return(false) }
+
+      it "sets a flash error" do
+        logo = fixture_file_upload("logo.png")
+        put :update, wiki: {logo: logo}
+        flash[:error].should_not be_empty
+      end
+
+      it "renders the 'edit' action" do
+        logo = fixture_file_upload("logo.png")
+        put :update, wiki: {logo: logo}
+        response.should render_template :edit
+      end
     end
   end
 end

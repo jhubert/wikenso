@@ -65,3 +65,6 @@ en:
   wikis:
     create:
       error_flash: "There was an error creating your wiki."
+    update:
+      successful_flash: "Your settings were successfully saved!"
+      error_flash: "There was an error saving your settings."
