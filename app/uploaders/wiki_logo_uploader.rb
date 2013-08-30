@@ -6,7 +6,7 @@ class WikiLogoUploader < CarrierWave::Uploader::Base
   end
 
   def default_url
-     "/assets/default_logo.png"
+     "/images/default_logo.png"
   end
 
   def extension_white_list
