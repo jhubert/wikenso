@@ -8,7 +8,8 @@ Wikenso::Application.routes.draw do
     get '/redeem/:invitation_code' => "pending_users#edit", as: 'redeem_invitation_code'
     put '/redeem/:invitation_code' => "pending_users#update"
 
-    get "/settings" => "wikis#edit"
+    get "/settings" => "wikis#edit", as: :edit_wiki_settings
+    put "/settings" => "wikis#update", as: :wiki_settings
 
     resources :sessions, only: [:new, :create]
     delete "/logout" => "sessions#destroy", as: :logout

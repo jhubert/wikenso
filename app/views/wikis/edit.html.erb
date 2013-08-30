@@ -1,0 +1,24 @@
+<div class="row wiki-settings">
+  <div class="large-12 columns">
+    <div class="wiki-settings-heading">
+      <span class="wiki-settings-heading-emphasis"><%= @wiki.subdomain %></span>
+      <span>Settings</span>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <%= simple_form_for @wiki, url: wiki_settings_path, method: :put do |f| %>
+    <div class="large-8 columns wiki-settings-body">
+      <div class="row wiki-settings-setting">
+        <div class="large-3 columns wiki-settings-setting-name">
+          <%= f.label :subdomain, "Web Address" %>
+        </div>
+
+        <div class="large-9 columns wiki-settings-setting-input">
+          <%= f.input_field :subdomain %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

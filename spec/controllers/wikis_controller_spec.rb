@@ -82,4 +82,14 @@ describe WikisController do
       end
     end
   end
+
+  context "GET 'edit'" do
+    let!(:wiki) { create(:wiki, subdomain: "foo") }
+    before(:each) { @request.host = "foo.example.com" }
+
+    it "assigns the current wiki" do
+      get :edit
+      assigns(:wiki).should == wiki
+    end
+  end
 end
