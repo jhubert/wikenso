@@ -121,5 +121,10 @@ describe Wiki do
       wiki = create(:wiki, name: nil, subdomain: "foo")
       wiki.name.should == "foo"
     end
+
+    it "returns the subdomain if the name is an empty string" do
+      wiki = create(:wiki, name: "", subdomain: "foo")
+      wiki.name.should == "foo"
+    end
   end
 end

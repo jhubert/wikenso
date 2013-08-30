@@ -28,6 +28,6 @@ class Wiki < ActiveRecord::Base
   end
 
   def name
-    self[:name] || subdomain
+    self[:name].present? ? self[:name] : subdomain
   end
 end
