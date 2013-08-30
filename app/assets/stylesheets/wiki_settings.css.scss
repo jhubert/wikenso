@@ -14,8 +14,57 @@
 
 .wiki-settings-body {
   margin-top: 20px;
+  font-family: ff-dagny-web-pro;
+}
+
+.wiki-settings-setting {
+  padding: 20px 0;
+  border-bottom: 1px solid #DDD;
+  line-height: 50px;
 }
 
 .wiki-settings-setting-name {
-  line-height: 33px;
+  font-size: 18px;
+  label { font-weight: 700; }
+}
+
+.wiki-settings-setting-input {
+  input { margin-top: 6px; }
+}
+
+.wiki-settings-setting-input-hint {
+  font-size: 14px;
+  margin-top: 10px;
+  color: #666;
+  line-height: 19px;
+}
+
+.wiki-settings-submit {
+  margin-top: 20px;
+}
+
+.wiki-settings-submit-button {
+  background-color: #7FC633;
+  border: none;
+  border-radius: 5px;
+  &:hover { background-color: #93D138; }
+}
+
+.wiki-settings-submit-cancel {
+  margin-left: 5px;
+  background-color: #E5E5E5;
+  border: none;
+  border-radius: 5px;
+  &:hover {
+    background-color: #EEE;
+    color: #888;
+  }
+  color: #888;
+}
+
+.wiki-settings-submit-or {
+  font-size: 20px;
+  font-family: ff-tisa-web-pro;
+  font-style: oblique;
+  margin: 0 6px 0 10px;
 }

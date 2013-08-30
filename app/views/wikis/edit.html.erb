@@ -12,12 +12,21 @@
     <div class="large-8 columns wiki-settings-body">
       <div class="row wiki-settings-setting">
         <div class="large-3 columns wiki-settings-setting-name">
-          <%= f.label :subdomain, "Web Address" %>
+          <%= f.label :logo, "Logo" %>
         </div>
 
         <div class="large-9 columns wiki-settings-setting-input">
-          <%= f.input_field :subdomain %>
+          <%= f.input_field :logo %>
+          <div class="wiki-settings-setting-input-hint">
+            The wiki logo will be displayed in the header. Larger images will be resized to fit within 100x80 pixels.
+          </div>
         </div>
+      </div>
+
+      <div class='wiki-settings-submit'>
+        <%= f.button :submit, "Save Settings", class: "wiki-settings-submit-button" %>
+        <span class="wiki-settings-submit-or">or</span>
+        <%= link_to "Cancel", :back, class: "button wiki-settings-submit-cancel" %>
       </div>
     </div>
   <% end %>

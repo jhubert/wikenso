@@ -1,6 +1,8 @@
 class Wiki < ActiveRecord::Base
   scope :case_insensitive_find_by_subdomain, lambda {|subdomain| where("lower(subdomain) = ?", subdomain.downcase) }
 
+  mount_uploader :logo, WikiLogoUploader
+
   has_many :users
   has_many :pages
   has_many :draft_pages
