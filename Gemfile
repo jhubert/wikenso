@@ -21,6 +21,7 @@ gem 'smt_rails'
 gem 'paper_trail', :git => 'git://github.com/airblade/paper_trail.git'
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'fog'
 
 group :production do
   gem 'rails_12factor'
