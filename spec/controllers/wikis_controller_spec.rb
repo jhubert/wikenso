@@ -130,6 +130,12 @@ describe WikisController do
         put :update, wiki: {logo: logo}
         response.should render_template :edit
       end
+
+      it "assigns the wiki" do
+        logo = fixture_file_upload("logo.png")
+        put :update, wiki: {logo: logo}
+        assigns(:wiki).should == wiki
+      end
     end
   end
 end

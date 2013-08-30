@@ -179,6 +179,12 @@ describe PendingUsersController do
         put :update, invitation_code: user.invitations.first.code, user: { name: nil }
         assigns(:user).should == user
       end
+
+      it "assigns the invitation code" do
+        user = create(:pending_user, :invitation, wiki: wiki)
+        put :update, invitation_code: user.invitations.first.code, user: { name: nil }
+        assigns(:invitation_code).should == user.invitations.first.code
+      end
     end
 
     context "authorization" do

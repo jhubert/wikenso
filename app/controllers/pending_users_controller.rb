@@ -30,6 +30,7 @@ class PendingUsersController < ApplicationController
       redirect_to root_path(subdomain: request.subdomain)
     else
       @user = user
+      @invitation_code = params[:invitation_code]
       render :edit
     end
   end

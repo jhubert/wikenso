@@ -69,6 +69,11 @@ describe SessionsController do
         assigns(:user).email.should == "wrong@example.com"
       end
 
+      it "assigns a user belonging to the wiki" do
+        get 'create', user: {email: "wrong@example.com", password: "foo", password_confirmation: "foo"}
+        assigns(:user).wiki.should == @wiki
+      end
+
       it "sets a flash error message" do
         get 'create', user: {email: "wrong@example.com", password: "foo", password_confirmation: "foo"}
         flash[:error].should_not be_empty

@@ -26,6 +26,7 @@ class WikisController < ApplicationController
       flash[:notice] = t("wikis.update.successful_flash")
       redirect_to root_path
     else
+      @wiki = wiki
       flash.now[:error] = t("wikis.update.error_flash")
       render :edit
     end

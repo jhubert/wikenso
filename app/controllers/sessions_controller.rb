@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       sign_in(user)
       redirect_to root_url(subdomain: request.subdomain)
     else
-      @user = User.new(user_params)
+      @user = wiki.users.new(user_params)
       flash.now[:error] = I18n.t("sessions.create.sign_in_unsuccessful")
       render :new
     end
