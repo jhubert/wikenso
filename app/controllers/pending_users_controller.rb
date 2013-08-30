@@ -26,7 +26,7 @@ class PendingUsersController < ApplicationController
     active_user = user.activate_with_params(user_updation_params) if user
     if active_user
       sign_in(active_user)
-      flash[:notice] = t("pending_users.update.welcome_flash_message", wiki_name: user.wiki_subdomain)
+      flash[:notice] = t("pending_users.update.welcome_flash_message", wiki_name: user.wiki_name)
       redirect_to root_path(subdomain: request.subdomain)
     else
       @user = user

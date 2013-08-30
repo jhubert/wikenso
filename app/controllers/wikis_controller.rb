@@ -39,6 +39,6 @@ class WikisController < ApplicationController
   end
 
   def wiki_updation_params
-    params.require(:wiki).permit(:logo)
+    params.require(:wiki).permit(:logo, :name)
   end
 end

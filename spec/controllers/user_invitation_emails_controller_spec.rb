@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe UserInvitationEmailsController do
-  let!(:wiki) { create(:wiki, subdomain: "foo") }
+  let!(:wiki) { create(:wiki, subdomain: "foo", name: "foo") }
   before(:each) do
     @request.host = "foo.example.com"
     sign_in(create(:active_user))

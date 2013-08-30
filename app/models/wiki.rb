@@ -26,4 +26,8 @@ class Wiki < ActiveRecord::Base
     end
     user
   end
+
+  def name
+    self[:name] || subdomain
+  end
 end

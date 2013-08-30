@@ -110,4 +110,16 @@ describe Wiki do
       wiki.users.map(&:type).uniq.should == ["ActiveUser"]
     end
   end
+
+  context "#name" do
+    it "returns the name if it exists" do
+      wiki = create(:wiki, name: "This is a name")
+      wiki.name.should == "This is a name"
+    end
+
+    it "returns the subdomain if a name doesn't exist" do
+      wiki = create(:wiki, name: nil, subdomain: "foo")
+      wiki.name.should == "foo"
+    end
+  end
 end

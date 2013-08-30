@@ -103,6 +103,12 @@ describe WikisController do
         wiki.reload.logo.file.read.should == logo.read
       end
 
+      it "updates the name of the current wiki" do
+        logo = fixture_file_upload("logo.png")
+        put :update, wiki: { name: "foo" }
+        wiki.reload.name.should == "foo"
+      end
+
       it "sets a flash notice" do
         logo = fixture_file_upload("logo.png")
         put :update, wiki: {logo: logo}

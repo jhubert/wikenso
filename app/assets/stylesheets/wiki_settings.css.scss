@@ -29,7 +29,12 @@
 }
 
 .wiki-settings-setting-input {
-  input { margin-top: 6px; }
+  input {
+    margin-top: 6px;
+  }
+  input[type=text] {
+    font-size: 20px;
+  }
 }
 
 .wiki-settings-setting-input-hint {
