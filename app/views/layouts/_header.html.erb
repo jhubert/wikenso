@@ -36,12 +36,6 @@
               <i class="foundicon-plus"></i>
             </a>
           </span>
-
-          <span class="wiki-header-actions-single-action">
-            <a href="#" class="wiki-header-actions-single-action-link" title="<%= t(".search_tooltip") %>" data-ot-style="action">
-              <i class="foundicon-search"></i>
-            </a>
-          </span>
           </li>
 
           <li class="divider"></li>
@@ -63,7 +57,6 @@
 <% if user_signed_in? %>
   <ul id="user-dropdown" class="f-dropdown" data-dropdown-content>
     <li><%= link_to "Users", users_path(subdomain: request.subdomain) %></li>
-    <li><a href="#">Profile</a></li>
     <li><%= link_to "Wiki Settings", wiki_settings_path %></li>
     <li><%= link_to "Logout", logout_path, method: :delete %></a></li>
   </ul>
