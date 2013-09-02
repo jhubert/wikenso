@@ -13,6 +13,7 @@
     <div class="large-9 columns wiki-pages-view-single display" data-id=<%= @page.id %>>
 
       <div class="wiki-pages-view-single-actions">
+        <span class="wiki-pages-view-single-actions-item delete"><%= link_to "Delete", page_path(@page), method: :delete, confirm: t('.delete_page_confirm') %></span>
         <span class="wiki-pages-view-single-actions-item history"><%= link_to "History", page_changes_path(@page) %></span>
         <span class="wiki-pages-view-single-actions-item edit"><%= link_to "Edit", edit_page_path(@page) %></span>
       </div>

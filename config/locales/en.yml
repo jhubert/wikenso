@@ -48,6 +48,10 @@ en:
     update:
       successful_flash: "Your page was published!"
       error_flash: "There was an error publishing this page."
+    destroy:
+      successful_flash: "Your page was deleted."
+    show:
+      delete_page_confirm: "Are you sure you want to delete this page? This action cannot be undone."
   users:
     create:
       successful: "%{user_email} has been sent an invitation to join %{wiki_name}."

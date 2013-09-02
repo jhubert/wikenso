@@ -232,13 +232,13 @@ describe PagesController do
 
       it "renders the edit page" do
         page = create(:page, wiki: wiki, user: user)
-        put :update, id: page.id, page: { title: nil }
+        put :update, id: page.id, page: {title: nil}
         response.should render_template :edit
       end
 
       it "sets a flash error" do
         page = create(:page, wiki: wiki, user: user)
-        put :update, id: page.id, page: { title: nil }
+        put :update, id: page.id, page: {title: nil}
         flash[:error].should_not be_empty
       end
 
@@ -247,6 +247,47 @@ describe PagesController do
         draft_page = DraftPage.create(user_id: user.id, wiki_id: wiki.id, page: page)
         put :update, id: page.id, page: {title: nil}
         expect { draft_page.reload }.not_to raise_error { ActiveRecord::RecordNotFound }
+      end
+    end
+  end
+
+  context "DELETE 'destroy'" do
+    context "when the given ID is valid" do
+      it "destroys the page corresponding to the given ID" do
+        page = create(:page)
+        delete :destroy, id: page.slug
+        expect { page.reload }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+
+      it "doesn't destroy any other page" do
+        page = create(:page)
+        other_pages = create_list(:page, 5)
+        delete :destroy, id: page.slug
+        Page.count.should == 5
+      end
+
+      it "sets a flash notice" do
+        page = create(:page)
+        delete :destroy, id: page.slug
+        flash[:notice].should_not be_empty
+      end
+
+      it "redirects to the root page" do
+        page = create(:page)
+        delete :destroy, id: page.slug
+        response.should redirect_to "/"
+      end
+    end
+
+    context "when the given ID is invalid" do
+      it "returns a 404" do
+        page = create(:page)
+        expect { delete :destroy, id: 12345 }.to raise_error(ActionController::RoutingError)
+      end
+
+      it "doesn't destroy any page" do
+        page = create(:page)
+        expect { delete(:destroy, id: 12345) rescue nil }.not_to change { Page.count }
       end
     end
   end

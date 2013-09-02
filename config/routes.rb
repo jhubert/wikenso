@@ -14,7 +14,7 @@ Wikenso::Application.routes.draw do
     resources :sessions, only: [:new, :create]
     delete "/logout" => "sessions#destroy", as: :logout
 
-    resources :pages, except: [:index, :destroy] do
+    resources :pages, except: [:index] do
       resources :page_versions, only: [:index, :show], as: :changes, path: :changes
     end
 

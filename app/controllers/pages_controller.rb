@@ -48,6 +48,17 @@ class PagesController < ApplicationController
     end
   end
 
+  def destroy
+    page = Page.find_by_slug(params[:id])
+    if page
+      page.destroy
+      flash[:notice] = t("pages.destroy.successful_flash")
+      redirect_to root_path
+    else
+      raise ActionController::RoutingError.new("Not Found")
+    end
+  end
+
   private
 
   def creation_page_params
