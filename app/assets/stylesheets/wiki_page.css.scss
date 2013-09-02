@@ -52,11 +52,14 @@ $page-title-margin-top: 35px;
   font-family: "ff-tisa-web-pro";
   margin-top: 15px;
   font-size: 17px;
-  p { line-height: 1.5;}
   outline: 0 solid transparent;
   min-height: 800px;
   &:focus { outline: 0 solid transparent; }
   a:hover { text-decoration: underline; }
+  p {
+    line-height: 1.5;
+    margin: 5px 0;
+  }
 }
 
 .style-wiki-pages-view-single-text-link-tooltip {
