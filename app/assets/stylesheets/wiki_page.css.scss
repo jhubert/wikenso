@@ -51,8 +51,8 @@ $page-title-margin-top: 35px;
 .wiki-pages-view-single-text {
   font-family: "ff-tisa-web-pro";
   margin-top: 15px;
-  line-height: 30px;
   font-size: 17px;
+  p { line-height: 0.5;}
   outline: 0 solid transparent;
   min-height: 800px;
   &:focus { outline: 0 solid transparent; }
