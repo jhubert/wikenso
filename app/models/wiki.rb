@@ -19,6 +19,16 @@ class Wiki < ActiveRecord::Base
     Wiki.new(params)
   end
 
+  def save_with_seed_page
+    transaction do
+      save!
+      seed_page = WelcomePage.latest
+      pages.create!(title: seed_page.title, text: seed_page.text)
+    end
+  rescue ActiveRecord::RecordInvalid
+    false
+  end
+
   def create_pending_user(email)
     user = PendingUser.create_with_invitation(email: email, wiki_id: self.id)
     if user.errors.empty?

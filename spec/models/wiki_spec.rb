@@ -90,7 +90,7 @@ describe Wiki do
     it "builds an active user if a single user is passed" do
       wiki_params = attributes_for(:wiki)
       user_params = attributes_for(:active_user, type: nil)
-      wiki = Wiki.build_with_active_user(wiki_params.merge(users_attributes: { "0" => user_params }))
+      wiki = Wiki.build_with_active_user(wiki_params.merge(users_attributes: {"0" => user_params}))
       wiki.users.first.should be_a ActiveUser
     end
 
@@ -125,6 +125,81 @@ describe Wiki do
     it "returns the subdomain if the name is an empty string" do
       wiki = create(:wiki, name: "", subdomain: "foo")
       wiki.name.should == "foo"
+    end
+  end
+
+  context "#save_with_seed_page" do
+    before(:each) { create(:welcome_page) }
+
+    it "saves the wiki" do
+      wiki = build(:wiki)
+      expect { wiki.save_with_seed_page }.to change { Wiki.count }.by(1)
+    end
+
+    it "saves the wiki's name" do
+      wiki = build(:wiki, name: "Foo")
+      wiki.save_with_seed_page
+      wiki.reload.name.should == "Foo"
+    end
+
+    context "when creating the seed page" do
+      it "creates a page belonging to the wiki" do
+        wiki = build(:wiki)
+        wiki.save_with_seed_page
+        wiki.reload.pages.should_not be_empty
+      end
+
+      it "creates a page with the same title as the last welcome page" do
+        create(:welcome_page, title: "Foo!")
+        wiki = build(:wiki)
+        wiki.save_with_seed_page
+        wiki.reload.pages.first.title.should == "Foo!"
+      end
+
+      it "creates a page with the same text as the last welcome page" do
+        create(:welcome_page, text: "Foo!")
+        wiki = build(:wiki)
+        wiki.save_with_seed_page
+        wiki.reload.pages.first.text.should == "Foo!"
+      end
+    end
+
+    it "returns true when the save succeeds" do
+      wiki = build(:wiki)
+      wiki.save_with_seed_page.should be_true
+    end
+
+    context "for an unsuccessful save" do
+      context "if the wiki save fails" do
+        it "doesn't create a page" do
+          wiki = build(:wiki)
+          Wiki.any_instance.stub(:save!).and_raise(ActiveRecord::RecordInvalid.new(wiki))
+          expect { wiki.save_with_seed_page }.not_to change { Page.count }
+        end
+
+        it "returns false" do
+          wiki = build(:wiki)
+          Wiki.any_instance.stub(:save!).and_raise(ActiveRecord::RecordInvalid.new(wiki))
+          wiki.save_with_seed_page.should be_false
+        end
+      end
+
+      context "if the page save fails" do
+        before(:each) do
+          ActiveRecord::Associations::CollectionProxy.any_instance.stub(:create!).
+              and_raise(ActiveRecord::RecordInvalid.new(build(:page)))
+        end
+
+        it "doesn't create a wiki" do
+          wiki = build(:wiki)
+          expect { wiki.save_with_seed_page }.not_to change { Wiki.count }
+        end
+
+        it "returns false" do
+          wiki = build(:wiki)
+          wiki.save_with_seed_page.should be_false
+        end
+      end
     end
   end
 end

@@ -20,6 +20,8 @@ describe WikisController do
   end
 
   context "GET 'create'" do
+    before(:each) { create(:welcome_page) }
+
     context "when save is successful" do
       let(:users_attributes) { {"0" => attributes_for(:active_user)} }
 
@@ -44,6 +46,11 @@ describe WikisController do
       it "creates a wiki with the supplied subdomain" do
         get 'create', :wiki => attributes_for(:wiki, :users_attributes, subdomain: "FooWiki")
         Wiki.last.subdomain.should == "FooWiki"
+      end
+
+      it "creates a new page belonging to the wiki" do
+        get 'create', :wiki => attributes_for(:wiki, :users_attributes, subdomain: "FooWiki")
+        Wiki.last.pages.should_not be_empty
       end
 
       it "redirects to the subdomain for the wiki" do
@@ -72,6 +79,12 @@ describe WikisController do
       it "sets a flash error" do
         get 'create', wiki: attributes_for(:wiki, :users_attributes, subdomain: "Foo")
         flash[:error].should_not be_empty
+      end
+
+      it "doesn't create a page" do
+        expect {
+          get 'create', wiki: attributes_for(:wiki, :users_attributes, subdomain: "Foo")
+        }.not_to change { Page.count }
       end
     end
 
