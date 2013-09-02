@@ -20,8 +20,8 @@ $page-title-margin-top: 35px;
   font-size: 25px;
   font-weight: 400;
   a { color: #BDBDBD; }
+  a:hover { color: #888; }
   &.active {
-    font-size: 28px;
     a { color: #333; }
   }
 }
