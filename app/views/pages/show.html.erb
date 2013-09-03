@@ -1,4 +1,4 @@
-<% if @wiki.pages.present? %>
+<% if @page %>
   <div class="row wiki-pages-view">
     <div class="large-3 columns wiki-pages-view-index">
       <ul class="wiki-pages-view-index-list">
@@ -28,4 +28,6 @@
     </div>
 
   </div>
+<% else %>
+  <%= render "pages/no_pages_found" %>
 <% end %>

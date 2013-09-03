@@ -30,7 +30,7 @@ class PagesController < ApplicationController
     if params.has_key?(:id)
       @page = @wiki.pages.friendly.find(params[:id]).decorate
     else
-      @page = @wiki.pages.order("created_at").first.decorate
+      @page = @wiki.pages.order("created_at").first.try(:decorate)
     end
   end
 

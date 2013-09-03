@@ -58,7 +58,7 @@ describe PagesController do
       end
 
       context "when assigning the page" do
-        let(:wiki) { create(:wiki, subdomain: "foo") }
+        let!(:wiki) { create(:wiki, subdomain: "foo") }
         before(:each) { @request.host = "foo.wikenso.com" }
 
         it "assigns the page corresponding to the passed friendly ID" do
@@ -72,6 +72,11 @@ describe PagesController do
           second_page = create(:page, wiki: wiki)
           get :show
           assigns(:page).should == first_page
+        end
+
+        it "assigns `nil` if no pages exist and no ID is passed" do
+          get :show
+          assigns(:page).should be_nil
         end
 
         it "raises an error if an invalid ID is passed" do

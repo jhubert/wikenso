@@ -219,3 +219,19 @@ input.add-link-modal-input {
 .wiki-pages-view-single-shadow-form {
   display: none;
 }
+
+.wiki-no-pages {
+  margin-top: 300px;
+  text-align: center;
+  font-family: ff-dagny-web-pro;
+  font-size: 30px;
+  color: #aaa;
+}
+
+.wiki-no-pages-create-link {
+  color: #7ABD30;
+  &:hover {
+    text-decoration: underline;
+    color: #578522;
+  }
+}
