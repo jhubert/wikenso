@@ -14,7 +14,7 @@
 <div class="row">
   <div class="columns">
     <ul class="page-history-view-list">
-      <% @page_versions.each do |version| %>
+      <% @page_versions.select(&:has_user?).each do |version| %>
           <li class="page-history-view-list-item">
             <div class="page-history-view-list-item-time">
               <%= link_to  version.created_at_time_string, page_change_path(@page, version) %>

@@ -14,6 +14,10 @@ class PageVersionDecorator < Draper::Decorator
     end
   end
 
+  def has_user?
+    model.whodunnit.present?
+  end
+
   # Papertrail's `reify` returns a 'pre-change' version of the Page
   # We're overriding this so we get a 'post-change' version of the Page
   def reify

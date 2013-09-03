@@ -14,7 +14,9 @@
 
       <div class="wiki-pages-view-single-actions hide-for-small">
         <span class="wiki-pages-view-single-actions-item delete"><%= link_to "Delete", page_path(@page), method: :delete, confirm: t('.delete_page_confirm') %></span>
-        <span class="wiki-pages-view-single-actions-item history"><%= link_to "History", page_changes_path(@page) %></span>
+        <% if @page.show_history? %>
+          <span class="wiki-pages-view-single-actions-item history"><%= link_to "History", page_changes_path(@page) %></span>
+        <% end %>
         <span class="wiki-pages-view-single-actions-item edit"><%= link_to "Edit", edit_page_path(@page) %></span>
       </div>
 
