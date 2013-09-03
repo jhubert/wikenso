@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :pages
   has_many :draft_pages
 
-  validates_uniqueness_of :email, scope: :wiki_id
+  validates_uniqueness_of :email, scope: :wiki_id, case_sensitive: false
   validates_presence_of :email
   validates_format_of :email, with: /@/
 
