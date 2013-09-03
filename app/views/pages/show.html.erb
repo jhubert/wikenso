@@ -1,6 +1,6 @@
 <% if @page %>
   <div class="row wiki-pages-view">
-    <div class="large-3 columns wiki-pages-view-index">
+    <div class="large-3 columns wiki-pages-view-index hide-for-small">
       <ul class="wiki-pages-view-index-list">
         <% @wiki.pages.each do |page| %>
           <li class="wiki-pages-view-index-list-item <%= page == @page ? "active" : "" %>">
@@ -12,18 +12,22 @@
 
     <div class="large-9 columns wiki-pages-view-single display" data-id=<%= @page.id %>>
 
-      <div class="wiki-pages-view-single-actions">
+      <div class="wiki-pages-view-single-actions hide-for-small">
         <span class="wiki-pages-view-single-actions-item delete"><%= link_to "Delete", page_path(@page), method: :delete, confirm: t('.delete_page_confirm') %></span>
         <span class="wiki-pages-view-single-actions-item history"><%= link_to "History", page_changes_path(@page) %></span>
         <span class="wiki-pages-view-single-actions-item edit"><%= link_to "Edit", edit_page_path(@page) %></span>
       </div>
 
-      <div class="wiki-pages-view-single-title">
-        <%= @page.title %>
+      <div class="row">
+        <div class="wiki-pages-view-single-title columns small-12 small-centered large-12">
+          <%= @page.title %>
+        </div>
       </div>
 
-      <div class="wiki-pages-view-single-text">
-        <p><%= sanitize @page.text, tags: @page.allowed_html_tags %></p>
+      <div class="row">
+        <div class="wiki-pages-view-single-text columns small-10 small-centered large-12">
+          <p><%= sanitize @page.text, tags: @page.allowed_html_tags %></p>
+        </div>
       </div>
     </div>
 

@@ -9,7 +9,10 @@
     max-height: 60px;
     max-width: 100px;
   }
+}
 
+@media only screen and (max-width: 768px) {
+  .wiki-header-logo { text-align: center; }
 }
 
 .wiki-header-actions {
