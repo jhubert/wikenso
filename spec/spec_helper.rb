@@ -29,6 +29,8 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 end
 
+Dir[Rails.root.join("spec/concerns/**/*.rb")].each {|f| require f}
+
 def sign_in(user)
   session[:user_id] = user.id
 end

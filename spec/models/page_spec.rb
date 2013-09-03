@@ -126,4 +126,6 @@ describe Page do
       end
     end
   end
+
+  include_examples "soft deletable"
 end
