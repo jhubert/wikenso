@@ -16,6 +16,7 @@
 //= require turbolinks
 
 //= require vendor/underscore
+//= require vendor/underscore.strings
 //= require vendor/backbone
 //= require vendor/nprogress
 //= require vendor/keymaster
