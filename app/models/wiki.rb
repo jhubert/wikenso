@@ -3,8 +3,8 @@ class Wiki < ActiveRecord::Base
 
   mount_uploader :logo, WikiLogoUploader
 
-  has_many :users
-  has_many :pages
+  has_many :users, dependent: :destroy
+  has_many :pages, dependent: :destroy
   has_many :draft_pages
   accepts_nested_attributes_for :users
 
