@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130903053011) do
+ActiveRecord::Schema.define(version: 20130904093929) do
 
   create_table "draft_pages", force: true do |t|
     t.string   "title"
@@ -101,5 +101,7 @@ ActiveRecord::Schema.define(version: 20130903053011) do
     t.string   "logo"
     t.string   "name"
   end
+
+  add_index "wikis", ["subdomain"], name: "index_wikis_on_subdomain", unique: true, using: :btree
 
 end
