@@ -48,6 +48,7 @@ group :development do
   gem 'zeus'
   gem 'letter_opener'
   gem "parallel_tests"
+  gem 'rack-mini-profiler'
 end
 
 group :test, :development do
