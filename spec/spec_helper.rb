@@ -32,13 +32,13 @@ end
 Dir[Rails.root.join("spec/concerns/**/*.rb")].each {|f| require f}
 
 def sign_in(user)
-  session[:user_id] = user.id
+  @controller.sign_in(user)
 end
 
 def user_signed_in?
-  session[:user_id].blank?
+  @controller.user_signed_in?
 end
 
 def sign_out
-  session.clear
+  @controller.sign_out
 end

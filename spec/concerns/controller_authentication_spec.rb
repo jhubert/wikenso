@@ -11,16 +11,30 @@ describe ControllerAuthentication, type: :controller do
     end
   end
 
-  it "signs a user in by saving the ID in the session" do
+  it "signs a user in by saving the ID in a signed cookie" do
     user = create(:active_user)
     @controller.sign_in(user)
-    session[:user_id].should == user.id
+    cookies.signed[:user_id].should == user.id
   end
 
-  it "signs a user out by clearing the ID from the session" do
-    @controller.sign_in(create(:active_user))
-    @controller.sign_out
-    user_signed_in?.should be_false
+  it "signs a user in permanently by saving the ID in a permanent signed cookie" do
+    user = create(:active_user)
+    @controller.sign_in_permanently(user)
+    cookies.permanent.signed[:user_id].should == user.id
+  end
+
+  context "while signing out" do
+    it "it clears the signed cookie" do
+      @controller.sign_in(create(:active_user))
+      @controller.sign_out
+      cookies.signed[:user_id].should be_nil
+    end
+
+    it "clears the permanent signed cookie" do
+      @controller.sign_in_permanently(create(:active_user))
+      @controller.sign_out
+      cookies.permanent.signed[:user_id].should be_nil
+    end
   end
 
   context "when finding the current user" do
@@ -37,12 +51,17 @@ describe ControllerAuthentication, type: :controller do
   end
 
   context "when checking if a user is logged in" do
-    it "returns true if a user is logged in" do
-      @controller.sign_in(create(:active_user))
+    it "returns true if a signed `user_id` exists" do
+      cookies.signed[:user_id] = 1
       @controller.user_signed_in?.should be_true
     end
 
-    it "returns false if a user is logged in" do
+    it "returns true if a permanent signed `user_id` exists" do
+      cookies.permanent.signed[:user_id] = 1
+      @controller.user_signed_in?.should be_true
+    end
+
+    it "returns false if a user isn't logged in" do
       @controller.user_signed_in?.should be_false
     end
   end

@@ -3,19 +3,23 @@ module ControllerAuthentication
 
   included do
     def sign_in(user)
-      session[:user_id] = user.id
+      cookies.signed[:user_id] = user.id
+    end
+
+    def sign_in_permanently(user)
+      cookies.permanent.signed[:user_id] = user.id
     end
 
     def sign_out
-      session.delete(:user_id)
+      cookies.delete :user_id
     end
 
     def current_user
-      User.find_by_id(session[:user_id])
+      User.find_by_id(cookies.signed[:user_id])
     end
 
     def user_signed_in?
-      session[:user_id].present?
+      cookies[:user_id].present?
     end
 
     def authenticate_user!
