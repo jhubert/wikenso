@@ -17,11 +17,11 @@ class WikisController < ApplicationController
   end
 
   def edit
-    @wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first
+    @wiki = current_wiki
   end
 
   def update
-    wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first
+    wiki = current_wiki
     if wiki.update(wiki_updation_params)
       flash[:notice] = t("wikis.update.successful_flash")
       redirect_to root_path

@@ -2,12 +2,12 @@ class SessionsController < ApplicationController
   include ControllerAuthentication
 
   def new
-    wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first
+    wiki = current_wiki
     @user = wiki.users.new.decorate
   end
 
   def create
-    wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first!
+    wiki = current_wiki
     user = wiki.users.active.find_by_email(user_params[:email])
       logger.fatal '*' * 50
       logger.fatal params[:remember_me]

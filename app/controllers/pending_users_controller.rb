@@ -2,14 +2,14 @@ class PendingUsersController < ApplicationController
   before_filter :authenticate_user!, only: [:create]
 
   def edit
-    wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first
+    wiki = current_wiki
     @user = PendingUser.find_by_invitation_code_and_wiki_id(params[:invitation_code], wiki.id)
     @invitation_code = params[:invitation_code]
     render(nothing: true, status: :bad_request) unless @user
   end
 
   def create
-    @wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first
+    @wiki = current_wiki
     pending_user = @wiki.create_pending_user(user_creation_params[:email])
     if pending_user.errors.empty?
       flash[:notice] = t("users.create.successful", wiki_name: @wiki.subdomain, user_email: pending_user.email)
@@ -21,7 +21,7 @@ class PendingUsersController < ApplicationController
   end
 
   def update
-    wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first
+    wiki = current_wiki
     user = PendingUser.find_by_invitation_code_and_wiki_id(params[:invitation_code], wiki.id)
     active_user = user.activate_with_params(user_updation_params) if user
     if active_user

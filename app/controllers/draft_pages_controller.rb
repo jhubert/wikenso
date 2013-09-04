@@ -2,7 +2,7 @@ class DraftPagesController < ApplicationController
   before_filter :authenticate_user!
 
   def destroy
-    wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first
+    wiki = current_wiki
     draft_page = wiki.draft_pages.find_by_id_and_user_id(params[:id], current_user.id)
     if draft_page
       draft_page.destroy

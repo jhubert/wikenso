@@ -2,7 +2,7 @@ class UserInvitationEmailsController < ApplicationController
   before_filter :authenticate_user!
 
   def create
-    wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first
+    wiki = current_wiki
     user = wiki.users.pending.find_by_id(params[:user_id])
     if user
       UserMailer.invitation_mail(user, user.wiki).deliver

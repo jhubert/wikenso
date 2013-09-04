@@ -11,11 +11,15 @@ class ApplicationController < ActionController::Base
 
   require_inclusion_of_subdomain in: lambda { Wiki.pluck(:subdomain).map(&:downcase) }
 
+  def current_wiki
+    Wiki.case_insensitive_find_by_subdomain(request.subdomain).first
+  end
+
   before_filter :assign_wiki_for_header
 
   def assign_wiki_for_header
     if subdomain?
-      @wiki = Wiki.case_insensitive_find_by_subdomain(request.subdomain).first
+      @wiki = current_wiki
     end
   end
 end

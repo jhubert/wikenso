@@ -22,6 +22,7 @@ gem 'paper_trail', :git => 'git://github.com/airblade/paper_trail.git'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
+gem "intercom-rails"
 
 group :production do
   gem 'rails_12factor'
