@@ -21,10 +21,9 @@ describe "WikiPageView", =>
       @model.get('id').should.equal 5
       spy.callCount.should.equal 0
 
-  it "hides the help text after the first model change", =>
+  it "doesn't hide the help text after the first model change", =>
     wikiPageView = new WikiApp.Views.WikiPageView(@model)
-    (-> $(".help-text").is(":hidden")).should.change.
-    from(false).to(true).
+    (-> $(".help-text").is(":hidden")).should.not.change.
     when -> @model.set('title', "Foo123")
 
   describe "saving", =>
