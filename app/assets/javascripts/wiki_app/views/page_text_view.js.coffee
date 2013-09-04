@@ -11,6 +11,8 @@ class WikiApp.Views.PageTextView extends Backbone.View
 
   events:
     "keyup": "updateText"
+    "blur": "showPlaceholderIfTextEmpty"
+    "focus": "removePlaceholder"
 
   initialize: (@model) =>
     @updateText(silent: true)
@@ -29,6 +31,16 @@ class WikiApp.Views.PageTextView extends Backbone.View
 
   updateText: (options) =>
     @model.set('text', @getText(), options)
+
+  showPlaceholderIfTextEmpty: =>
+    if _.blank(this.$el.text())
+      this.$el.addClass("placeholder")
+      this.$el.text(this.$el.data("placeholder"))
+
+  removePlaceholder: =>
+    if this.$el.hasClass("placeholder")
+      this.$el.removeClass("placeholder")
+      this.$el.html("")
 
   showFormattingTooltip: =>
     if @isSelectionEmpty()

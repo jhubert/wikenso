@@ -20,11 +20,11 @@
     </div>
 
     <div class="wiki-pages-view-single-title-prefix">Editing Draft</div>
-    <div class="wiki-pages-view-single-title" contenteditable=true>
+    <div class="wiki-pages-view-single-title" contenteditable=true data-placeholder="Title goes here…">
       <%= @draft_page.title %>
     </div>
 
-    <div class="wiki-pages-view-single-text" contenteditable=true>
+    <div class="wiki-pages-view-single-text" contenteditable=true data-placeholder="Enter your page text here…">
       <p><%= sanitize @draft_page.text, tags: @draft_page.allowed_html_tags %></p>
     </div>
   </div>
@@ -51,6 +51,8 @@
 </div>
 
 <script type="text/javascript">
-  var model = new WikiApp.Models.DraftPageModel();
-  new WikiApp.Views.WikiPageView(model);
+  $(document).ready(function(){
+    var model = new WikiApp.Models.DraftPageModel();
+    new WikiApp.Views.WikiPageView(model);
+  });
 </script>
