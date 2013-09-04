@@ -1,0 +1,78 @@
+<div id="keyboard-shortcuts-modal" class="reveal-modal small">
+  <h3 class="keyboard-shortcuts-modal-header">Keyboard Shortcuts</h3>
+  <table class="keyboard-shortcuts-modal-table">
+    <thead>
+      <tr>
+        <td>Action</td>
+        <td>Key</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>
+          Bold
+        </td>
+        <td>
+          <% if browser.windows? %>
+            Ctrl+B
+          <% else %>
+            ⌘B
+          <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          Italic
+        </td>
+        <td>
+          <% if browser.windows? %>
+            Ctrl+I
+          <% else %>
+            ⌘I
+          <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          Add Link
+        </td>
+        <td>
+          <% if browser.windows? %>
+            Ctrl+K
+          <% else %>
+            ⌘K
+          <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          Add Sub-Heading
+        </td>
+        <td>
+          <% if browser.windows? %>
+            Ctrl + Shift + .
+          <% else %>
+            ⌘ + Shift + .
+          <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          Remove Sub-Heading
+        </td>
+        <td>
+          <% if browser.windows? %>
+            Ctrl + Shift + ,
+          <% else %>
+            ⌘ + Shift + ,
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -23,6 +23,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
 gem "intercom-rails"
+gem 'browser'
 
 group :production do
   gem 'rails_12factor'
