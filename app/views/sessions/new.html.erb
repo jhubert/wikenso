@@ -1,5 +1,5 @@
 <div class="wiki-new-session row">
-  <div class="columns large-9 large-centered">
+  <div class="columns large-6 large-centered">
     <%= simple_form_for @user, url: sessions_path, method: :post, html: {class: "wiki-new-session-form"} do |f| %>
       <fieldset>
         <legend class="wiki-new-session-form-legend">
@@ -11,6 +11,11 @@
 
         <%= f.input :email, required: false, wrapper_html: {class: "wiki-new-session-form-input"} %>
         <%= f.input :password, wrapper_html: {class: "wiki-new-session-form-input"} %>
+
+        <%= f.input :remember_me, as: :boolean,
+                    wrapper_html: {class: "wiki-new-session-form-input remember-me"},
+                    label: "Remember me on this computer" %>
+
         <div class="wiki-new-session-form-submit-wrapper">
           <%= f.button :submit, t(".login_button_label"), class: "wiki-new-session-form-submit" %>
         </div>

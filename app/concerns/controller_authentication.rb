@@ -7,7 +7,7 @@ module ControllerAuthentication
     end
 
     def sign_in_permanently(user)
-      cookies.permanent.signed[:user_id] = { value: user.id, expires: 2.weeks.from_now }
+      cookies.signed[:user_id] = { value: user.id, expires: 2.weeks.from_now }
     end
 
     def sign_out

@@ -20,6 +20,16 @@
   font-size: 20px;
 }
 
+.wiki-new-session-form-input.remember-me {
+  text-align: center;
+  margin: 0;
+  input { display: inline; }
+  label {
+    display: inline;
+    margin-left: 5px;
+  }
+}
+
 .wiki-new-session-form-submit-wrapper {
   margin: 0 auto;
   width: 100%;
@@ -29,15 +39,14 @@
 
 .wiki-new-session-form-submit {
   border: none;
-  color: #7ABD30;
+  color: white;
+  background-color: #7ABD30;
   font-weight: 700;
-  font-size: 45px;
-  padding: 0;
+  font-size: 35px;
+  padding: 10px 26px;
   margin: 0;
-
-  background: transparent;
-  &:hover {
-    background: transparent;
-    color: #578522;
-  }
+  border-radius: 10px;
+  border: 1px solid #619827;
+  &:hover { background-color: #9BD743; }
+  &:focus { background-color: #7ABD30; }
 }

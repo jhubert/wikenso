@@ -46,6 +46,16 @@ describe SessionsController do
         get 'create', user: {email: "a@example.com", password: "foo", password_confirmation: "foo"}
         response.should redirect_to "http://foo.wikenso.dev/"
       end
+
+      it "signs the user in permanently when params[:remember_me] exists" do
+        @controller.should_receive(:sign_in_permanently)
+        get 'create', user: {email: "a@example.com", password: "foo", password_confirmation: "foo", remember_me: "1"}
+      end
+
+      it "signs the user in normally when params[:remember_me] doesn't exist" do
+        @controller.should_receive(:sign_in)
+        get 'create', user: {email: "a@example.com", password: "foo", password_confirmation: "foo", remember_me: "0"}
+      end
     end
 
     context "when the credentials are wrong" do
