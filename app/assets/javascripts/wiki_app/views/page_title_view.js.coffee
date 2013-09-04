@@ -3,8 +3,13 @@ class WikiApp.Views.PageTitleView extends Backbone.View
 
   events:
     "keyup": "updateTitle"
+    "blur": "showPlaceholderIfTextEmpty"
+    "focus": "removePlaceholder"
 
-  initialize: (@model) => @updateTitle(silent: true)
+  initialize: (@model) =>
+    @updateTitle(silent: true)
+    _.extend(this, WikiApp.Concerns.Placeholder)
+    @showPlaceholderIfTextEmpty()
 
   updateTitle: (options) =>
     @model.set('title', @getTitle(), options)
