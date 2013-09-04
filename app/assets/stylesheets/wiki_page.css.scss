@@ -90,7 +90,10 @@ $page-title-margin-top: 35px;
     text-align: center;
     padding: 0;
   }
-  .wiki-pages-view-single-text { margin-right: 20px; }
+  .wiki-pages-view-single-text {
+    margin-right: 20px;
+    h2 { text-align: center; }
+  }
 }
 
 @mixin formatting-button {
