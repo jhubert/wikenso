@@ -26,7 +26,7 @@ describe PageVersionsController do
 
     context "authorization" do
       it "denies access to non-logged-in users" do
-        session[:user_id] = nil
+        sign_out
         page = create(:page, wiki: wiki)
         get 'index', page_id: page.id
         response.should redirect_to new_session_path

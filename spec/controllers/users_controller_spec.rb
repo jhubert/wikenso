@@ -24,7 +24,7 @@ describe UsersController do
     end
 
     it "doesn't allow access if the user is not logged in" do
-      session[:user_id] = nil
+      sign_out
       get :index
       response.should redirect_to new_session_path
     end

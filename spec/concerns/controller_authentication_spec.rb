@@ -20,7 +20,7 @@ describe ControllerAuthentication, type: :controller do
   it "signs a user out by clearing the ID from the session" do
     @controller.sign_in(create(:active_user))
     @controller.sign_out
-    session[:user_id].should be_nil
+    user_signed_in?.should be_false
   end
 
   context "when finding the current user" do

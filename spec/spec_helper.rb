@@ -35,6 +35,10 @@ def sign_in(user)
   session[:user_id] = user.id
 end
 
+def user_signed_in?
+  session[:user_id].blank?
+end
+
 def sign_out
   session.clear
 end

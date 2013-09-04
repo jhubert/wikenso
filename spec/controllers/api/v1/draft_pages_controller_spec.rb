@@ -63,7 +63,7 @@ module Api
 
         context "authorization" do
           it "doesn't allow access when no user is logged in" do
-            session[:user_id] = nil
+            sign_out
             page = create(:draft_page, title: "Bar", user: user)
             put :update, id: page.id, draft_page: {title: "Foo"}
             response.should_not be_success

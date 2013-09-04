@@ -3,7 +3,7 @@ require 'spec_helper'
 describe PendingUsersController do
   let!(:wiki) { create(:wiki, subdomain: "foo") }
   before(:each) { @request.host = "foo.example.com" }
-  after(:each) { session[:user_id] = nil }
+  after(:each) { sign_out }
 
   context "POST 'create'" do
     let(:wiki) { create(:wiki, subdomain: "foo") }
@@ -69,7 +69,7 @@ describe PendingUsersController do
     end
 
     it "doesn't allow access if the user is not logged in" do
-      session[:user_id] = nil
+      sign_out
       post :create, user: attributes_for(:active_user, wiki: wiki)
       response.should redirect_to new_session_path
     end
@@ -145,7 +145,7 @@ describe PendingUsersController do
       it "logs the user in" do
         user = create(:pending_user, :invitation, wiki: wiki)
         put :update, invitation_code: user.invitations.first.code, user: { password: "foo", password_confirmation: "foo" }
-        session[:user_id].should_not be_nil
+        user_signed_in?.should be_true
       end
 
       it "redirects to the wiki home page" do
@@ -165,7 +165,7 @@ describe PendingUsersController do
       it "doesn't log the user in" do
         user = create(:pending_user, :invitation, wiki: wiki)
         put :update, invitation_code: user.invitations.first.code, user: { name: nil }
-        session[:user_id].should be_nil
+        user_signed_in?.should be_false
       end
 
       it "renders the :edit template" do

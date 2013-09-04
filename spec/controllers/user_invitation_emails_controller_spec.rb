@@ -53,7 +53,7 @@ describe UserInvitationEmailsController do
 
     context "authorization" do
       it "doesn't allow access if a user isn't logged in" do
-        session[:user_id] = nil
+        sign_out
         user = create(:pending_user, :invitation, wiki: wiki)
         get 'create', user_id: user.id
         response.should redirect_to new_session_path

@@ -24,7 +24,7 @@ describe SessionsController do
 
   context "GET 'create'" do
     before(:each) do
-      session[:user_id] = nil
+      sign_out
       @request.host = "foo.wikenso.dev"
       @wiki = create(:wiki, subdomain: "Foo")
       @active_user = create(:active_user, wiki: @wiki, email: "a@example.com", password: "foo")
@@ -33,13 +33,13 @@ describe SessionsController do
     context "when the credentials are correct" do
       it "signs the user in if he is active" do
         get 'create', user: {email: "a@example.com", password: "foo", password_confirmation: "foo"}
-        session[:user_id].should == @active_user.id
+        user_signed_in?.should be_true
       end
 
       it "doesn't sign the user in if he is pending" do
         pending_user = create(:pending_user, wiki: @wiki, email: "pending@example.com", password: "foo", password_confirmation: "foo")
         get 'create', user: {email: "pending@example.com", password: "foo", password_confirmation: "foo"}
-        session[:user_id].should be_nil
+        user_signed_in?.should be_false
       end
 
       it "redirects to the root page of the subdomain" do
@@ -51,17 +51,17 @@ describe SessionsController do
     context "when the credentials are wrong" do
       it "doesn't sign the user in if the email is incorrect" do
         get 'create', user: {email: "wrong@example.com", password: "foo", password_confirmation: "foo"}
-        session[:user_id].should be_nil
+        user_signed_in?.should be_false
       end
 
       it "doesn't sign the user in if the password is incorrect" do
         get 'create', user: {email: "a@example.com", password: "foo123"}
-        session[:user_id].should be_nil
+        user_signed_in?.should be_false
       end
 
       it "doesn't sign the user in if both the email and password are incorrect" do
         get 'create', user: {email: "wrong@example.com", password: "123foo"}
-        session[:user_id].should be_nil
+        user_signed_in?.should be_false
       end
 
       it "assigns a user with the same email" do
@@ -99,7 +99,7 @@ describe SessionsController do
     it "clears user ID from the session" do
       user = create(:active_user)
       @controller.sign_in(user)
-      expect { delete 'destroy' }.to change { session[:user_id] }.from(user.id).to(nil)
+      expect { delete 'destroy' }.to change { user_signed_in? }.from(true).to(false)
     end
   end
 

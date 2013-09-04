@@ -41,7 +41,7 @@ describe DraftPagesController do
 
     it "denies access if a user isn't logged in" do
       draft_page = create(:draft_page, wiki: wiki, user: user)
-      session[:user_id] = nil
+      sign_out
       delete :destroy, id: draft_page.id
       response.should redirect_to new_session_path
     end
