@@ -3,11 +3,11 @@ module ControllerAuthentication
 
   included do
     def sign_in(user)
-      cookies.signed[:user_id] = user.id
+      cookies.signed[:user_id] = { value: user.id, expires: 4.hours.from_now }
     end
 
     def sign_in_permanently(user)
-      cookies.permanent.signed[:user_id] = user.id
+      cookies.permanent.signed[:user_id] = { value: user.id, expires: 2.weeks.from_now }
     end
 
     def sign_out
