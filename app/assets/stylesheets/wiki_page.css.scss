@@ -60,7 +60,7 @@ $page-title-margin-top: 35px;
   a:hover { text-decoration: underline; }
   p {
     line-height: 1.5;
-    margin: 5px 0;
+    margin: 15px 0;
   }
   h2 {
     border-bottom: 2px solid #7FC633;
@@ -100,7 +100,6 @@ $page-title-margin-top: 35px;
   &:last-child { padding-right: 10px; }
   color: white;
   font-family: "ff-dagny-web-pro";
-  font-weight: 400;
   font-size: 25px;
   width: 30px;
   &:hover { color: #578522; }
@@ -123,12 +122,25 @@ a.wiki-pages-view-formatting-bold {
 
 a.wiki-pages-view-formatting-italic {
   @include formatting-button;
+  font-weight: 400;
   font-style: oblique;
 }
 
 a.wiki-pages-view-formatting-link {
   @include formatting-button;
   text-decoration: underline;
+  font-size: 25px;
+}
+
+.wiki-pages-view-formatting-heading {
+  @include formatting-button;
+  i { font-size: 16px; }
+}
+
+.wiki-pages-view-formatting-paragraph {
+  @include formatting-button;
+  i { font-size: 12px; }
+
 }
 
 @mixin page-action-button {

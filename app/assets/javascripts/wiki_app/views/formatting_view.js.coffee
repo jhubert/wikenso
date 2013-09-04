@@ -5,8 +5,10 @@ class WikiApp.Views.FormattingView extends Backbone.View
     "click .wiki-pages-view-formatting-bold": "triggerBold"
     "click .wiki-pages-view-formatting-italic": "triggerItalic"
     "click .wiki-pages-view-formatting-link": "triggerLink"
+    "click .wiki-pages-view-formatting-heading": "triggerAddHeading"
+    "click .wiki-pages-view-formatting-paragraph": "triggerRemoveHeading"
 
-  marginRight: 80
+  marginRight: 120
   marginBottom: 50
 
   showFormattingElementsForSelection: (selection) =>
@@ -23,3 +25,11 @@ class WikiApp.Views.FormattingView extends Backbone.View
   triggerBold: (event) => @trigger("formatting:bold", event)
   triggerItalic: (event) => @trigger("formatting:italic", event)
   triggerLink: (event) => @trigger("formatting:link", event)
+
+  triggerAddHeading: (event) =>
+    @trigger("formatting:add_heading", event)
+    @hide()
+
+  triggerRemoveHeading: (event) =>
+    @trigger("formatting:remove_heading", event)
+    @hide()

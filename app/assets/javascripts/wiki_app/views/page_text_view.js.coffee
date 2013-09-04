@@ -33,6 +33,8 @@ class WikiApp.Views.PageTextView extends Backbone.View
     @formattingView.on("formatting:link", @showAddLinkDialog)
     @formattingView.on("formatting:bold", @toggleBoldForSelection)
     @formattingView.on("formatting:italic", @toggleItalicForSelection)
+    @formattingView.on("formatting:add_heading", @addHeadingForSelection)
+    @formattingView.on("formatting:remove_heading", @removeHeadingForSelection)
 
   updateText: (options) =>
     @model.set('text', @getText(), options)

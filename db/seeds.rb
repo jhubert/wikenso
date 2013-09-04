@@ -3,8 +3,6 @@ page_text = <<-EOF
   Hi!&nbsp;Welcome to <i>Wikenso!</i>
 </p>
 
-<p><br></p>
-
 <p>
 Here's what you can do to <b>get</b> <b>started</b>.</p><p><br>
 </p>
