@@ -8,6 +8,10 @@ class WikiApp.Views.PageTextView extends Backbone.View
     'ctrl+i': "toggleItalicForSelection"
     '⌘+k': "showAddLinkDialog"
     'ctrl+k': "showAddLinkDialog"
+    '⌘+shift+.': "addHeadingForSelection"
+    'ctrl+shift+.': "addHeadingForSelection"
+    '⌘+shift+,': "removeHeadingForSelection"
+    'ctrl+shift+,': "removeHeadingForSelection"
 
   events:
     "keyup": "updateText"
@@ -62,6 +66,14 @@ class WikiApp.Views.PageTextView extends Backbone.View
 
   addLinkForSelection: (link) =>
     document.execCommand('CreateLink', false, link)
+    @updateText()
+
+  addHeadingForSelection: =>
+    document.execCommand('formatBlock', false, "<h2>")
+    @updateText()
+
+  removeHeadingForSelection: =>
+    document.execCommand('formatBlock', false, "<p>")
     @updateText()
 
   showAddLinkDialog: (event) =>
