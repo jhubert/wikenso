@@ -133,6 +133,7 @@ GEM
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.6.8)
+    newrelic_rpm (3.5.7.59)
     nokogiri (1.5.10)
     parallel (0.6.5)
     parallel_tests (0.8.14)
@@ -275,6 +276,7 @@ DEPENDENCIES
   konacha
   letter_opener
   mini_magick
+  newrelic_rpm
   paper_trail!
   parallel_tests
   pg
