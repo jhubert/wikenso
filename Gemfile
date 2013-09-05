@@ -24,7 +24,7 @@ gem 'mini_magick'
 gem 'fog'
 gem "intercom-rails"
 gem 'browser'
-gem 'newrelic_rpm'
+gem 'newrelic_rpm', '~> 3.6'
 
 group :production do
   gem 'rails_12factor'
