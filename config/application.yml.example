@@ -12,3 +12,4 @@ INTERCOM_API_SECRET: baz
 GOOGLE_ANALYTICS_ID: foo
 NEW_RELIC_LICENSE_KEY: foo
 NEW_RELIC_APP_NAME: bar
+WEB_CONCURRENCY: 3 # Unicorn processes per heroku dyno
