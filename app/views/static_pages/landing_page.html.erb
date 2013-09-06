@@ -66,22 +66,26 @@
   <div class="landing-page-thumbnail-features">
     <div class="row">
       <div class="columns large-4 landing-page-thumbnail-feature">
-        <%= image_tag "http://placehold.it/200x200", class: "landing-page-thumbnail-feature-image" %>
+        <%= link_to(image_tag("http://placehold.it/200x200", class: "landing-page-thumbnail-feature-image"), "#", data: { reveal_id: "wysiwyg-screenshot-modal" }) %>
         <h4 class="landing-page-thumbnail-feature-header">WYSIWYG Editor</h4>
         <p class="landing-page-thumbnail-feature-description">Wikenso has a clean, no-nonsense editor that is a joy to use.</p>
       </div>
 
       <div class="columns large-4 landing-page-thumbnail-feature">
-        <%= image_tag "http://placehold.it/200x200", class: "landing-page-thumbnail-feature-image" %>
+        <%= link_to(image_tag("http://placehold.it/200x200", class: "landing-page-thumbnail-feature-image"), "#", data: { reveal_id: "history-screenshot-modal" }) %>
         <h4 class="landing-page-thumbnail-feature-header">History</h4>
         <p class="landing-page-thumbnail-feature-description">View the history of every change published on a page.</p>
       </div>
 
       <div class="columns large-4 landing-page-thumbnail-feature">
-        <%= image_tag "http://placehold.it/200x200", class: "landing-page-thumbnail-feature-image" %>
+        <%= link_to(image_tag("http://placehold.it/200x200", class: "landing-page-thumbnail-feature-image"), "#", data: { reveal_id: "logo-screenshot-modal" }) %>
         <h4 class="landing-page-thumbnail-feature-header">Logo</h4>
         <p class="landing-page-thumbnail-feature-description">Use your organization's logo in the header.</p>
       </div>
     </div>
   </div>
+
+  <%= render "static_pages/landing_page_screenshot_modal", image_url: asset_path("assets/landing_page/wysiwyg-screenshot.png") %>
+  <%= render "static_pages/landing_page_screenshot_modal", image_url: asset_path("assets/landing_page/history-screenshot.png") %>
+  <%= render "static_pages/landing_page_screenshot_modal", image_url: asset_path("assets/landing_page/logo-screenshot.png") %>
 </div>

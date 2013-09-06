@@ -64,7 +64,7 @@
 }
 
 .landing-page-features {
-  background-color: #21350E;
+  background-color: #A70000;
   position: relative;
   bottom: 10px;
 }
@@ -75,7 +75,7 @@
 }
 
 .landing-page-feature-heading {
-  font-weight: 400;
+  font-weight: 100;
   color: white;
   font-size: 40px;
   margin: 10px 0 15px 0;
@@ -89,7 +89,7 @@
   }
 }
 .landing-page-thumbnail-features {
-  background-color: #29460E;
+  background-color: #BD1515;
   position: relative;
   bottom: 10px;
   padding-top: 40px;
@@ -106,4 +106,8 @@
   font-family: ff-dagny-web-pro;
   font-weight: 400;
   color: white;
+}
+
+.landing-page-thumbnail-features-modal {
+  padding: 0;
 }
