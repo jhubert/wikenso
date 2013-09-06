@@ -32,4 +32,6 @@ Wikenso::Application.configure do
   config.generators.stylesheets = false
   config.generators.javascripts = false
   config.generators.helpers = false
+
+  Rack::MiniProfiler.config.start_hidden = true
 end
