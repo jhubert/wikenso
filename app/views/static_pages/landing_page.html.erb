@@ -7,7 +7,7 @@
     <div class="columns large-8 landing-page-header-actions">
       <%= link_to "About", "#", class: "landing-page-header-action about" %>
       <%= link_to "Features", "#features", class: "landing-page-header-action features" %>
-      <%= link_to "Pricing", "#", class: "landing-page-header-action pricing" %>
+      <%= link_to "Pricing", pricing_page_path, class: "landing-page-header-action pricing" %>
       <%= link_to "Sign Up", new_wiki_path, class: "landing-page-header-action create-wiki" %>
     </div>
   </div>
@@ -84,7 +84,6 @@
     <div class="columns large-6 landing-page-footer-actions">
       <%= link_to "About", "#", class: "landing-page-footer-action tos" %>
       <%= link_to "Contact", "http://nilenso.com/#contact", class: "landing-page-footer-action contact", target: "_blank" %>
-      <%= link_to "Terms of Service", "#", class: "landing-page-footer-action tos" %>
     </div>
     <div class="columns large-5 landing-page-footer-logo">
       <%= link_to(image_tag(asset_path("nilenso.png")), "http://nilenso.com") %>

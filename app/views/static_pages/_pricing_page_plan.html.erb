@@ -1,0 +1,27 @@
+<div class="pricing-page-plan <%= emphasis ? "emphasis" : "" %>">
+  <div class="pricing-page-plan-name">
+    <%= plan_name %>
+  </div>
+
+  <div class="pricing-page-plan-price">
+    <%= "$#{price}/month" %>
+  </div>
+
+  <div class="pricing-page-plan-users">
+    Up to <%= users %> users
+  </div>
+
+  <div class="pricing-page-plan-pages">
+    Unlimited pages
+  </div>
+
+  <div class="pricing-page-plan-sign-up">
+    <%= link_to "Sign Up", new_wiki_path, class: "button pricing-page-plan-sign-up-button" %>
+  </div>
+
+  <% if emphasis %>
+    <div class="pricing-page-plan-recommended">
+      Recommended!
+    </div>
+  <% end %>
+</div>
