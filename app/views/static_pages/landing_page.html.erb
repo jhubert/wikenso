@@ -75,8 +75,18 @@
   <div class="landing-page-sign-up">
     <div class="row">
       <div class="columns large-centered">
-          <%= link_to "Get Your Wikenso Wiki Now!", new_wiki_path, class: 'landing-page-sign-up-button button' %>
+        <%= link_to "Get Your Wikenso Wiki Now!", new_wiki_path, class: 'landing-page-sign-up-button button' %>
       </div>
+    </div>
+  </div>
+
+  <div class="landing-page-footer row">
+    <div class="columns large-6 landing-page-footer-actions">
+      <%= link_to "Terms of Service", "#", class: "landing-page-footer-action tos" %>
+      <%= link_to "Contact Us", "http://nilenso.com/#contact", class: "landing-page-footer-action contact", target: "_blank" %>
+    </div>
+    <div class="columns large-5 landing-page-footer-logo">
+      <%= link_to(image_tag(asset_path("nilenso.png")), "http://nilenso.com") %>
     </div>
   </div>
 </div>
