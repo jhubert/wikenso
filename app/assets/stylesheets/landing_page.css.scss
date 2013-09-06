@@ -1,4 +1,5 @@
 .landing-page {
+  height: 3000px;
   background-color: #7ABD30;
 }
 
@@ -123,4 +124,23 @@
 
 .landing-page-thumbnail-features-modal {
   padding: 0;
+}
+
+.landing-page-sign-up {
+  width: 100%;
+  height: 150px;
+  line-height: 150px;
+  position: relative;
+  bottom: 10px;
+  text-align: center;
+  background-color: #dff1bd;
+}
+
+.landing-page-sign-up-button {
+  @include button(emCalc(10px), #32B420, 3px, false, false, false);
+  color: white;
+  font-family: ff-dagny-web-pro;
+  font-size: 40px;
+  font-weight: 100;
+  padding: 20px 25px;
 }

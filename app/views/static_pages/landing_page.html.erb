@@ -32,7 +32,8 @@
           Internal
         </div>
         <div class="landing-page-feature-description">
-          <p>Stuff in a Wikenso wiki is only visible to the people you invite. Think of it as an intranet for your team. We also give you a subdomain <em>(yourcompany.wikenso.com)</em> so your wiki is completely separate.</p>
+          <p>Stuff in a Wikenso wiki is only visible to the people you invite. Think of it as an intranet for your team.
+            We also give you a subdomain <em>(yourcompany.wikenso.com)</em> so your wiki is completely separate.</p>
         </div>
       </div>
 
@@ -71,7 +72,15 @@
     </div>
   </div>
 
-  <%= render "static_pages/landing_page_screenshot_modal", image_url: asset_path("landing_page/wysiwyg-screenshot.png"), class_name: "wysiwyg", size: "medium" %>
-  <%= render "static_pages/landing_page_screenshot_modal", image_url: asset_path("landing_page/history-screenshot.png"), class_name: "history", size: "medium" %>
-  <%= render "static_pages/landing_page_screenshot_modal", image_url: asset_path("landing_page/logo-screenshot.png"), class_name: "logo", size: "small" %>
+  <div class="landing-page-sign-up">
+    <div class="row">
+      <div class="columns large-centered">
+          <%= link_to "Get Your Wikenso Wiki Now!", new_wiki_path, class: 'landing-page-sign-up-button button' %>
+      </div>
+    </div>
+  </div>
 </div>
+
+<%= render "static_pages/landing_page_screenshot_modal", image_url: asset_path("landing_page/wysiwyg-screenshot.png"), class_name: "wysiwyg", size: "medium" %>
+<%= render "static_pages/landing_page_screenshot_modal", image_url: asset_path("landing_page/history-screenshot.png"), class_name: "history", size: "medium" %>
+<%= render "static_pages/landing_page_screenshot_modal", image_url: asset_path("landing_page/logo-screenshot.png"), class_name: "logo", size: "small" %>
