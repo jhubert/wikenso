@@ -82,8 +82,9 @@
 
   <div class="landing-page-footer row">
     <div class="columns large-6 landing-page-footer-actions">
+      <%= link_to "About", "#", class: "landing-page-footer-action tos" %>
+      <%= link_to "Contact", "http://nilenso.com/#contact", class: "landing-page-footer-action contact", target: "_blank" %>
       <%= link_to "Terms of Service", "#", class: "landing-page-footer-action tos" %>
-      <%= link_to "Contact Us", "http://nilenso.com/#contact", class: "landing-page-footer-action contact", target: "_blank" %>
     </div>
     <div class="columns large-5 landing-page-footer-logo">
       <%= link_to(image_tag(asset_path("nilenso.png")), "http://nilenso.com") %>
