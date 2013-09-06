@@ -65,23 +65,24 @@
 
   <div class="landing-page-thumbnail-features">
     <div class="row">
-      <div class="columns large-4 landing-page-thumbnail-feature">
-        <%= link_to(image_tag(asset_path("assets/landing_page/wysiwyg-screenshot-thumb.png"), class: "landing-page-thumbnail-feature-image"), "#", data: { reveal_id: "wysiwyg-screenshot-modal" }) %>
-        <h4 class="landing-page-thumbnail-feature-header">WYSIWYG Editor</h4>
-        <p class="landing-page-thumbnail-feature-description">Wikenso has a clean, no-nonsense editor that is a joy to use.</p>
-      </div>
+      <%= render "static_pages/landing_page_thumbnail_feature",
+                 header: "WYSIWYG Editor",
+                 text: "Wikenso has a clean, no-nonsense editor that is a joy to use.",
+                 image_url: asset_path("assets/landing_page/wysiwyg-screenshot-thumb.png"),
+                 modal_id: "wysiwyg-screenshot-modal" %>
 
-      <div class="columns large-4 landing-page-thumbnail-feature">
-        <%= link_to(image_tag(asset_path("assets/landing_page/history-screenshot-thumb.png"), class: "landing-page-thumbnail-feature-image"), "#", data: { reveal_id: "history-screenshot-modal" }) %>
-        <h4 class="landing-page-thumbnail-feature-header">History</h4>
-        <p class="landing-page-thumbnail-feature-description">View the history of every change published on a page.</p>
-      </div>
+      <%= render "static_pages/landing_page_thumbnail_feature",
+                 header: "History",
+                 text: "View the history of every change published on a page.",
+                 image_url: asset_path("assets/landing_page/history-screenshot-thumb.png"),
+                 modal_id: "history-screenshot-modal" %>
 
-      <div class="columns large-4 landing-page-thumbnail-feature">
-        <%= link_to(image_tag(asset_path("assets/landing_page/logo-screenshot-thumb.png"), class: "landing-page-thumbnail-feature-image"), "#", data: { reveal_id: "logo-screenshot-modal" }) %>
-        <h4 class="landing-page-thumbnail-feature-header">Logo</h4>
-        <p class="landing-page-thumbnail-feature-description">Use your organization's logo in the header.</p>
-      </div>
+
+      <%= render "static_pages/landing_page_thumbnail_feature",
+                 header: "Logo",
+                 text: "Use your organization's logo in the header.",
+                 image_url: asset_path("assets/landing_page/logo-screenshot-thumb.png"),
+                 modal_id: "logo-screenshot-modal" %>
     </div>
   </div>
 
