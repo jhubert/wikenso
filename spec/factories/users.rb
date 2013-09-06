@@ -9,8 +9,6 @@ FactoryGirl.define do
   factory :pending_user, class: "PendingUser" do
     name { Forgery::Name.full_name }
     email { Forgery(:internet).email_address }
-    password "foo"
-    password_confirmation { |u| u.password }
 
     trait :wiki do
       wiki { create(:wiki) }
