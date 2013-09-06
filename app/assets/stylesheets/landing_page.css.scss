@@ -64,9 +64,10 @@
 }
 
 .landing-page-features {
-  background-color: #A70000;
+  background-color: white;
   position: relative;
   bottom: 10px;
+  padding: 30px 0;
 }
 
 .landing-page-feature {
@@ -76,23 +77,23 @@
 
 .landing-page-feature-heading {
   font-weight: 100;
-  color: white;
+  color: #38681A;
   font-size: 40px;
   margin: 10px 0 15px 0;
 }
 
 .landing-page-feature-description {
-  color: white;
+  color: black;
   p {
     margin: 0;
     font-size: 20px;
   }
 }
 .landing-page-thumbnail-features {
-  background-color: #BD1515;
+  background-color: #dff1bd;
   position: relative;
   bottom: 10px;
-  padding-top: 40px;
+  padding: 40px 0 10px 0;
 }
 
 .landing-page-thumbnail-feature {
@@ -105,13 +106,19 @@
   margin-top: 10px;
   font-family: ff-dagny-web-pro;
   font-weight: 400;
-  color: white;
+  color: #38681A;
+}
+
+.landing-page-thumbnail-feature-description {
+  color: black;
 }
 
 .landing-page-thumbnail-feature-image {
   max-width: 200px;
   max-height: 200px;
   border-radius: 3px;
+  box-shadow: 0px 0px 10px 3px rgba(100, 100, 100, 0.2);
+  border: 1px solid #BBB;
 }
 
 .landing-page-thumbnail-features-modal {
