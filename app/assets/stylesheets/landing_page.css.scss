@@ -13,6 +13,9 @@
   font-family: bello-pro;
   text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 2px;
   @include transform(rotate(-1deg));
+  a {
+    color: white;
+  }
 }
 
 .landing-page-header-actions {
@@ -57,5 +60,50 @@
   font-family: ff-dagny-web-pro;
   font-size: 50px;
   font-weight: 100;
+  color: white;
+}
+
+.landing-page-features {
+  background-color: #21350E;
+  position: relative;
+  bottom: 10px;
+}
+
+.landing-page-feature {
+  padding: 30px 0;
+  font-family: ff-dagny-web-pro;
+}
+
+.landing-page-feature-heading {
+  font-weight: 400;
+  color: white;
+  font-size: 40px;
+  margin: 10px 0 15px 0;
+}
+
+.landing-page-feature-description {
+  color: white;
+  p {
+    margin: 0;
+    font-size: 20px;
+  }
+}
+.landing-page-thumbnail-features {
+  background-color: #29460E;
+  position: relative;
+  bottom: 10px;
+  padding-top: 40px;
+}
+
+.landing-page-thumbnail-feature {
+  font-family: ff-dagny-web-pro;
+  color: white;
+  text-align: center;
+}
+
+.landing-page-thumbnail-feature-header {
+  margin-top: 10px;
+  font-family: ff-dagny-web-pro;
+  font-weight: 400;
   color: white;
 }

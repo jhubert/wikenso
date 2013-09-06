@@ -21,6 +21,7 @@
 //= require vendor/nprogress
 //= require vendor/keymaster
 //= require vendor/backbone_shortcuts
+//= require vendor/smoothscroll
 //= require vendor/opentip
 //= require_tree ./vendor/rangy
 

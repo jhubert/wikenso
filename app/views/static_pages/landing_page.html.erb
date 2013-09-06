@@ -1,13 +1,14 @@
 <div class="landing-page">
   <div class="row landing-page-header">
     <div class="columns landing-page-header-logo large-4">
-      Wikenso
+      <%= link_to "Wikenso", "#" %>
     </div>
 
     <div class="columns large-8 landing-page-header-actions">
       <%= link_to "About", "#", class: "landing-page-header-action about" %>
+      <%= link_to "Features", "#features", class: "landing-page-header-action features" %>
       <%= link_to "Pricing", "#", class: "landing-page-header-action pricing" %>
-      <%= link_to "Sign Up", "#", class: "landing-page-header-action create-wiki" %>
+      <%= link_to "Sign Up", new_wiki_path, class: "landing-page-header-action create-wiki" %>
     </div>
   </div>
 
@@ -21,6 +22,66 @@
   <div class="row landing-page-tagline-row">
     <div class="columns landing-page-tagline large-8 large-centered">
       Hosted, Private Wikis for Teams
+    </div>
+  </div>
+
+  <div class="landing-page-features">
+    <div class="row landing-page-feature" id="features">
+      <div class="columns large-6 landing-page-feature-image">
+        <div class="landing-page-feature-image">
+          <%= image_tag "http://placehold.it/450x100" %>
+        </div>
+      </div>
+
+      <div class="columns large-6 landing-page-feature-body">
+        <div class="landing-page-feature-heading">
+          Fully Hosted
+        </div>
+        <div class="landing-page-feature-description">
+          <p>You don't need the hassle of setting up and maintaining your own servers.
+            With Wikenso you get a wiki that you can start using immediately.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row landing-page-feature" id="features">
+      <div class="columns large-6 landing-page-feature-body">
+        <div class="landing-page-feature-heading">
+          Internal
+        </div>
+        <div class="landing-page-feature-description">
+          <p>Stuff in a Wikenso wiki is only visible to the people you invite. Think of it as an intranet for your team. We also give you a subdomain <em>(yourcompany.wikenso.com)</em> so your wiki is completely separate.</p>
+        </div>
+      </div>
+
+      <div class="columns large-6 landing-page-feature-image">
+        <div class="landing-page-feature-image">
+          <%= image_tag "http://placehold.it/450x100" %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="landing-page-thumbnail-features">
+    <div class="row">
+      <div class="columns large-4 landing-page-thumbnail-feature">
+        <%= image_tag "http://placehold.it/200x200", class: "landing-page-thumbnail-feature-image" %>
+        <h4 class="landing-page-thumbnail-feature-header">WYSIWYG Editor</h4>
+        <p class="landing-page-thumbnail-feature-description">Wikenso has a clean, no-nonsense editor that is a joy to use.</p>
+      </div>
+
+      <div class="columns large-4 landing-page-thumbnail-feature">
+        <%= image_tag "http://placehold.it/200x200", class: "landing-page-thumbnail-feature-image" %>
+        <h4 class="landing-page-thumbnail-feature-header">History</h4>
+        <p class="landing-page-thumbnail-feature-description">View the history of every change published on a page.</p>
+      </div>
+
+      <div class="columns large-4 landing-page-thumbnail-feature">
+        <%= image_tag "http://placehold.it/200x200", class: "landing-page-thumbnail-feature-image" %>
+        <h4 class="landing-page-thumbnail-feature-header">Logo</h4>
+        <p class="landing-page-thumbnail-feature-description">Use your organization's logo in the header.</p>
+      </div>
     </div>
   </div>
 </div>
