@@ -21,7 +21,7 @@ Wikenso::Application.routes.draw do
     resources :draft_pages, only: [:destroy]
     get "/" => "pages#show"
   end
-  root :to => 'wikis#new'
+  root :to => 'static_pages#landing_page'
 
   namespace :api do
     namespace :v1 do

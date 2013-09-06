@@ -1,0 +1,61 @@
+.landing-page {
+  background-color: #7ABD30;
+}
+
+.landing-page-header {
+  color: white;
+  font-size: 80px;
+  height: 150px;
+  line-height: 150px;
+}
+
+.landing-page-header-logo {
+  font-family: bello-pro;
+  text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 2px;
+  @include transform(rotate(-1deg));
+}
+
+.landing-page-header-actions {
+  font-size: 20px;
+  font-family: jaf-bernino-sans-condensed;
+  text-align: right;
+  padding-right: 75px;
+}
+
+.landing-page-header-action {
+  margin-left: 20px;
+  font-size: 20px;
+  font-family: ff-dagny-web-pro;
+  color: #FFF;
+  font-weight: 400;
+  border-radius: 5px;
+  &:hover {
+    text-decoration: underline;
+    color: white;
+  }
+}
+
+.landing-page-header-action.create-wiki {
+  border-radius: 5px;
+  border: 1px solid white;
+  padding: 10px 20px;
+}
+
+.landing-page-tagline-row {
+  width: 100%;
+  max-width: 100%;
+  z-index: 1000;
+  position: relative;
+  bottom: 10px;
+  background-color: #47791F;
+  height: 100px;
+  line-height: 100px;
+}
+
+.landing-page-tagline {
+  text-align: center;
+  font-family: ff-dagny-web-pro;
+  font-size: 50px;
+  font-weight: 100;
+  color: white;
+}
