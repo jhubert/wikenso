@@ -11,24 +11,11 @@
   <link rel="icon" sizes="16x16 32x32" href="/images/favicon.ico">
   <!--[if IE]><link rel="shortcut icon" href="/images/favicon.ico"><![endif]-->
 
-  <script type="text/javascript" src="//use.typekit.net/fdl3yrh.js"></script>
-  <script type="text/javascript">
-    try {
-      Typekit.load();
-    } catch (e) {
-    }
-  </script>
-
-  <script type="text/javascript">
-    $(document).on('page:fetch', function () {
-      NProgress.start();
-    });
-    $(document).on('page:load', function () {
-      NProgress.done();
-    });
-  </script>
-
+  <%= render 'vendor/typekit' %>
+  <%= render 'vendor/nprogress' %>
+  <%= render 'vendor/heap' %>
   <%= render 'vendor/google_analytics' %>
+
 </head>
 <body class="<%= yield(:body_class) %>">
 
