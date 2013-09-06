@@ -1,0 +1,53 @@
+body.not-logged-in {
+  background-color: #7ABD30;
+}
+
+.not-logged-in-header {
+  color: white;
+  font-size: 80px;
+  height: 150px;
+  line-height: 150px;
+}
+
+.not-logged-in-header-logo {
+  font-family: bello-pro;
+  text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 2px;
+  @include transform(rotate(-1deg));
+  a {
+    color: white;
+  }
+}
+
+
+.not-logged-in-footer {
+  font-family: ff-dagny-web-pro;
+  background-color: #7ABD30;
+  height: 76px;
+  color: white;
+  width: 100%;
+  max-width: 100%;
+}
+
+.not-logged-in-footer-logo {
+  margin-right: 30px;
+}
+
+.not-logged-in-footer-logo img {
+  max-height: 50px;
+  float: right;
+  margin-top: 15px;
+}
+
+.not-logged-in-footer-actions {
+  margin-left: 30px;
+}
+
+.not-logged-in-footer-action {
+  line-height: 76px;
+  margin-right: 30px;
+  color: white;
+  &:hover {
+    color: white;
+    text-decoration: underline;
+  }
+}

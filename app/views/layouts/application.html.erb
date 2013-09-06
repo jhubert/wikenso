@@ -30,7 +30,7 @@
 
   <%= render 'vendor/google_analytics' %>
 </head>
-<body>
+<body class="<%= yield(:body_class) %>">
 
 <% if subdomain? %>
   <%= render "layouts/header" %>

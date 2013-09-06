@@ -1,8 +1,8 @@
+<% content_for(:body_class) { "not-logged-in" } %>
+
 <div class="pricing-page">
-  <div class="row pricing-page-header">
-    <div class="columns pricing-page-header-logo large-4">
-      <%= link_to "Wikenso", "/" %>
-    </div>
+  <div class="row not-logged-in-header">
+    <%= render "not_logged_in/header" %>
   </div>
 
   <div class="row">
@@ -20,12 +20,5 @@
     </div>
   </div>
 
-  <div class="pricing-page-footer row">
-    <div class="columns large-6 pricing-page-footer-actions">
-      <%= link_to "Contact", "http://nilenso.com/#contact", class: "pricing-page-footer-action contact", target: "_blank" %>
-    </div>
-    <div class="columns large-5 pricing-page-footer-logo">
-      <%= link_to(image_tag(asset_path("nilenso.png")), "http://nilenso.com") %>
-    </div>
-  </div>
+  <%= render "not_logged_in/footer" %>
 </div>

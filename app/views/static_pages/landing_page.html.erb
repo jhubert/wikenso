@@ -1,8 +1,8 @@
+<% content_for(:body_class) { "not-logged-in" } %>
+
 <div class="landing-page">
-  <div class="row landing-page-header">
-    <div class="columns landing-page-header-logo large-4">
-      <%= link_to "Wikenso", "/" %>
-    </div>
+  <div class="row not-logged-in-header">
+    <%= render "not_logged_in/header" %>
 
     <div class="columns large-8 landing-page-header-actions">
       <%= link_to "Features", "#features", class: "landing-page-header-action features" %>
@@ -79,14 +79,7 @@
     </div>
   </div>
 
-  <div class="landing-page-footer row">
-    <div class="columns large-6 landing-page-footer-actions">
-      <%= link_to "Contact", "http://nilenso.com/#contact", class: "landing-page-footer-action contact", target: "_blank" %>
-    </div>
-    <div class="columns large-5 landing-page-footer-logo">
-      <%= link_to(image_tag(asset_path("nilenso.png")), "http://nilenso.com") %>
-    </div>
-  </div>
+  <%= render "not_logged_in/footer" %>
 </div>
 
 <%= render "static_pages/landing_page_screenshot_modal", image_url: asset_path("landing_page/wysiwyg-screenshot.png"), class_name: "wysiwyg", size: "medium" %>
