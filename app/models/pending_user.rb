@@ -26,7 +26,6 @@ class PendingUser < User
 
   def activate_with_params(params)
     transaction do
-      assign_attributes(params) # Need to do this so that the password and password_confirmation are assigned.
       update_attributes(type: "ActiveUser")
       active_user = becomes(ActiveUser)
       if active_user.update_attributes(params)

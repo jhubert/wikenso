@@ -117,6 +117,30 @@ describe PendingUser do
         user.activate_with_params(name: "Bar Foo", password: "foo", password_confirmation: "foo").should be_a ActiveUser
       end
 
+      it "removes the password from the user" do
+        user = create(:pending_user)
+        user.activate_with_params(password: "foo", password_confirmation: "foo")
+        User.find(user.id)[:password].should be_nil
+      end
+
+      it "removes the password confirmation from the user" do
+        user = create(:pending_user)
+        user.activate_with_params(password: "foo", password_confirmation: "foo")
+        User.find(user.id)[:password_confirmation].should be_nil
+      end
+
+      it "removes the password from the user" do
+        user = create(:pending_user)
+        user.activate_with_params(password: "foo", password_confirmation: "foo")
+        User.find(user.id)[:password].should be_nil
+      end
+
+      it "sets the password digest for the user" do
+        user = create(:pending_user)
+        user.activate_with_params(password: "foo", password_confirmation: "foo")
+        User.find(user.id)[:password_digest].should_not be_nil
+      end
+
       context "invitations" do
         it "removes all invitations belonging to the user" do
           user = create(:pending_user)
