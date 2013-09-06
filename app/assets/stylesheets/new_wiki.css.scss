@@ -3,14 +3,21 @@
   font-family: "ff-dagny-web-pro";
 }
 
-.create-wiki-form-legend {
+.create-wiki fieldset {
+  background-color: white;
+  border-radius: 5px;
+}
+
+.create-wiki-legend {
+  color: white;
   font-size: 22px;
   text-align: center;
   font-weight: 400;
+  background-color: transparent;
   font-family: ff-dagny-web-pro;
 }
 
-.create-wiki-form-legend-emphasis {
+.create-wiki-legend-emphasis {
   font-family: ff-dagny-web-pro;
   font-weight: 700;
 }
@@ -28,16 +35,11 @@
 }
 
 .create-wiki-form-submit {
-  border: none;
-  color: #7ABD30;
-  font-weight: 700;
-  font-size: 45px;
-  padding: 0;
-  margin: 0;
-
-  background: transparent;
-  &:hover {
-    background: transparent;
-    color: #578522;
-  }
+  @include button(emCalc(10px), #32B420, 3px, false, false, false);
+  color: white;
+  font-family: ff-dagny-web-pro;
+  font-size: 30px;
+  font-weight: 100;
+  padding: 20px 25px;
+  margin-bottom: 10px;
 }

@@ -1,17 +1,23 @@
+<% content_for(:body_class) { "not-logged-in" } %>
+
+<div class="row not-logged-in-header">
+  <%= render "not_logged_in/header" %>
+</div>
+
+<div class="create-wiki-legend">
+  Sign up for a
+          <span class="create-wiki-legend-emphasis">
+            Wikenso
+          </span>
+  Wiki
+</div>
+
 <div class="create-wiki row">
   <div class="columns large-9 large-centered">
     <%= simple_form_for @wiki do |f| %>
       <fieldset>
-        <legend class="create-wiki-form-legend">
-          Create a
-          <span class="create-wiki-form-legend-emphasis">
-            Wikenso
-          </span>
-          Wiki
-        </legend>
-
         <div class="row collapse create-wiki-form-input">
-            <%= f.label :subdomain, "Web Address" %>
+          <%= f.label :subdomain, "Web Address" %>
           <div class="large-8 columns">
             <%= f.input_field :subdomain %>
             <%= f.full_error :subdomain %>
@@ -36,8 +42,10 @@
   </div>
 </div>
 
+<%= render "not_logged_in/footer" %>
+
 <script type="text/javascript">
-  $(document).ready(function(){
+  $(document).ready(function () {
     $("input[id=wiki_subdomain]").first().focus();
   });
 </script>
