@@ -27,16 +27,5 @@
 }
 
 .wiki-new-page-form-submit {
-  border: none;
-  color: #7ABD30;
-  font-weight: 700;
-  font-size: 45px;
-  padding: 0;
-  margin: 0;
-
-  background: transparent;
-  &:hover {
-    background: transparent;
-    color: #578522;
-  }
+  @include big-green-button;
 }

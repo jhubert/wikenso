@@ -55,13 +55,7 @@
 }
 
 .pricing-page-plan-sign-up-button {
-  @include button(emCalc(10px), #32B420, 3px, false, false, false);
-  color: white;
-  font-family: ff-dagny-web-pro;
-  font-size: 30px;
-  font-weight: 100;
-  padding: 20px 25px;
-  margin-bottom: 10px;
+  @include big-green-button;
 }
 
 .pricing-page-plan-recommended {

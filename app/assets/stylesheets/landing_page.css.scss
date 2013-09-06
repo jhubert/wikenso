@@ -129,10 +129,5 @@
 }
 
 .landing-page-sign-up-button {
-  @include button(emCalc(10px), #32B420, 3px, false, false, false);
-  color: white;
-  font-family: ff-dagny-web-pro;
-  font-size: 40px;
-  font-weight: 100;
-  padding: 20px 25px;
+  @include big-green-button;
 }
