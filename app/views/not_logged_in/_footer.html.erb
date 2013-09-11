@@ -1,8 +1,10 @@
-<div class="not-logged-in-footer row">
+<div class="not-logged-in-footer row" itemscope itemtype="http://schema.org/Organization">
   <div class="columns large-6 not-logged-in-footer-actions">
-    <%= link_to "Contact", "http://nilenso.com/#contact", class: "not-logged-in-footer-action contact", target: "_blank" %>
+    <a target="_blank" class="not-logged-in-footer-action contact" href="http://nilenso.com/#contact">
+      Contact <span itemprop="name">Nilenso</span>
+    </a>
   </div>
   <div class="columns large-5 not-logged-in-footer-logo">
-    <%= link_to(image_tag(asset_path("nilenso.png")), "http://nilenso.com") %>
+    <%= link_to(image_tag(asset_path("nilenso.png"), itemprop: "logo"), "http://nilenso.com", itemprop: "url") %>
   </div>
 </div>

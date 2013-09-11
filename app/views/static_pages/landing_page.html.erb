@@ -1,6 +1,6 @@
 <% content_for(:body_class) { "not-logged-in" } %>
 
-<div class="landing-page">
+<div class="landing-page" itemscope itemtype="http://data-vocabulary.org/Product">
   <div class="row not-logged-in-header">
     <%= render "not_logged_in/header" %>
 
@@ -14,12 +14,12 @@
 
   <div class="row">
     <div class="columns large-centered landing-page-screenshot">
-      <%= image_tag asset_path("landing_page/screenshot.png") %>
+      <%= image_tag asset_path("landing_page/screenshot.png"), itemprop: "image" %>
     </div>
   </div>
 
   <div class="row landing-page-tagline-row">
-    <div class="columns landing-page-tagline large-8 large-centered">
+    <div class="columns landing-page-tagline large-8 large-centered" itemprop="description">
       Hosted, Private Wikis for Teams
     </div>
   </div>
