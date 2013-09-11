@@ -27,6 +27,7 @@ Wikenso::Application.routes.draw do
 
   namespace :admin do
     resources :statistics, only: :index
+    resources :welcome_pages, only: [:new, :create]
   end
 
   namespace :api do

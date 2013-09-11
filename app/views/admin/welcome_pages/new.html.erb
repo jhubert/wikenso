@@ -1,0 +1,21 @@
+<% content_for(:body_class) { "not-logged-in" } %>
+
+<div class="row">
+  <div class="large-centered large-8 columns existing-welcome-page">
+    <h1>The Existing Welcome Page</h1>
+    <%= simple_form_for @existing_welcome_page, url: admin_welcome_pages_path do |f| %>
+      <%= f.input :title, disabled: true %>
+      <%= f.input :text, disabled: true, input_html: { class: "existing-welcome-page-text" } %>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="large-centered large-8 columns new-welcome-page">
+    <h1>Add a New Welcome Page</h1>
+    <%= simple_form_for @welcome_page, url: admin_welcome_pages_path do |f| %>
+      <%= f.input :title %>
+      <%= f.input :text, input_html: { class: "new-welcome-page-text" } %>
+      <%= f.button :submit %>
+    <% end %>
+  </div>
+</div>
