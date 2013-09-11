@@ -1,4 +1,4 @@
-##Wikenso
+##Wikenso [![Build Status](https://travis-ci.org/nilenso/wikenso.png?branch=master)](https://travis-ci.org/nilenso/wikenso)
 
 Clean and simple wiki hosting.
 
