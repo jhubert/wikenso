@@ -1,8 +1,11 @@
 require 'spec_helper'
 
 describe Admin::WelcomePagesController do
-
   describe "GET 'new'" do
+    before(:each) do
+      controller.stub(:authorize!).and_return(false)
+    end
+
     it "returns http success" do
       get 'new'
       response.should be_success
@@ -18,9 +21,32 @@ describe Admin::WelcomePagesController do
       get "new"
       assigns(:welcome_page).should be_a WelcomePage
     end
+
+    context "authorization" do
+      before(:each) do
+        controller.stub(:authorize!).and_call_original
+      end
+
+      it "doesn't allow non-super-admins to access the action" do
+        user = create(:active_user, :normal)
+        sign_in(user)
+        expect { get "new" }.to raise_error(CanCan::AccessDenied)
+      end
+
+      it "allows super admins to access the action" do
+        user = create(:active_user, :super_admin)
+        sign_in(user)
+        get "new"
+        response.should be_ok
+      end
+    end
   end
 
   describe "GET 'create'" do
+    before(:each) do
+      controller.stub(:authorize!).and_return(false)
+    end
+
     it "creates a new welcome page" do
       welcome_page_params = attributes_for(:welcome_page)
       expect { post :create, welcome_page: welcome_page_params }.to change { WelcomePage.count }.by(1)
@@ -73,6 +99,28 @@ describe Admin::WelcomePagesController do
         welcome_page_params = attributes_for(:welcome_page)
         post :create, welcome_page: welcome_page_params
         assigns(:welcome_page).should be_a WelcomePage
+      end
+    end
+
+    context "authorization" do
+      before(:each) do
+        controller.stub(:authorize!).and_call_original
+      end
+
+      it "doesn't allow non-super-admins to access the action" do
+        user = create(:active_user, :normal)
+        sign_in(user)
+        welcome_page_params = attributes_for(:welcome_page)
+        expect { post :create, welcome_page: welcome_page_params }.to raise_error(CanCan::AccessDenied)
+      end
+
+      it "allows super admins to access the action" do
+        user = create(:active_user, :super_admin)
+        sign_in(user)
+        welcome_page_params = attributes_for(:welcome_page)
+        post :create, welcome_page: welcome_page_params
+        get "new"
+        response.should be_ok
       end
     end
   end

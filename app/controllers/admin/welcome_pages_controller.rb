@@ -1,4 +1,6 @@
 class Admin::WelcomePagesController < ApplicationController
+  authorize_resource
+
   def new
     @existing_welcome_page = WelcomePage.latest
     @welcome_page = WelcomePage.new

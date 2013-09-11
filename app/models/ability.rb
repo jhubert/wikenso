@@ -5,6 +5,7 @@ class Ability
     user ||= User.new
     if user.super_admin?
       can :view, :statistics
+      can :create, WelcomePage
     end
   end
 end
