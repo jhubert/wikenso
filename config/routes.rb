@@ -25,6 +25,10 @@ Wikenso::Application.routes.draw do
   get '/pricing' => 'static_pages#pricing_page', as: :pricing_page
   get '/plans' => 'static_pages#pricing_page'
 
+  namespace :admin do
+    resources :statistics, only: :index
+  end
+
   namespace :api do
     namespace :v1 do
       resources :draft_pages, only: :update

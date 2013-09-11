@@ -1,0 +1,64 @@
+<% content_for(:body_class) { "not-logged-in" } %>
+
+<div class="row not-logged-in-header">
+  <%= render "not_logged_in/header" %>
+  <div class="columns large-8 landing-page-header-actions">
+    <%= link_to "Welcome Pages", "#features", class: "not-logged-in-header-action welcome-page" %>
+  </div>
+</div>
+
+<div class="row large-statistics">
+  <div class="columns large-6 large-statistics-item">
+    <span class="large-statistics-item-number">
+      <%= @wikis.count %>
+    </span>
+    <span class="large-statistics-item-label">
+      Wikis
+    </span>
+  </div>
+  <div class="columns large-6 large-statistics-item">
+    <span class="large-statistics-item-number">
+      <%= @wikis.users_count %>
+    </span>
+    <span class="large-statistics-item-label">
+      Users
+    </span>
+  </div>
+</div>
+
+
+<div class="row">
+  <table class="columns large-12 statistics-table">
+    <thead>
+    <tr>
+      <td>Wiki</td>
+      <td>Subdomain</td>
+      <td>Users</td>
+      <td>Pages</td>
+    </tr>
+    </thead>
+    <tbody>
+    <% @wikis.each do |wiki| %>
+      <tr>
+        <td>
+          <%= wiki.name %>
+        </td>
+
+        <td>
+          <%= wiki.subdomain %>
+        </td>
+
+        <td>
+          <%= wiki.users.count %>
+        </td>
+
+        <td>
+          <%= wiki.pages.count %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= render "not_logged_in/footer" %>
