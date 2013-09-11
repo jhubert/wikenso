@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130904093929) do
+ActiveRecord::Schema.define(version: 20130911031147) do
 
   create_table "draft_pages", force: true do |t|
     t.string   "title"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 20130904093929) do
     t.string   "password_digest"
     t.string   "email"
     t.string   "type"
+    t.string   "role",                  default: "user"
   end
 
   add_index "users", ["email", "wiki_id"], name: "index_users_on_email_and_wiki_id", unique: true, using: :btree
