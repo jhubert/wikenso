@@ -25,6 +25,7 @@ gem 'fog'
 gem "intercom-rails"
 gem 'browser'
 gem 'newrelic_rpm', '~> 3.6'
+gem 'cancan'
 
 group :production do
   gem 'rails_12factor'
