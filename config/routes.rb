@@ -1,5 +1,6 @@
 Wikenso::Application.routes.draw do
   resources :wikis, only: [:new, :create]
+  get "/new" => "wikis#new"
   scope constraints: {:subdomain => /.+/} do
     resources :demo_wiki_sessions, only: [:create]
     resources :users, only: [:index]
