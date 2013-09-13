@@ -11,6 +11,7 @@ class Wiki < ActiveRecord::Base
   validates_uniqueness_of :subdomain, case_sensitive: false
   validates_associated :users
   validates_format_of :subdomain, with: /\A\w+\z/, message: I18n.t("activerecord.errors.messages.subdomain_format")
+  validates_exclusion_of :subdomain, in: %w(blog admin wikenso)
 
   def self.build_with_active_user(params)
     if params[:users_attributes]
