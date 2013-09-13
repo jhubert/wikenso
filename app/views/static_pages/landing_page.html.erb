@@ -1,18 +1,8 @@
 <% content_for(:body_class) { "not-logged-in" } %>
 
 <div class="landing-page" itemscope itemtype="http://data-vocabulary.org/Product">
-  <div class="row not-logged-in-header">
-    <%= render "not_logged_in/header" %>
 
-    <div class="columns large-8 landing-page-header-actions">
-      <% if Wiki.demo_wiki %>
-        <%= link_to "Demo", demo_wiki_sessions_url(subdomain: Wiki.demo_wiki.subdomain), class: "landing-page-header-action demo", method: :post %>
-      <% end %>
-      <%= link_to "Features", "#features", class: "landing-page-header-action features" %>
-      <%= link_to "Sign Up", new_wiki_path, class: "landing-page-header-action create-wiki" %>
-    </div>
-  </div>
-
+  <%= render "not_logged_in/header" %>
 
   <div class="row">
     <div class="columns large-centered landing-page-screenshot">
@@ -87,3 +77,9 @@
 <%= render "static_pages/landing_page_screenshot_modal", image_url: asset_path("landing_page/wysiwyg-screenshot.png"), class_name: "wysiwyg", size: "medium" %>
 <%= render "static_pages/landing_page_screenshot_modal", image_url: asset_path("landing_page/history-screenshot.png"), class_name: "history", size: "medium" %>
 <%= render "static_pages/landing_page_screenshot_modal", image_url: asset_path("landing_page/logo-screenshot.png"), class_name: "logo", size: "small" %>
+
+<script type="text/javascript">
+  $(".landing-page-header-action.features").click(function(){
+    window.smoothScroll($(".landing-page-features")[0]);
+  });
+</script>

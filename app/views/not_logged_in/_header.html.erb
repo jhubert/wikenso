@@ -1,3 +1,14 @@
-<div class="columns not-logged-in-header-logo large-4" itemprop="brand">
-  <%= link_to "Wikenso", "/" %>
+<div class="row not-logged-in-header">
+  <div class="columns not-logged-in-header-logo large-4" itemprop="brand">
+    <%= link_to "Wikenso", root_path %>
+  </div>
+
+  <div class="columns large-8 landing-page-header-actions">
+    <% if Wiki.demo_wiki %>
+      <%= link_to "Demo", demo_wiki_sessions_url(subdomain: Wiki.demo_wiki.subdomain), class: "landing-page-header-action demo", method: :post %>
+    <% end %>
+    <%= link_to "Features", root_url(anchor: "features"), class: "landing-page-header-action features" %>
+    <%= link_to "Sign Up", new_wiki_path, class: "landing-page-header-action create-wiki" %>
+  </div>
 </div>
+
