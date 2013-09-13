@@ -15,6 +15,22 @@
   .wiki-header-logo { text-align: center; }
 }
 
+.wiki-header-demo-text {
+  background-color: $topbar-bg;
+  font-family: ff-dagny-web-pro;
+  height: $topbar-height;
+  line-height: $topbar-height;
+  color: #5B8129;
+  padding-right: 20px;
+  font-size: 18px;
+  font-style: oblique;
+  a {
+    padding: 0 !important;
+    color: #5B8129;
+    text-decoration: underline;
+  }
+}
+
 .wiki-header-actions {
   height: $topbar-height;
   background-color: $topbar-bg;

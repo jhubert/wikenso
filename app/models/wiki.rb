@@ -44,4 +44,8 @@ class Wiki < ActiveRecord::Base
   def self.demo_wiki
     Wiki.find_by_subdomain("demo")
   end
+
+  def demo_wiki?
+    self == Wiki.demo_wiki
+  end
 end

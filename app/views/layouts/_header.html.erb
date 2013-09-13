@@ -29,6 +29,16 @@
       <% if user_signed_in? %>
 
         <ul class="right">
+          <% if @wiki.demo_wiki? %>
+            <li class="wiki-header-demo-text">
+              <p>
+                This is a demo wiki.
+                <%= link_to "Sign up", new_wiki_url(subdomain: nil) %>
+                or
+                <%= link_to "go back", root_url(subdomain: nil) %>.
+              </p>
+            </li>
+          <% end %>
           <li class="wiki-header-actions">
           <span class="wiki-header-actions-single-action">
 
