@@ -18,6 +18,11 @@ body.not-logged-in {
   }
 }
 
+@media only screen and (max-width: 768px) {
+  .not-logged-in-header-logo {
+    text-align: center;
+  }
+}
 
 .not-logged-in-footer {
   font-family: ff-dagny-web-pro;
@@ -29,7 +34,7 @@ body.not-logged-in {
 }
 
 .not-logged-in-footer-logo {
-  margin-right: 30px;
+  padding-right: 30px;
 }
 
 .not-logged-in-footer-logo img {
@@ -39,7 +44,7 @@ body.not-logged-in {
 }
 
 .not-logged-in-footer-actions {
-  margin-left: 30px;
+  padding-left: 30px;
 }
 
 .not-logged-in-footer-action {
