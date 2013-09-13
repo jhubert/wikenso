@@ -23,8 +23,6 @@ Wikenso::Application.routes.draw do
     get "/" => "pages#show"
   end
   root :to => 'static_pages#landing_page'
-  get '/pricing' => 'static_pages#pricing_page', as: :pricing_page
-  get '/plans' => 'static_pages#pricing_page'
 
   namespace :admin do
     resources :statistics, only: :index
