@@ -40,4 +40,8 @@ class Wiki < ActiveRecord::Base
   def name
     self[:name].present? ? self[:name] : subdomain
   end
+
+  def self.demo_wiki
+    Wiki.find_by_subdomain("demo")
+  end
 end

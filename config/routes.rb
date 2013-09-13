@@ -1,6 +1,7 @@
 Wikenso::Application.routes.draw do
   resources :wikis, only: [:new, :create]
   scope constraints: {:subdomain => /.+/} do
+    resources :demo_wiki_sessions, only: [:create]
     resources :users, only: [:index]
     resources :pending_users, only: [:create]
     post 'user_invitation_emails/:user_id' => "user_invitation_emails#create", as: 'resend_invitation_email'

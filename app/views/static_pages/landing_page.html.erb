@@ -5,6 +5,9 @@
     <%= render "not_logged_in/header" %>
 
     <div class="columns large-8 landing-page-header-actions">
+      <% if Wiki.demo_wiki %>
+        <%= link_to "Demo", demo_wiki_sessions_url(subdomain: Wiki.demo_wiki.subdomain), class: "landing-page-header-action demo", method: :post %>
+      <% end %>
       <%= link_to "Features", "#features", class: "landing-page-header-action features" %>
       <%= link_to "Pricing", pricing_page_path, class: "landing-page-header-action pricing" %>
       <%= link_to "Sign Up", new_wiki_path, class: "landing-page-header-action create-wiki" %>
