@@ -21,4 +21,9 @@
 
 <script type="text/javascript">
   $(".wiki-new-page-form-input > input").first().focus();
+  $(".wiki-new-page-form > form").submit(function(event){
+    var button = $(".wiki-new-page-form-submit");
+    button.attr('disabled', 'disabled');
+    button.val("Creating…");
+  });
 </script>
